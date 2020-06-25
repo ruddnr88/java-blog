@@ -27,21 +27,21 @@
 <!--  PC버젼 탑바 -->
 	<div class="top-bar visible-on-md-up">
 		<div class="con height-100p flex flex-jc-sb">
-			<a href="${pageContext.request.contextPath}/home/main" class="logo flex flex-ai-c"> <img
+			<a href="${pageContext.request.contextPath}/s/home/main" class="logo flex flex-ai-c"> <img
 				src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
 			</a>
 
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">
 
-					<li><a href="${pageContext.request.contextPath}/home/main" class="height-100p flex flex-ai-c">Home</a></li>
-					<li><a href="#" class="height-100p flex flex-ai-c">Articles</a>
-						<ul>
-							<li><a class="block" href="${pageContext.request.contextPath}/home/article">Notice</a></li>
-							<li><a class="block" href="${pageContext.request.contextPath}/home/free">Free</a></li>
-						</ul>
+					<li><a href="${pageContext.request.contextPath}/s/home/main" class="height-100p flex flex-ai-c">Home</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/article/list" class="height-100p flex flex-ai-c">Articles</a>
+						<!--<ul>
+						 	<li><a class="block" href="${pageContext.request.contextPath}/s/home/article">Notice</a></li>
+							<li><a class="block" href="${pageContext.request.contextPath}/s/home/free">Free</a></li>
+						</ul> -->
 					</li>
-					<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="height-100p flex flex-ai-c">About
+					<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="height-100p flex flex-ai-c">About
 							Me</a></li>
 					<li><a href="#" class="height-100p flex flex-ai-c">SNS</a>
 						<ul>
@@ -63,7 +63,7 @@
 			<div></div>
 			<div></div>
 			<div></div>
-		</a> <a href="${pageContext.request.contextPath}/home/main"
+		</a> <a href="${pageContext.request.contextPath}/s/home/main"
 			class="logo flex flex-ai-c absolute-center absolute-middle"> <img
 			src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
 		</a>
@@ -74,14 +74,14 @@
 			<ul>
 				<li class="icon"><img
 					src="http://kyky1211.dothome.co.kr/img/icon.png" alt=""></li>
-				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
-				<li><a href="#" class="block">Articles</a>
-					<ul>
-						<li><a class="block" href="${pageContext.request.contextPath}/home/article">Notice</a></li>
-						<li><a class="block" href="${pageContext.request.contextPath}/home/free">Free</a></li>
-					</ul>
+				<li><a href="${pageContext.request.contextPath}/s/home/main" class="block">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/article/list" class="block">Articles</a>
+					<!--<ul>
+						 	<li><a class="block" href="${pageContext.request.contextPath}/s/home/article">Notice</a></li>
+							<li><a class="block" href="${pageContext.request.contextPath}/s/home/free">Free</a></li>
+						</ul> -->
 				</li>
-				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">About Me</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe" class="block">About Me</a></li>
 				<li><a href="#" class="block">SNS</a>
 					<ul>
 						<li><a class="block" target="_blank"

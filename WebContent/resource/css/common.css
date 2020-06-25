@@ -452,15 +452,17 @@ label[for] {
 
 .mobile-top-bar .logo > img {
   width:40px;
+ 
 }
+
 
 .mobile-top-bar a {
   font-size:2.5rem;
 }
 .mobile-top-bar .btn-toggle-mobile-side-bar {
-  width:50px;
-  height:50px;
-  
+ margin:5px;
+  width:40px;
+  height:40px;
   position:relative;
   
   
@@ -549,7 +551,13 @@ label[for] {
   font-weight:bold;
 }
 .mobile-side-bar > .menu-box-1 ul > li.icon > img{
-  width:100px;
+  width:200px;
+  transition: all ease 1s;
+}
+
+.mobile-side-bar > .menu-box-1 ul > li.icon:hover > img{
+  transform: rotate(360deg);
+
 }
 .mobile-side-bar > .menu-box-1 ul > li > a:not(:only-child)::after {
   content:"   [+]";

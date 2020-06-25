@@ -7,13 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/home/article")
-public class HomeArticleServlet extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/**
+ * Servlet implementation class ArticleListServelt
+ */
+@WebServlet("/s/article/list")
+public class ArticleListServelt extends HttpServlet {
 
-		response.setContentType("text/html; charset=utf-8");
-		request.getRequestDispatcher("/jsp/home/article.jsp").forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 	}
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

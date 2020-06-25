@@ -8,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/home/aboutMe")
+@WebServlet("/s/home/aboutMe")
 public class HomeAboutMeServelt extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html; charset=utf-8");
 		request.getRequestDispatcher("/jsp/home/aboutMe.jsp").forward(request, response);
 	}
 
