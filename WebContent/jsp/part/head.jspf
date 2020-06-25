@@ -12,8 +12,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
 
-<link rel="stylesheet" href="/blog/resource/css/common.css">	
-<link rel="stylesheet" href="/blog/resource/css/home/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/common.css">	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/home/main.css">
 
 
 <!-- 제이쿼리 불러오기 -->
@@ -27,16 +27,21 @@
 <!--  PC버젼 탑바 -->
 	<div class="top-bar visible-on-md-up">
 		<div class="con height-100p flex flex-jc-sb">
-			<a href="/blog/home/main" class="logo flex flex-ai-c"> <img
+			<a href="${pageContext.request.contextPath}/home/main" class="logo flex flex-ai-c"> <img
 				src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
 			</a>
 
 			<nav class="menu-box-1">
 				<ul class="flex height-100p">
 
-					<li><a href="/blog/home/main" class="height-100p flex flex-ai-c">Home</a></li>
-					<li><a href="#" class="height-100p flex flex-ai-c">Articles</a></li>
-					<li><a href="/blog/home/aboutMe" class="height-100p flex flex-ai-c">About
+					<li><a href="${pageContext.request.contextPath}/home/main" class="height-100p flex flex-ai-c">Home</a></li>
+					<li><a href="#" class="height-100p flex flex-ai-c">Articles</a>
+						<ul>
+							<li><a class="block" href="${pageContext.request.contextPath}/home/article">Notice</a></li>
+							<li><a class="block" href="${pageContext.request.contextPath}/home/free">Free</a></li>
+						</ul>
+					</li>
+					<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="height-100p flex flex-ai-c">About
 							Me</a></li>
 					<li><a href="#" class="height-100p flex flex-ai-c">SNS</a>
 						<ul>
@@ -46,7 +51,8 @@
 								target="_blank" href="https://www.youtube.com/channel/UC_2N02mxLdoz6CQL1QQbuzA?view_as=subscriber">YouTube</a></li>
 							<li><a class="block" target="_blank"
 								href="https://kyky1211.tistory.com/">BOLG</a></li>
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -57,7 +63,7 @@
 			<div></div>
 			<div></div>
 			<div></div>
-		</a> <a href="/blog/home/main"
+		</a> <a href="${pageContext.request.contextPath}/home/main"
 			class="logo flex flex-ai-c absolute-center absolute-middle"> <img
 			src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
 		</a>
@@ -68,9 +74,14 @@
 			<ul>
 				<li class="icon"><img
 					src="http://kyky1211.dothome.co.kr/img/icon.png" alt=""></li>
-				<li><a href="/blog/home/main" class="block">Home</a></li>
-				<li><a href="#" class="block">Articles</a></li>
-				<li><a href="/blog/home/aboutMe" class="block">About Me</a></li>
+				<li><a href="${pageContext.request.contextPath}/home/main" class="block">Home</a></li>
+				<li><a href="#" class="block">Articles</a>
+					<ul>
+						<li><a class="block" href="${pageContext.request.contextPath}/home/article">Notice</a></li>
+						<li><a class="block" href="${pageContext.request.contextPath}/home/free">Free</a></li>
+					</ul>
+				</li>
+				<li><a href="${pageContext.request.contextPath}/home/aboutMe" class="block">About Me</a></li>
 				<li><a href="#" class="block">SNS</a>
 					<ul>
 						<li><a class="block" target="_blank"
