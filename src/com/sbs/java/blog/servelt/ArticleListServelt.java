@@ -26,6 +26,7 @@ public class ArticleListServelt extends HttpServlet {
 		String user = "sbsst";
 		String password = "sbs123414";
 		String driverName = "com.mysql.cj.jdbc.Driver";
+		
 
 		String sql = "";
 

@@ -68,5 +68,16 @@ public class DBUtil {
 
 		return rows;
 	}
+	
+
+	public static Map<String, Object> selectRow(Connection conn, String sql) {
+		List<Map<String, Object>> rows = selectRows(conn, sql);
+
+		if (rows.size() == 0) {
+			return new HashMap<String, Object>();
+		}
+
+		return rows.get(0);
+	}
 
 }

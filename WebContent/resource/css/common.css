@@ -7,10 +7,6 @@ html {
   font-family: "Noto Sans KR", sans-serif;
   
 }
-/*컨텐츠전용*/
-html {
-  box-sizing: border-box;
-}
 
 /* 노말라이즈 */
 body, ul, li, h1 {
@@ -23,22 +19,6 @@ a {
   color:inherit;
   text-decoration:none;
 }
-
-/*컨텐츠전용*/
-body {
- 
-  min-height: 100vh;
-  font-size: 1rem;
-  line-height: 1.25;
-}
-
-/*컨텐츠전용*/
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
 
 label[for] {
   cursor:pointer;
@@ -584,4 +564,6 @@ label[for] {
   display:block;
 }
 
-
+#origin1 {
+  display:none;
+}
