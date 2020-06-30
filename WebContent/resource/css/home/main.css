@@ -3,6 +3,8 @@
 /* 메인 화면 컨텐츠 */
 .main-con>img {
 	margin-top: 100px;
+	max-width:100%;
+	height: auto;
 }
 
 /* 어바웃미 */
@@ -51,27 +53,37 @@ h1 {
 }
 
 .article .table tr.noti {
-	color:##335c55;
+	color: ##335c55;
 }
 
 .article .detail-table td {
 	text-align: left;
 }
-
-.con .list-button {
-	margin-top:30px;
+.con .con_butt {
+	position: relative;
+	margin: 0 auto;
+    width: 80%;
+}
+.con .butt {
+	margin-top: 30px;
 	display: inline-block;
 	text-align: center;
 	vertical-align: center;
-	
-	
-	
 }
 
-.con .list-button a {
+.con .butt a {
 	padding: 10px 25px;
 	background-color: #C2E2DD;
 	color: #6EAEA3;
-	
 	border: 1px solid #6EAEA3;
 }
+.con .list-button {
+	position: absolute;
+	left:0;
+}
+
+.con .de-mo_butt {
+	position: absolute;
+	right:0;
+}
+

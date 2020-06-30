@@ -47,8 +47,10 @@
 		</tbody>
 
 	</table>
-	<div class="list-button">
-		<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+	<div class="con_butt">
+		<div class="list-button butt">
+			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+		</div>
 	</div>
 
 </div>

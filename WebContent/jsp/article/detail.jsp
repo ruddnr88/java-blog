@@ -74,8 +74,7 @@
 				<td><%=article.getUpdateDate()%></td>
 			</tr>
 			<tr class="detail">
-				<th>내용</th>
-				<td><div id="origin1"><%=article.getBody()%></div>
+				<td colspan="2" ><div id="origin1"><%=article.getBody()%></div>
 					<div id="viewer1"></div></td>
 
 			</tr>
@@ -86,10 +85,22 @@
 
 		</tbody>
 
-	</table>
 
-	<div class="list-button">
-		<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+	</table>
+	<div class="con_butt">
+		<div class="list-button butt">
+			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+		</div>
+		<div class="de-mo_butt">
+			<div class="delete-button butt">
+				<a href="#">수정</a>
+			</div>
+			<div class="modify-button butt">
+				<a href="#">삭제</a>
+			</div>
+
+		</div>
+
 	</div>
 	<script>
 		var editor1__initialValue = $('#origin1').html();

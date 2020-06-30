@@ -13,5 +13,4 @@
 
 
 
-</div>
 <%@ include file="/jsp/part/foot.jspf"%>
