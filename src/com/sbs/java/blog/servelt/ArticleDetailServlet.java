@@ -20,62 +20,58 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.util.DBUtil;
 
 @WebServlet("/s/article/detail")
-public class ArticleDetailServlet extends HttpServlet {	
+public class ArticleDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Article> getArticles; {
-			String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-			String user = "sbsst";
-			String password = "sbs123414";
-			String driverName = "com.mysql.cj.jdbc.Driver";
-		
-			String sql = "";
-			String id = request.getParameter("id");
 
-			sql += String.format("SELECT * ");
-			sql += String.format("FROM article ");
-			sql += String.format("WHERE id = %s ",id);
+		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "sbsst";
+		String password = "sbs123414";
+		String driverName = "com.mysql.cj.jdbc.Driver";
 
-			Connection conn = null;
-			List<Article> articles = new ArrayList<>();
+		String sql = "";
 
-			try {
-				Class.forName(driverName);
-				conn = DriverManager.getConnection(url, user, password);
+		int id = Integer.parseInt(request.getParameter("id"));
 
-				List<Map<String, Object>> rows = DBUtil.selectRows(conn, sql);
+		sql += String.format("SELECT * ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE id = %d ", id);
 
-				for (Map<String, Object> row : rows) {
-					articles.add(new Article(row));
-				}
+		Connection conn = null;
+		List<Article> articles = new ArrayList<>();
 
-			} catch (ClassNotFoundException e) {
-				System.err.println("[ClassNotFoundException 예외] ");
-				System.err.println("msg : " + e.getMessage());
+		try {
+			Class.forName(driverName);
+			conn = DriverManager.getConnection(url, user, password);
 
-			} catch (SQLException e) {
-				System.err.println("[SQLException 예외] ");
-				System.err.println("msg : " + e.getMessage());
-			} finally {
-				if (conn != null) {
-					try {
-						conn.close();
-					} catch (SQLException e) {
-						System.err.println("[SQLException 예외] ");
-						System.err.println("msg : " + e.getMessage());
-					}
-				}
+			List<Map<String, Object>> rows = DBUtil.selectRows(conn, sql);
+
+			for (Map<String, Object> row : rows) {
+				articles.add(new Article(row));
 			}
 
-			request.setAttribute("articles", articles);
-			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
-			
+		} catch (ClassNotFoundException e) {
+			System.err.println("[ClassNotFoundException 예외] ");
+			System.err.println("msg : " + e.getMessage());
 
+		} catch (SQLException e) {
+			System.err.println("[SQLException 예외] ");
+			System.err.println("msg : " + e.getMessage());
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.err.println("[SQLException 예외] ");
+					System.err.println("msg : " + e.getMessage());
+				}
+			}
 		}
-	
 
-		
+		request.setAttribute("articles", articles);
+		request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
