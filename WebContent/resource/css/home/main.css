@@ -10,6 +10,7 @@
 /* 어바웃미 */
 .con {
 	text-align: center;
+	margin: 0 auto;
 }
 
 .con h1 {
@@ -28,7 +29,7 @@ h1 {
 }
 
 .article {
-	
+	margin:0 auto;
 }
 
 .article .table {
@@ -85,5 +86,14 @@ h1 {
 .con .de-mo_butt {
 	position: absolute;
 	right:0;
+}
+
+.con .write_editor {
+	text-align: left;
+}
+@media ( max-width :799px ) {
+	.con .mo_modi_date  {
+		display: none;
+	}
 }
 

@@ -24,7 +24,7 @@
 				<th>번호</th>
 				<th>제목</th>
 				<th>날짜</th>
-				<th>수정날짜</th>
+				<th class="mo_modi_date">수정날짜</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,7 +36,7 @@
 				<td><a
 					href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
 				<td><%=article.getRegDate()%></td>
-				<td><%=article.getUpdateDate()%></td>
+				<td class ="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
 			<%
 				}
@@ -50,6 +50,13 @@
 	<div class="con_butt">
 		<div class="list-button butt">
 			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+		</div>
+		<div class="de-mo_butt">
+			<div class="write-button butt">
+				<a href="${pageContext.request.contextPath}/s/article/write">글쓰기</a>
+			</div>
+			
+
 		</div>
 	</div>
 
