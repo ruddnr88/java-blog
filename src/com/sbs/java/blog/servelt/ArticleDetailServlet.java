@@ -25,8 +25,8 @@ public class ArticleDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String url = "jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
-		String user = "sbsst";
+		String url = "jdbc:mysql://site26.iu.gy:3306/site26?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true";
+		String user = "site26";
 		String password = "sbs123414";
 		String driverName = "com.mysql.cj.jdbc.Driver";
 
