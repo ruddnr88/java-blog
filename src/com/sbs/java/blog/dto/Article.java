@@ -6,6 +6,7 @@ public class Article extends Dto {
 	private String updateDate;
 	private String title;
 	private String body;
+	private int cateItemId;
 
 	public Article() {
 
@@ -16,12 +17,13 @@ public class Article extends Dto {
 		this.updateDate = (String) row.get("updateDate");
 		this.title = (String) row.get("title");
 		this.body = (String) row.get("body");
+		this.cateItemId =(int) row.get("cateItemId");
 
 	}
 
 	@Override
 	public String toString() {
-		return "Article [id=" + getId() + ", regDate=" + getRegDate() + ", updateDate=" + updateDate + ", title="
+		return "Article [cateItemId "+ getcateItemId() + ", id=" + getId() + ", regDate=" + getRegDate() + ", updateDate=" + updateDate + ", title="
 				+ title + ", body=" + body + "]";
 	}
 
@@ -48,5 +50,14 @@ public class Article extends Dto {
 	public void setBody(String body) {
 		this.body = body;
 	}
+	
+	public int getcateItemId() {
+		return cateItemId;
+	}
+
+	public void setcateItemId(int cateItemId) {
+		this.cateItemId = cateItemId;
+	}
+
 
 }

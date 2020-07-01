@@ -28,6 +28,10 @@ h1 {
 	margin-bottom: 50px;
 }
 
+h1.list-h1 {
+	margin-top:0;
+}
+
 .article {
 	margin:0 auto;
 }
@@ -49,8 +53,8 @@ h1 {
 	padding: 10px;
 }
 
-.article .table td:nth-child(1) {
-	font-weight: bold;
+.article .table td > a:hover {
+	color:#609E93;
 }
 
 .article .table tr.noti {
@@ -60,6 +64,23 @@ h1 {
 .article .detail-table td {
 	text-align: left;
 }
+.article .cate-menu {
+	justify-content: space-around;
+	
+}
+
+.article ul {
+	margin-top:10px;
+	justify-content:center;
+}
+
+.article ul li > a {
+	color:#609E93;
+	padding: 10px;
+}
+
+/*버튼*/
+
 .con .con_butt {
 	position: relative;
 	margin: 0 auto;
@@ -87,6 +108,8 @@ h1 {
 	position: absolute;
 	right:0;
 }
+
+
 
 .con .write_editor {
 	text-align: left;

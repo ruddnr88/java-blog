@@ -58,6 +58,10 @@
 				for (Article article : articles) {
 			%>
 			<tr class="detail">
+				<th>카테고리</th>
+				<td><%=article.getcateItemId()%></td>
+			</tr>
+			<tr class="detail">
 				<th>번호</th>
 				<td><%=article.getId()%></td>
 			</tr>

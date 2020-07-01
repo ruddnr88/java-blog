@@ -1,6 +1,7 @@
 package com.sbs.java.blog.servelt;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import org.omg.CORBA.Request;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.util.DBUtil;
+
 
 @WebServlet("/s/article/detail")
 public class ArticleDetailServlet extends HttpServlet {
@@ -74,9 +76,6 @@ public class ArticleDetailServlet extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
+	
 
 }
