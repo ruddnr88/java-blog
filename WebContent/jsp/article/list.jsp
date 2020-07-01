@@ -10,21 +10,21 @@
 <div class="con article">
 	<ul class="cate-menu flex">
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=1">[1]Dairy</a></li>
+			href="./list?cateItemId=1">[1]Dairy</a></li>
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=2">[2]IT/JAVA</a></li>
+			href="./list?cateItemId=2">[2]IT/JAVA</a></li>
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=3">[3]IT/정보</a></li>
+			href="./list?cateItemId=3">[3]IT/정보</a></li>
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=4">[4]IT/ETC</a></li>
+			href="./list?cateItemId=4">[4]IT/ETC</a></li>
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=5">[5]HTML/CSS</a></li>
+			href="./list?cateItemId=5">[5]HTML/CSS</a></li>
 		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?cateItemId=6">[6]Design</a></li>
+			href="./list?cateItemId=6">[6]Design</a></li>
 	</ul>
 
 
-	<h1 class = "list-h1">List</h1>
+	<h1 class="list-h1">List</h1>
 
 	<table border="1" class="table notice-table">
 		<colgroup>
@@ -54,7 +54,7 @@
 				<td><%=article.getcateItemId()%></td>
 				<td><%=article.getId()%></td>
 				<td><a
-					href="${pageContext.request.contextPath}/s/article/detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
 				<td><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
