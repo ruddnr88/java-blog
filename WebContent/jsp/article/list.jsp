@@ -23,7 +23,7 @@
 
 	<h1 class="list-h1">List</h1>
 
-	<table border="1" class="table notice-table">
+	<table class="table notice-table">
 		<colgroup>
 			<col width="5%">
 			<col width="5%">
@@ -36,7 +36,7 @@
 			<tr>
 				<th>CA</th>
 				<th>NO.</th>
-				<th>제목</th>
+				<th>제  목</th>
 				<th>날짜</th>
 				<th class="mo_modi_date">수정날짜</th>
 			</tr>
@@ -52,8 +52,8 @@
 				<td><%=article.getId()%></td>
 				<td class="text-align-left"><a
 					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
-				<td><%=article.getRegDate()%></td>
-				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
+				<td style="font-size:14px;"><%=article.getRegDate()%></td>
+				<td class="mo_modi_date" style="font-size:14px;"><%=article.getUpdateDate()%></td>
 			</tr>
 			<%
 				}
@@ -68,7 +68,7 @@
 
 	<div class="con page-box">
 		<ul class="flex flex-jc-c">
-			<li>◀</li>
+			<li style="color:#609E93;">◀</li>
 			<%
 				for (int i = 1; i <= totalPage; i++) {
 			%>
@@ -77,7 +77,7 @@
 			<%
 				}
 			%>
-			<li>▶</li>
+			<li style="color:#609E93;">▶</li>
 		</ul>
 	</div>
 	<div class="con_butt">

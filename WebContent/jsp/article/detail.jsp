@@ -48,7 +48,7 @@
 	<h1>게시물 상세보기</h1>
 
 
-	<table border="1" class="table detail-table">
+	<table class="table detail-table">
 		<colgroup>
 			<col width="25%">
 			<col width="75%">
