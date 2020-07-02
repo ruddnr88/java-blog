@@ -88,4 +88,17 @@ public class DBUtil {
 		return -1;
 	}
 
+	public static int selectAffectedRows(Connection dbConn, String sql) {
+		int affectedRows = 0;
+
+		Statement stmt;
+		try {
+			stmt = dbConn.createStatement();
+			affectedRows = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
+		}
+		return affectedRows;
+	}
+
 }

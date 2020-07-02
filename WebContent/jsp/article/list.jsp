@@ -9,21 +9,7 @@
 	int paramPage = (int) request.getAttribute("page");
 %>
 <!-- 리스트 미메인컨텐츠 -->
-<style>
-.page-box>ul>li>a {
-	padding: 0 10px;
-	color: #787878;
-}
 
-.page-box>ul>li:hover>a {
-	color: black;
-}
-
-.page-box>ul>li.current>a {
-	color: #6EAEA3;
-	font-weight: bold;
-}
-</style>
 <div class="con article">
 	<ul class="cate-menu flex">
 		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Dairy</a></li>
@@ -64,7 +50,8 @@
 			<tr class="noti">
 				<td><%=article.getcateItemId()%></td>
 				<td><%=article.getId()%></td>
-				<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+				<td class="text-align-left"><a
+					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
 				<td><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
@@ -95,11 +82,11 @@
 	</div>
 	<div class="con_butt">
 		<div class="list-button butt">
-			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+			<a href="./list">전체목록</a>
 		</div>
 		<div class="de-mo_butt">
 			<div class="write-button butt">
-				<a href="${pageContext.request.contextPath}/s/article/write">글쓰기</a>
+				<a href="./write">글쓰기</a>
 			</div>
 
 

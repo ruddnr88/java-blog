@@ -71,4 +71,16 @@ public class ArticleDao {
 		return count;
 	}
 
+	public int getArticleDelete(int id) {
+		String sql = "";
+		
+		sql += String.format("DELETE FROM article ");
+		sql += String.format("WHERE id = '%d'", id);
+		
+
+		int deleteId = DBUtil.selectAffectedRows(dbConn, sql);
+		
+		return deleteId;
+	}
+
 }

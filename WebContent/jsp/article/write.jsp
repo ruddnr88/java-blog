@@ -1,7 +1,8 @@
-
+<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
 
@@ -32,7 +33,7 @@
 
 	<div class="con_butt">
 		<div class="list-button butt">
-			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+			<a href="./list">목록</a>
 		</div>
 		<div class="de-mo_butt">
 			<div class="doit-button butt">
@@ -51,7 +52,7 @@
 			height : '600px',
 			initialEditType : 'markdown',
 			previewStyle : 'vertical',
-			initialValue : "# 안녕",
+			initialValue : "# 글을 작성해주세요",
 			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
 		});
 	</script>

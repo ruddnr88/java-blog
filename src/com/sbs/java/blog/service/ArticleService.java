@@ -27,4 +27,8 @@ public class ArticleService {
 		return articleDao.getForPrintListArticlesCount(cateItemId);
 	}
 
+	public int getArticleDelete(int id) {
+		return articleDao.getArticleDelete(id);
+	}
+
 }

@@ -25,8 +25,7 @@ public class ArticleController extends Controller {
 		case "detail":
 			return doActionDetail(req, resp);
 		case "write":
-			return doActionWrite(req, resp);
-
+			return doActionWrite(req, resp);		
 		}
 
 		return "";
@@ -42,6 +41,8 @@ public class ArticleController extends Controller {
 		if (req.getParameter("id") != null) {
 			id = Integer.parseInt(req.getParameter("id"));
 		}
+		
+		//int deletId = articleService.getArticleDelete(id);
 
 		List<Article> articles = articleService.getForPrintArticleDetail(id);
 		req.setAttribute("articles", articles);
@@ -50,7 +51,7 @@ public class ArticleController extends Controller {
 
 	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
 		int cateItemId = 0;
-		if (req.getParameter("cateItemId") != null && req.getParameter("cateItemId") != "" ) {
+		if (req.getParameter("cateItemId") != null && req.getParameter("cateItemId") != "") {
 			cateItemId = Integer.parseInt(req.getParameter("cateItemId"));
 		}
 
@@ -58,16 +59,15 @@ public class ArticleController extends Controller {
 		if (req.getParameter("page") != null) {
 			page = Integer.parseInt(req.getParameter("page"));
 		}
-		
+
 		int itemsInAPage = 10;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId);
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);
-		
-		req.setAttribute("totalCount",totalCount);
+
+		req.setAttribute("totalCount", totalCount);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
-		
-	
+
 		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId);
 		req.setAttribute("articles", articles);
 		return "article/list";

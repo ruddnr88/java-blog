@@ -78,7 +78,7 @@
 				<td><%=article.getUpdateDate()%></td>
 			</tr>
 			<tr class="detail">
-				<td colspan="2" ><div id="origin1"><%=article.getBody()%></div>
+				<td colspan="2"><div id="origin1"><%=article.getBody()%></div>
 					<div id="viewer1"></div></td>
 
 			</tr>
@@ -92,9 +92,11 @@
 
 	</table>
 	<div class="con_butt">
+		<%for (Article article : articles) {%>
 		<div class="list-button butt">
-			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>
+			<a href="./list?cateItemId=<%=article.getcateItemId()%>">목록</a>
 		</div>
+		<%}%>
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
 				<a href="#">수정</a>

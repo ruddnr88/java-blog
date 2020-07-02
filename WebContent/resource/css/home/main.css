@@ -3,7 +3,7 @@
 /* 메인 화면 컨텐츠 */
 .main-con>img {
 	margin-top: 100px;
-	max-width:100%;
+	max-width: 100%;
 	height: auto;
 }
 
@@ -29,11 +29,11 @@ h1 {
 }
 
 h1.list-h1 {
-	margin-top:0;
+	margin-top: 0;
 }
 
 .article {
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 .article .table {
@@ -53,8 +53,9 @@ h1.list-h1 {
 	padding: 10px;
 }
 
-.article .table td > a:hover {
-	color:#609E93;
+.article .table td>a:hover {
+	color: #609E93;
+	font-weight: bold;
 }
 
 .article .table tr.noti {
@@ -64,28 +65,31 @@ h1.list-h1 {
 .article .detail-table td {
 	text-align: left;
 }
+
 .article .cate-menu {
 	justify-content: space-around;
-	
 }
+
+
+
 
 .article ul {
-	margin-top:10px;
-	justify-content:center;
+	margin-top: 10px;
+	justify-content: center;
 }
 
-.article ul li > a {
-	color:#609E93;
+.article ul li>a {
+	color: #609E93;
 	padding: 10px;
 }
 
 /*버튼*/
-
 .con .con_butt {
 	position: relative;
 	margin: 0 auto;
-    width: 80%;
+	width: 80%;
 }
+
 .con .butt {
 	margin-top: 30px;
 	display: inline-block;
@@ -99,24 +103,38 @@ h1.list-h1 {
 	color: #6EAEA3;
 	border: 1px solid #6EAEA3;
 }
+
 .con .list-button {
 	position: absolute;
-	left:0;
+	left: 0;
 }
 
 .con .de-mo_butt {
 	position: absolute;
-	right:0;
+	right: 0;
+}
+
+.page-box>ul>li>a {
+	padding: 0 10px;
+	color: #787878;
+}
+
+.page-box>ul>li:hover>a {
+	color: black;
 }
 
 
+.page-box>ul>li.current>a {
+	color: #6EAEA3;
+	font-weight: bold;
+}
 
 .con .write_editor {
 	text-align: left;
 }
+
 @media ( max-width :799px ) {
-	.con .mo_modi_date  {
+	.con .mo_modi_date {
 		display: none;
 	}
 }
-
