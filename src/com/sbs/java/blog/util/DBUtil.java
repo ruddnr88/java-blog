@@ -21,7 +21,7 @@ public class DBUtil {
 		try {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			ResultSetMetaData metaData = rs.getMetaData();			
+			ResultSetMetaData metaData = rs.getMetaData();
 			int columnSize = metaData.getColumnCount();
 
 			while (rs.next()) {
@@ -47,17 +47,16 @@ public class DBUtil {
 			}
 		} catch (SQLException e) {
 			System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
-		}
-		finally {
-			if(stmt != null) {
+		} finally {
+			if (stmt != null) {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
 					System.err.printf("[SQL 예외, SQL : %s] : %s\n", sql, e.getMessage());
 				}
 			}
-			
-			if(rs != null) {
+
+			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
@@ -68,7 +67,6 @@ public class DBUtil {
 
 		return rows;
 	}
-	
 
 	public static Map<String, Object> selectRow(Connection conn, String sql) {
 		List<Map<String, Object>> rows = selectRows(conn, sql);
@@ -78,6 +76,16 @@ public class DBUtil {
 		}
 
 		return rows.get(0);
+	}
+
+	public static int selectRowIntValue(Connection dbConn, String sql) {
+		Map<String, Object> row = selectRow(dbConn, sql);
+
+		for (String key : row.keySet()) {
+			return (int) row.get(key);
+		}
+
+		return -1;
 	}
 
 }

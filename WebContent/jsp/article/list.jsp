@@ -5,22 +5,33 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
+	int totalPage = (int) request.getAttribute("totalPage");
+	int paramPage = (int) request.getAttribute("page");
 %>
 <!-- 리스트 미메인컨텐츠 -->
+<style>
+.page-box>ul>li>a {
+	padding: 0 10px;
+	color: #787878;
+}
+
+.page-box>ul>li:hover>a {
+	color: black;
+}
+
+.page-box>ul>li.current>a {
+	color: #6EAEA3;
+	font-weight: bold;
+}
+</style>
 <div class="con article">
 	<ul class="cate-menu flex">
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=1">[1]Dairy</a></li>
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=2">[2]IT/JAVA</a></li>
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=3">[3]IT/정보</a></li>
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=4">[4]IT/ETC</a></li>
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=5">[5]HTML/CSS</a></li>
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=6">[6]Design</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Dairy</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]IT/JAVA</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=3">[3]IT/정보</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=4">[4]IT/ETC</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]HTML/CSS</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]Design</a></li>
 	</ul>
 
 
@@ -53,8 +64,7 @@
 			<tr class="noti">
 				<td><%=article.getcateItemId()%></td>
 				<td><%=article.getId()%></td>
-				<td><a
-					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+				<td><a href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
 				<td><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
@@ -67,22 +77,22 @@
 		</tbody>
 
 	</table>
-	<ul class="flex">
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list">◀</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?page=1">1</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?page=2">2</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?page=3">3</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?page=4">4</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list?page=5">5</a></li>
-		<li class="flex flex-as-c"><a
-			href="${pageContext.request.contextPath}/s/article/list">▶</a></li>
-	</ul>
+
+
+	<div class="con page-box">
+		<ul class="flex flex-jc-c">
+			<li>◀</li>
+			<%
+				for (int i = 1; i <= totalPage; i++) {
+			%>
+			<li class="<%=i == paramPage ? "current" : ""%>"><a
+				href="?cateItemId=${param.cateItemId}&page=<%=i%>" class="block"><%=i%></a></li>
+			<%
+				}
+			%>
+			<li>▶</li>
+		</ul>
+	</div>
 	<div class="con_butt">
 		<div class="list-button butt">
 			<a href="${pageContext.request.contextPath}/s/article/list">목록</a>

@@ -18,7 +18,7 @@ public class ArticleDao {
 	public List<Article> getForPrintListArticles(int page, int cateItemId) {
 		String sql = "";
 
-		int itemsInAPage = 5;
+		int itemsInAPage = 10;
 		int limitFrom = (page - 1) * itemsInAPage;
 
 		sql += String.format("SELECT * ");
@@ -46,7 +46,7 @@ public class ArticleDao {
 		sql += String.format("SELECT * ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE id = %d ", id);
-		
+
 		List<Article> articles = new ArrayList<>();
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
 
@@ -55,6 +55,20 @@ public class ArticleDao {
 		}
 
 		return articles;
+	}
+
+	public int getForPrintListArticlesCount(int cateItemId) {
+		String sql = "";
+
+		sql += String.format("SELECT COUNT(*) AS cnt ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE displayStatus = 1 ");
+		if (cateItemId != 0) {
+			sql += String.format("AND cateItemId = %d ", cateItemId);
+		}
+
+		int count = DBUtil.selectRowIntValue(dbConn, sql);
+		return count;
 	}
 
 }
