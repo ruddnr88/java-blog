@@ -40,23 +40,6 @@ public class ArticleDao {
 		return articles;
 	}
 
-	public List<Article> getForPrintArticleDetail(int id) {
-		String sql = "";
-
-		sql += String.format("SELECT * ");
-		sql += String.format("FROM article ");
-		sql += String.format("WHERE id = %d ", id);
-
-		List<Article> articles = new ArrayList<>();
-		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
-
-		for (Map<String, Object> row : rows) {
-			articles.add(new Article(row));
-		}
-
-		return articles;
-	}
-
 	public int getForPrintListArticlesCount(int cateItemId) {
 		String sql = "";
 
@@ -81,6 +64,19 @@ public class ArticleDao {
 		int deleteId = DBUtil.selectAffectedRows(dbConn, sql);
 		
 		return deleteId;
+	}
+
+	public Article getForPrintArticle(int id) {
+		String sql = "";
+
+		sql += String.format("SELECT *, '노경욱' AS extra__writer ");
+		sql += String.format("FROM article ");
+		sql += String.format("WHERE 1 ");
+		sql += String.format("AND id = %d ", id);
+		sql += String.format("AND displayStatus = 1 ");
+		
+		
+		return new Article(DBUtil.selectRow(dbConn, sql));
 	}
 
 }

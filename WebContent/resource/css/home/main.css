@@ -2,7 +2,6 @@
 
 /* 메인 화면 컨텐츠 */
 .main-con>img {
-	margin-top: 100px;
 	max-width: 100%;
 	height: auto;
 }
@@ -25,7 +24,7 @@
 
 /*아티클 - 공통사항*/
 h1 {
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 
 h1.list-h1 {
@@ -39,39 +38,20 @@ h1.list-h1 {
 .article .table {
 	width: 80%;
 	margin: 0 auto;
-	border: 1px solid #6EAEA3;
+	border-top: 1px solid #6EAEA3;
 	border-collapse: collapse;
 }
 
 .article .table th {
 	background-color: #C2E2DD;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	color: #609E93;
 }
 
 .article .table th, td {
 	padding: 10px;
+	border-bottom: 1px solid #6EAEA3;
 }
-
-.article .table td>a:hover {
-	color: #609E93;
-	font-weight: bold;
-}
-
-.article .table tr.noti {
-	color: ##335c55;
-}
-
-.article .detail-table td {
-	text-align: left;
-}
-
-.article .cate-menu {
-	justify-content: space-around;
-}
-
-
-
 
 .article ul {
 	margin-top: 10px;
@@ -81,6 +61,40 @@ h1.list-h1 {
 .article ul li>a {
 	color: #609E93;
 	padding: 10px;
+}
+
+/*게시물 리스트*/
+.article .table td>a:hover {
+	color: #609E93;
+	font-weight: bold;
+}
+
+.article .table tr.noti {
+	color: #335c55;
+}
+
+.article .cate-menu {
+	justify-content: space-around;
+}
+
+.article .countValue {
+	margin-left: 10%;
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.article  .cate-menu > li {
+	border-bottom: 3px solid transparent;
+}
+
+.article .cate-menu > li:hover {
+	border-bottom: 3px solid #609E93;
+}
+
+/*게시물 디테일*/
+.article .detail-table td {
+	text-align: left;
 }
 
 /*버튼*/
@@ -123,7 +137,6 @@ h1.list-h1 {
 	color: black;
 }
 
-
 .page-box>ul>li.current>a {
 	color: #6EAEA3;
 	font-weight: bold;
@@ -134,7 +147,13 @@ h1.list-h1 {
 }
 
 @media ( max-width :799px ) {
-	.con .mo_modi_date {
+	.mo_modi_date {
 		display: none;
+	}
+	.con .table {
+		width: 100%;
+	}
+	.article .countValue {
+	margin-left:0;
 	}
 }

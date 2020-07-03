@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
+	Article article = (Article) request.getAttribute("article");
 %>
 
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
@@ -45,18 +45,15 @@
 
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con article">
-	<h1>게시물 상세보기</h1>
+	<h1 style="color:#6EAEA3;"><%=article.getTitle()%></h1>
 
 
-	<table border="1" class="table detail-table">
+	<table class="table detail-table">
 		<colgroup>
 			<col width="25%">
 			<col width="75%">
 		</colgroup>
 		<tbody>
-			<%
-				for (Article article : articles) {
-			%>
 			<tr class="detail">
 				<th>카테고리</th>
 				<td><%=article.getcateItemId()%></td>
@@ -66,8 +63,8 @@
 				<td><%=article.getId()%></td>
 			</tr>
 			<tr class="detail">
-				<th>제목</th>
-				<td><%=article.getTitle()%></td>
+				<th>작성자</th>
+				<td><%=article.getExtra().get("writer")%></td>
 			</tr>
 			<tr class="detail">
 				<th>등록날짜</th>
@@ -82,9 +79,7 @@
 					<div id="viewer1"></div></td>
 
 			</tr>
-			<%
-				}
-			%>
+
 			<!-- 두번째 줄 끝 -->
 
 		</tbody>
@@ -92,11 +87,11 @@
 
 	</table>
 	<div class="con_butt">
-		<%for (Article article : articles) {%>
+		
 		<div class="list-button butt">
 			<a href="./list?cateItemId=<%=article.getcateItemId()%>">목록</a>
 		</div>
-		<%}%>
+	
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
 				<a href="#">수정</a>

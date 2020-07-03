@@ -1,15 +1,14 @@
 package com.sbs.java.blog.controller;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.service.ArticleService;
+import com.sbs.java.blog.util.Util;
 
 public class ArticleController extends Controller {
 	private ArticleService articleService;
@@ -25,7 +24,7 @@ public class ArticleController extends Controller {
 		case "detail":
 			return doActionDetail(req, resp);
 		case "write":
-			return doActionWrite(req, resp);		
+			return doActionWrite(req, resp);
 		}
 
 		return "";
@@ -33,20 +32,26 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionWrite(HttpServletRequest req, HttpServletResponse resp) {
-		return "article/write";
+		return "article/write.jsp";
 	}
 
 	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
-		int id = 1;
-		if (req.getParameter("id") != null) {
-			id = Integer.parseInt(req.getParameter("id"));
+		if (Util.empty(req, "id")) {
+			return "plain:id를 입력해주세요.";
 		}
-		
-		//int deletId = articleService.getArticleDelete(id);
 
-		List<Article> articles = articleService.getForPrintArticleDetail(id);
-		req.setAttribute("articles", articles);
-		return "article/detail";
+		if (Util.isNum(req, "id") == false) {
+			return "plain:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+
+		Article article = articleService.getForPrintArticle(id);
+
+		req.setAttribute("article", article);
+
+		return "article/detail.jsp";
+		
 	}
 
 	private String doActionList(HttpServletRequest req, HttpServletResponse resp) {
@@ -70,7 +75,7 @@ public class ArticleController extends Controller {
 
 		List<Article> articles = articleService.getForPrintListArticles(page, cateItemId);
 		req.setAttribute("articles", articles);
-		return "article/list";
+		return "article/list.jsp";
 	}
 
 }

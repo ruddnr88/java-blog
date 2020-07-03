@@ -24,7 +24,7 @@ public class Article extends Dto {
 	@Override
 	public String toString() {
 		return "Article [cateItemId "+ getcateItemId() + ", id=" + getId() + ", regDate=" + getRegDate() + ", updateDate=" + updateDate + ", title="
-				+ title + ", body=" + body + "]";
+				+ title + ", body=" + body + ", dto=" + super.toString() + "]";
 	}
 
 	public String getUpdateDate() {

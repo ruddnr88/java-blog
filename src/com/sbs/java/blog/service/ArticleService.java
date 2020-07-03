@@ -19,16 +19,16 @@ public class ArticleService {
 		return articleDao.getForPrintListArticles(page, cateItemId);
 	}
 
-	public List<Article> getForPrintArticleDetail(int id) {
-		return articleDao.getForPrintArticleDetail(id);
-	}
-
 	public int getForPrintListArticlesCount(int cateItemId) {
 		return articleDao.getForPrintListArticlesCount(cateItemId);
 	}
 
 	public int getArticleDelete(int id) {
 		return articleDao.getArticleDelete(id);
+	}
+
+	public Article getForPrintArticle(int id) {
+		return articleDao.getForPrintArticle(id);
 	}
 
 }

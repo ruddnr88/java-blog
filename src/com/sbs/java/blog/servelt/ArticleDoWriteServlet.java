@@ -27,6 +27,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
+		String cateItemId = request.getParameter("cateItemId");
 
 		Connection connection = null;
 		Statement stmt = null;
@@ -35,6 +36,8 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		sql += String.format("INSERT INTO article ");
 		sql += String.format("SET regDate = NOW()");
 		sql += String.format(", updateDate = NOW()");
+		sql += String.format(", displayStatus = 1");
+		sql += String.format(", cateItemId = %s",cateItemId);
 		sql += String.format(", title = '%s'", title);
 		sql += String.format(", body = '%s';",body);
 		
@@ -45,7 +48,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			stmt = connection.createStatement();
 			int affectedRows= stmt.executeUpdate(sql);
 			
-			response.getWriter().append(affectedRows + "개의 데이터가 추가되었습니다.");
+			response.getWriter().append("/s/article/list.jsp");
 			
 		} catch (SQLException e) {
 			System.err.printf("[SQL 예외] : %s\n", e.getMessage());
