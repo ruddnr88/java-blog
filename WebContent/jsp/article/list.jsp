@@ -23,9 +23,13 @@
 
 	<h1 class="list-h1">List</h1>
 
+<<<<<<< HEAD
 	<div class="text-align-left countValue">총 게시물 수 : ${totalCount}</div>
 	<table class="table notice-table">
 
+=======
+	<table class="table notice-table">
+>>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 		<colgroup>
 			<col width="5%">
 			<col width="5%">
@@ -39,7 +43,11 @@
 			<tr>
 				<th>CA</th>
 				<th>NO.</th>
+<<<<<<< HEAD
 				<th>제 목</th>
+=======
+				<th>제  목</th>
+>>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 				<th>날짜</th>
 				<th class="mo_modi_date">수정날짜</th>
 			</tr>
@@ -55,8 +63,13 @@
 				<td><%=article.getId()%></td>
 				<td class="text-align-left"><a
 					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+<<<<<<< HEAD
 				<td style="font-size: 14px;"><%=article.getRegDate()%></td>
 				<td class="mo_modi_date" style="font-size: 14px;"><%=article.getUpdateDate()%></td>
+=======
+				<td style="font-size:14px;"><%=article.getRegDate()%></td>
+				<td class="mo_modi_date" style="font-size:14px;"><%=article.getUpdateDate()%></td>
+>>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 			</tr>
 			<%
 				}
@@ -70,7 +83,11 @@
 
 	<div class="con page-box">
 		<ul class="flex flex-jc-c">
+<<<<<<< HEAD
 			<li style="color: #609E93">◀</li>
+=======
+			<li style="color:#609E93;">◀</li>
+>>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 			<%
 				for (int i = 1; i <= totalPage; i++) {
 			%>
@@ -79,7 +96,11 @@
 			<%
 				}
 			%>
+<<<<<<< HEAD
 			<li style="color: #609E93">▶</li>
+=======
+			<li style="color:#609E93;">▶</li>
+>>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 		</ul>
 	</div>
 	<div class="con_butt">
