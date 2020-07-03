@@ -37,37 +37,26 @@ h1.list-h1 {
 
 .article .table {
 	width: 80%;
-	border-top:1px solid #609E93;
+	border-top: 1px solid #609E93;
 	margin: 0 auto;
-<<<<<<< HEAD
-	border-top: 1px solid #6EAEA3;
-=======
->>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 	border-collapse: collapse;
 }
 
 .article .table th {
 	background-color: #C2E2DD;
-<<<<<<< HEAD
 	font-size: 1rem;
-=======
->>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 	color: #609E93;
 }
 
-
 .article .table th, td {
-	padding: 10px;
-<<<<<<< HEAD
-	border-bottom: 1px solid #6EAEA3;
+	padding: 10px; 
+	HEAD border-bottom: 1px solid #6EAEA3;
 }
 
 .article ul {
 	margin-top: 10px;
-	justify-content: center;
-=======
-	border-bottom:1px solid #609E93
->>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
+	justify-content: center; 
+	border-bottom: 1px solid #609E93;
 }
 
 .article ul li>a {
@@ -89,7 +78,8 @@ h1.list-h1 {
 	justify-content: space-around;
 }
 
-<<<<<<< HEAD
+<<<<<<<
+HEAD
 .article .countValue {
 	margin-left: 10%;
 	margin-bottom: 10px;
@@ -97,17 +87,16 @@ h1.list-h1 {
 	font-weight: bold;
 }
 
-.article  .cate-menu > li {
+.article  .cate-menu>li {
 	border-bottom: 3px solid transparent;
 }
 
-.article .cate-menu > li:hover {
-	border-bottom: 3px solid #609E93;
-=======
-.article ul {
-	margin-top: 10px;
+.article .cate-menu>li:hover {
+	border-bottom: 3px solid #609E93; ======= . article ul { margin-top :
+	10px;
 	justify-content: center;
->>>>>>> d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
+	>>>>>>>
+	d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
 }
 
 /*게시물 디테일*/
@@ -172,6 +161,6 @@ h1.list-h1 {
 		width: 100%;
 	}
 	.article .countValue {
-	margin-left:0;
+		margin-left: 0;
 	}
 }
