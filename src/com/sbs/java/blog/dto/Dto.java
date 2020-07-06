@@ -8,10 +8,6 @@ public class Dto {
 	private String regDate;
 	private Map<String, Object> extra;
 
-	public Dto() {
-
-	}
-
 	public Dto(Map<String, Object> row) {
 		this.id = (int) row.get("id");
 		this.regDate = (String) row.get("regDate");
@@ -30,19 +26,6 @@ public class Dto {
 		return id;
 	}
 
-	public Map<String, Object> getExtra() {
-		return extra;
-	}
-
-	public void setExtra(Map<String, Object> extra) {
-		this.extra = extra;
-	}
-
-	@Override
-	public String toString() {
-		return "Dto [id=" + id + ", regDate=" + regDate + ", extra=" + extra + "]";
-	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -55,4 +38,16 @@ public class Dto {
 		this.regDate = regDate;
 	}
 
+	public Map<String, Object> getExtra() {
+		return extra;
+	}
+
+	public void setExtra(Map<String, Object> extra) {
+		this.extra = extra;
+	}
+
+	@Override
+	public String toString() {
+		return "Dto [id=" + id + ", regDate=" + regDate + ", extra=" + extra + "]";
+	}
 }

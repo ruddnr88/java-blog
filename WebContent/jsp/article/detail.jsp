@@ -56,7 +56,7 @@
 		<tbody>
 			<tr class="detail">
 				<th>카테고리</th>
-				<td><%=article.getcateItemId()%></td>
+				<td><%=article.getCateItemId()%></td>
 			</tr>
 			<tr class="detail">
 				<th>번호</th>
@@ -89,7 +89,7 @@
 	<div class="con_butt">
 		
 		<div class="list-button butt">
-			<a href="./list?cateItemId=<%=article.getcateItemId()%>">목록</a>
+			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
 		</div>
 	
 		<div class="de-mo_butt">

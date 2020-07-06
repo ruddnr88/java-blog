@@ -5,6 +5,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
+	String cateItemName = (String) request.getAttribute("cateItemName");
 	int totalPage = (int) request.getAttribute("totalPage");
 	int paramPage = (int) request.getAttribute("page");
 %>
@@ -12,18 +13,57 @@
 
 <div class="con article">
 	<ul class="cate-menu flex">
-		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Dairy</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Diary</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]JAVA</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=3">[3]정보</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=4">[4]ETC</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]HTML/CSS</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]Design</a></li>
 	</ul>
+	<ul class="mobail-bar mo_flex">
+		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]
+				<i class="fas fa-book-open"></i>
+		</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]
+				<i class="fas fa-code"></i>
+		</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=3">[3]
+				<i class="fas fa-question-circle"></i>
+		</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=4">[4]
+				<i class="fab fa-sketch"></i>
+		</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]
+				<i class="fab fa-html5"></i>
+		</a></li>
+		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]
+				<i class="fab fa-adobe"></i>
+		</a></li>
+	</ul>
 
 
-	<h1 class="list-h1">List</h1>
 
-	<div class="text-align-left countValue">총 게시물 수 : ${totalCount}</div>
+
+	<h1 class="list-h1" style="margin-top: 10px;">
+		<%=cateItemName%></h1>
+	<div class="search-count">
+		<div class="text-align-left countValue">총 게시물 수 : ${totalCount}</div>
+		<div class="search-bar">
+			<form action="${pageContext.request.contextPath}/s/article/list">
+				<input type="hidden" name="page" value="1" /> <input type="hidden"
+					name="cateItemId" value="${param.cateItemId}" /> <input
+					type="hidden" name="searchKeywordType" value="title" /> <input
+					type="text" name="searchKeyword" value="${param.searchKeyword}"
+					placeholder="검색어를 입력하세요" class="search"
+					style="border-bottom: 1px solid;">
+				<button>
+					<i class="fa fa-search"></i>
+				</button>
+			</form>
+		</div>
+
+	</div>
+
 
 	<table class="table notice-table">
 		<colgroup>
@@ -40,7 +80,7 @@
 				<th>CA</th>
 				<th>NO.</th>
 				<th>제 목</th>
-				<th>날짜</th>
+				<th class="mo_modi_date">날짜</th>
 				<th class="mo_modi_date">수정날짜</th>
 			</tr>
 		</thead>
@@ -51,12 +91,12 @@
 				for (Article article : articles) {
 			%>
 			<tr class="noti">
-				<td><%=article.getcateItemId()%></td>
+				<td><%=article.getCateItemId()%></td>
 				<td><%=article.getId()%></td>
 				<td class="text-align-left"><a
 					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
-				<td style="font-size: 14px;"><%=article.getRegDate()%></td>
-				<td class="mo_modi_date" style="font-size: 14px;"><%=article.getUpdateDate()%></td>
+				<td class="mo_modi_date"><%=article.getRegDate()%></td>
+				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
 			<%
 				}

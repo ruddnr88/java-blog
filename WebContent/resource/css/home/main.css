@@ -49,14 +49,13 @@ h1.list-h1 {
 }
 
 .article .table th, td {
-	padding: 10px; 
-	HEAD border-bottom: 1px solid #6EAEA3;
+	padding: 10px;
+	border-bottom: 1px solid #6EAEA3;
 }
 
 .article ul {
 	margin-top: 10px;
-	justify-content: center; 
-	border-bottom: 1px solid #609E93;
+	justify-content: center;
 }
 
 .article ul li>a {
@@ -73,18 +72,9 @@ h1.list-h1 {
 .article .table tr.noti {
 	color: #335c55;
 }
-
+/*카테고리 */
 .article .cate-menu {
 	justify-content: space-around;
-}
-
-<<<<<<<
-HEAD
-.article .countValue {
-	margin-left: 10%;
-	margin-bottom: 10px;
-	font-size: 14px;
-	font-weight: bold;
 }
 
 .article  .cate-menu>li {
@@ -92,11 +82,62 @@ HEAD
 }
 
 .article .cate-menu>li:hover {
-	border-bottom: 3px solid #609E93; ======= . article ul { margin-top :
-	10px;
+	border-bottom: 3px solid #609E93;
+}
+
+.article .mobail-bar {
+	display: none;
+}
+
+.article ul {
+	margin-top: 10px;
 	justify-content: center;
-	>>>>>>>
-	d773002da4e3f6ed9f083fddaa1f29d3cb62dc4d
+}
+
+.article td.mo_modi_date {
+	font-size: 14px;
+}
+
+/*서치바 & 게시물수*/
+.article .search-count {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+.article .search {
+	width: 150px;
+	height: 25px;
+	color: #609E93;
+	transition: all 0.5s;
+	border: 0 none;
+}
+
+.article .search:hover {
+	width: 200px;
+}
+
+.article .countValue {
+	margin-left: 10%;
+	margin-bottom: 10px;
+	font-size: 16px;
+	color: #609E93;
+	font-weight: bold;
+	display: inline-block;
+}
+
+.article .search-bar {
+	margin-right: 10%;
+}
+
+.article .search-bar button {
+	width: 30px;
+	height: 30px;
+	font-size: 18px;
+	color: #609E93;
+	background: white;
+	cursor: pointer;
+	border: 0 none;
 }
 
 /*게시물 디테일*/
@@ -153,14 +194,27 @@ HEAD
 	text-align: left;
 }
 
+/*모바일*/
 @media ( max-width :799px ) {
 	.mo_modi_date {
 		display: none;
+	}
+	.article .search-bar {
+		margin-right: 0;
 	}
 	.con .table {
 		width: 100%;
 	}
 	.article .countValue {
-		margin-left: 0;
+		margin-left: 1%;
+	}
+	.article .cate-menu {
+		display: none;
+	}
+	.article .mobail-bar {
+		display:block;
+	}
+	.article .mo_flex {
+		display: flex;
 	}
 }
