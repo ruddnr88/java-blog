@@ -12,6 +12,19 @@
 <!-- 리스트 미메인컨텐츠 -->
 
 <div class="con article">
+	<div class="select-box">
+		<select class="cete-select"
+			onchange="if(this.value) location.href=(this.value);">
+			<option selected>카테고리 선택</option>
+			<option value="./list?cateItemId=1">[1] Diary</option>
+			<option value="./list?cateItemId=2">[2] JAVA</option>
+			<option value="./list?cateItemId=3">[3] 정보</option>
+			<option value="./list?cateItemId=4">[4] ETC</option>
+			<option value="./list?cateItemId=5">[5] HTML/CSS</option>
+			<option value="./list?cateItemId=6">[6] 디자인</option>
+		</select>
+	</div>
+
 	<ul class="cate-menu flex">
 		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Diary</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]JAVA</a></li>
@@ -20,26 +33,7 @@
 		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]HTML/CSS</a></li>
 		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]Design</a></li>
 	</ul>
-	<ul class="mobail-bar mo_flex">
-		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]
-				<i class="fas fa-book-open"></i>
-		</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]
-				<i class="fas fa-code"></i>
-		</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=3">[3]
-				<i class="fas fa-question-circle"></i>
-		</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=4">[4]
-				<i class="fab fa-sketch"></i>
-		</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]
-				<i class="fab fa-html5"></i>
-		</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]
-				<i class="fab fa-adobe"></i>
-		</a></li>
-	</ul>
+
 
 
 

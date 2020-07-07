@@ -5,6 +5,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	Article article = (Article) request.getAttribute("article");
+	String cateItemName = (String) request.getAttribute("cateItemName");
 %>
 
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
@@ -45,7 +46,7 @@
 
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con article">
-	<h1 style="color:#6EAEA3;"><%=article.getTitle()%></h1>
+	<h1 style="color: #6EAEA3;"><%=article.getTitle()%></h1>
 
 
 	<table class="table detail-table">
@@ -56,7 +57,7 @@
 		<tbody>
 			<tr class="detail">
 				<th>카테고리</th>
-				<td><%=article.getCateItemId()%></td>
+				<td>[<%=article.getCateItemId()%>]<%=cateItemName%></td>
 			</tr>
 			<tr class="detail">
 				<th>번호</th>
@@ -75,7 +76,7 @@
 				<td><%=article.getUpdateDate()%></td>
 			</tr>
 			<tr class="detail">
-				<td colspan="2"><div id="origin1"><%=article.getBody()%></div>
+				<td colspan="2"><script type="text/x-template" id="origin1"><%=article.getBody()%></script>
 					<div id="viewer1"></div></td>
 
 			</tr>
@@ -87,11 +88,11 @@
 
 	</table>
 	<div class="con_butt">
-		
+
 		<div class="list-button butt">
 			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
 		</div>
-	
+
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
 				<a href="#">수정</a>
@@ -103,16 +104,8 @@
 		</div>
 
 	</div>
-	<script>
-		var editor1__initialValue = $('#origin1').html();
-		var editor1 = new toastui.Editor({
-			el : document.querySelector('#viewer1'),
-			height : '600px',
-			initialValue : editor1__initialValue,
-			viewer : true,
-			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight ]
-		});
-	</script>
+	<script
+		src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
 
 </div>

@@ -50,8 +50,24 @@ public class ArticleController extends Controller {
 
 		int id = Util.getInt(req, "id");
 
-		Article article = articleService.getForPrintArticle(id);
-		
+		int cateItemId = 0;
+
+		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
+			cateItemId = Util.getInt(req, "cateItemId");
+		}
+
+		String cateItemName = "Total List";
+
+		if (cateItemId != 0) {
+			CateItem cateItem = articleService.getCateItem(cateItemId);
+			cateItemName = cateItem.getName();
+
+		}
+
+		req.setAttribute("cateItemName", cateItemName);
+
+		Article article = articleService.getForPrintArticle(id, cateItemId);
+
 		req.setAttribute("article", article);
 
 		return "article/detail.jsp";
@@ -76,6 +92,7 @@ public class ArticleController extends Controller {
 		if (cateItemId != 0) {
 			CateItem cateItem = articleService.getCateItem(cateItemId);
 			cateItemName = cateItem.getName();
+
 		}
 		req.setAttribute("cateItemName", cateItemName);
 

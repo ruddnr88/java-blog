@@ -73,6 +73,41 @@ h1.list-h1 {
 	color: #335c55;
 }
 /*카테고리 */
+.article .select-box {
+	margin-top: 25px;
+	margin-left: 10%;
+	display: none;
+}
+
+.article .cete-select {
+	width: 200px;
+	padding: .8em .5em;
+	font-family: inherit;
+	background:
+		url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
+		no-repeat 95% 50%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 1px solid #999;
+	border-radius: 0px;
+	width: 200px;
+}
+
+.article .cete-select option {
+	padding: .8em .5em;
+	font-size: 16px;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+.article .cete-select::-ms-expand {
+	/* for IE 11 */
+	display: none;
+}
+
 .article .cate-menu {
 	justify-content: space-around;
 }
@@ -85,20 +120,11 @@ h1.list-h1 {
 	border-bottom: 3px solid #609E93;
 }
 
-.article .mobail-bar {
-	display: none;
-}
-
 .article ul {
 	margin-top: 10px;
 	justify-content: center;
 }
 
-.article td.mo_modi_date {
-	font-size: 14px;
-}
-
-/*서치바 & 게시물수*/
 .article .search-count {
 	display: flex;
 	justify-content: space-between;
@@ -202,6 +228,10 @@ h1.list-h1 {
 	.article .search-bar {
 		margin-right: 0;
 	}
+	.article .select-box {
+		display: block;
+		margin-left: 2%;
+	}
 	.con .table {
 		width: 100%;
 	}
@@ -210,11 +240,5 @@ h1.list-h1 {
 	}
 	.article .cate-menu {
 		display: none;
-	}
-	.article .mobail-bar {
-		display:block;
-	}
-	.article .mo_flex {
-		display: flex;
 	}
 }

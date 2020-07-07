@@ -334,6 +334,31 @@ label[for] {
 	flex: 1 0 0;
 }
 
+/*토스트 에디터*/
+.ratio-16-9::after {
+  content:"";
+  display:block;
+  padding-top:56.25%;
+}
+
+.ratio-1-1::after {
+  content:"";
+  display:block;
+  padding-top:100%;
+}
+
+.relative {
+  position:relative;
+}
+
+.abs-full {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
 /* 커스텀 */
 .con {
 	max-width: 1356px;
@@ -568,7 +593,6 @@ label[for] {
 }
 
 .footer {
-	
 	margin-top:100px;
 	
 }

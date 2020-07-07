@@ -19,7 +19,8 @@ public class ArticleService extends Service {
 		articleDao = new ArticleDao(dbConn, req, resp);
 	}
 
-	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType, String searchKeyword) {
+	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType,
+			String searchKeyword) {
 		return articleDao.getForPrintListArticles(page, itemsInAPage, cateItemId, searchKeywordType, searchKeyword);
 	}
 
@@ -27,8 +28,8 @@ public class ArticleService extends Service {
 		return articleDao.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 	}
 
-	public Article getForPrintArticle(int id) {
-		return articleDao.getForPrintArticle(id);
+	public Article getForPrintArticle(int id, int cateItemId) {
+		return articleDao.getForPrintArticle(id, cateItemId);
 	}
 
 	public List<CateItem> getForPrintCateItems() {

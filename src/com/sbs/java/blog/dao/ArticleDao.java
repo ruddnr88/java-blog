@@ -12,7 +12,7 @@ import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.DBUtil;
 
-public class ArticleDao extends Dao{
+public class ArticleDao extends Dao {
 	private Connection dbConn;
 	private DBUtil dbUtil;
 
@@ -69,13 +69,16 @@ public class ArticleDao extends Dao{
 		return count;
 	}
 
-	public Article getForPrintArticle(int id) {
+	public Article getForPrintArticle(int id, int cateItemId) {
 		String sql = "";
 
-		sql += String.format("SELECT *, '노경욱' AS extra__writer ");
+		sql += String.format("SELECT * , '노경욱' AS extra__writer ");
 		sql += String.format("FROM article ");
 		sql += String.format("WHERE 1 ");
 		sql += String.format("AND id = %d ", id);
+		if (cateItemId != 0) {
+			sql += String.format("AND cateItemId = %d ", cateItemId);
+		}
 		sql += String.format("AND displayStatus = 1 ");
 
 		return new Article(dbUtil.selectRow(dbConn, sql));
