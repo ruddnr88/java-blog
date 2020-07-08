@@ -192,6 +192,14 @@ select::-ms-expand {
 	border: 1px solid #6EAEA3;
 }
 
+.con .butt .button_css {
+	width:100px;
+	padding: 10px 25px;
+	background-color: #C2E2DD;
+	color: #6EAEA3;
+	border: 1px solid #6EAEA3;
+}
+
 .con .list-button {
 	position: absolute;
 	left: 0;
@@ -218,6 +226,65 @@ select::-ms-expand {
 
 .con .write_editor {
 	text-align: left;
+}
+
+/*글쓰기 */
+.wrtie-box {
+	text-align: center;
+}
+
+.form1 {
+	display: block;
+	width: 90%;
+}
+
+.form1 .form-row {
+	align-items: center;
+	display: flex;
+}
+
+.form1 .form-row>.label {
+	width: 100px;
+}
+
+.form1 .form-row>.input {
+	flex-grow: 1;
+}
+
+.form1 .form-row>.input>input, .form1 .form-row>.input>textarea {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.form1 .form-row>.input>select {
+	padding: 10px;
+}
+
+.form1 .form-row>.input>textarea {
+	height: 500px;
+}
+
+@media ( max-width :500px) {
+	.form1 .form-row {
+		display: block;
+	}
+}
+
+.write-form-box {
+	margin-top: 30px;
+}
+
+/*글쓰기 버튼 */
+.form1 .input .button_css {
+	height:45px;
+	padding:10px 25px;
+	background-color: #C2E2DD;
+	color: #6EAEA3;
+	border: 1px solid #6EAEA3;
+	font-size: 18px;
+	margin-left: 10px;
 }
 
 /*모바일*/

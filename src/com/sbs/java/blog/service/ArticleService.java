@@ -14,9 +14,8 @@ public class ArticleService extends Service {
 
 	private ArticleDao articleDao;
 
-	public ArticleService(Connection dbConn, HttpServletRequest req, HttpServletResponse resp) {
-		super(req, resp);
-		articleDao = new ArticleDao(dbConn, req, resp);
+	public ArticleService(Connection dbConn) {
+		articleDao = new ArticleDao(dbConn);
 	}
 
 	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType,
@@ -38,6 +37,10 @@ public class ArticleService extends Service {
 
 	public CateItem getCateItem(int cateItemId) {
 		return articleDao.getCateItem(cateItemId);
+	}
+
+	public int write(int cateItemId, String title, String body) {
+		return articleDao.write(cateItemId, title, body);
 	}
 
 }

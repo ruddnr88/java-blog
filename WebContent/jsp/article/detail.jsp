@@ -58,6 +58,8 @@
 			<tr class="detail">
 				<th>카테고리</th>
 				<td>[<%=article.getCateItemId()%>]<%=cateItemName%></td>
+				
+				
 			</tr>
 			<tr class="detail">
 				<th>번호</th>

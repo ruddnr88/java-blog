@@ -1,9 +1,11 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
+<%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
+	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 	String cateItemName = (String) request.getAttribute("cateItemName");
 	int totalPage = (int) request.getAttribute("totalPage");
@@ -16,22 +18,27 @@
 		<select class="cete-select"
 			onchange="if(this.value) location.href=(this.value);">
 			<option selected>카테고리 선택</option>
-			<option value="./list?cateItemId=1">[1] Diary</option>
-			<option value="./list?cateItemId=2">[2] JAVA</option>
-			<option value="./list?cateItemId=3">[3] 정보</option>
-			<option value="./list?cateItemId=4">[4] ETC</option>
-			<option value="./list?cateItemId=5">[5] HTML/CSS</option>
-			<option value="./list?cateItemId=6">[6] 디자인</option>
+			<%
+				for (CateItem cateItem : cateItems) {
+			%>
+			<option value="./list?cateItemId=<%=cateItem.getId()%>" class="block">[<%=cateItem.getId()%>]<%=cateItem.getName()%></option>
+			<%
+				}
+			%>
 		</select>
 	</div>
 
 	<ul class="cate-menu flex">
-		<li class="flex flex-as-c"><a href="./list?cateItemId=1">[1]Diary</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=2">[2]JAVA</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=3">[3]정보</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=4">[4]ETC</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=5">[5]HTML/CSS</a></li>
-		<li class="flex flex-as-c"><a href="./list?cateItemId=6">[6]Design</a></li>
+		<%
+			for (CateItem cateItem : cateItems) {
+		%>
+
+		<li class="flex flex-as-c"><a
+			href="./list?cateItemId=<%=cateItem.getId()%>" class="block">[<%=cateItem.getId()%>]<%=cateItem.getName()%></a></li>
+
+		<%
+			}
+		%>
 	</ul>
 
 
@@ -88,7 +95,7 @@
 				<td><%=article.getCateItemId()%></td>
 				<td><%=article.getId()%></td>
 				<td class="text-align-left"><a
-					href="./detail?id=<%=article.getId()%>"><%=article.getTitle()%></a></td>
+					href="./detail?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>"><%=article.getTitle()%></a></td>
 				<td class="mo_modi_date"><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>
