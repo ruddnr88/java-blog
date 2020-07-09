@@ -22,6 +22,16 @@
 	margin-bottom: 20px;
 }
 
+/*SNS*/
+.sns-con .sns-icon {
+	justify-content: space-around;
+	margin: 100px;
+}
+
+.sns-icon>a {
+	font-size: 12rem;
+}
+
 /*아티클 - 공통사항*/
 h1 {
 	margin-bottom: 30px;
@@ -193,7 +203,7 @@ select::-ms-expand {
 }
 
 .con .butt .button_css {
-	width:100px;
+	width: 100px;
 	padding: 10px 25px;
 	background-color: #C2E2DD;
 	color: #6EAEA3;
@@ -266,26 +276,42 @@ select::-ms-expand {
 	height: 500px;
 }
 
-@media ( max-width :500px) {
-	.form1 .form-row {
-		display: block;
-	}
-}
 
 .write-form-box {
 	margin-top: 30px;
 }
 
-/*글쓰기 버튼 */
-.form1 .input .button_css {
-	height:45px;
-	padding:10px 25px;
+
+/*회원가입 화면*/
+.sign-form {
+	margin: 0 auto;
+}
+
+.sign_butt {
+	width:100%;
+}
+
+
+/*로그인&가입 버튼*/
+.form1 .input .login_but {
+	position:absolute;
+	padding: 10px 25px;
 	background-color: #C2E2DD;
 	color: #6EAEA3;
 	border: 1px solid #6EAEA3;
 	font-size: 18px;
 	margin-left: 10px;
 }
+
+.form1 .input .lb_1 {
+	left:0;
+}
+
+.form1 .input .lb_3 {
+	right:0;
+}
+
+
 
 /*모바일*/
 @media ( max-width :799px ) {
@@ -307,5 +333,11 @@ select::-ms-expand {
 	}
 	.article .cate-menu {
 		display: none;
+	}
+	.sns-con .sns-icon {
+	flex-direction: column;
+	}
+	.form1 .form-row {
+		display: block;
 	}
 }

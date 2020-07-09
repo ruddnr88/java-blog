@@ -43,19 +43,15 @@
 						class="height-100p flex flex-ai-c">Home</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/article/list"
-						class="height-100p flex flex-ai-c">Articles</a>
+						class="height-100p flex flex-ai-c">Articles</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/home/aboutMe"
 						class="height-100p flex flex-ai-c">About Me</a></li>
-					<li><a href="#" class="height-100p flex flex-ai-c">SNS</a>
-						<ul>
-							<li><a class="block" target="_blank"
-								href="https://github.com/ruddnr88">GITHUB</a></li>
-							<li><a class="block" target="_blank"
-								href="https://www.youtube.com/channel/UC_2N02mxLdoz6CQL1QQbuzA?view_as=subscriber">YouTube</a></li>
-							<li><a class="block" target="_blank"
-								href="https://kyky1211.tistory.com/">BOLG</a></li>
-						</ul></li>
+					<li><a href="${pageContext.request.contextPath}/s/home/SNS"
+						class="height-100p flex flex-ai-c">SNS</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/member/login"
+						class="height-100p flex flex-ai-c">Member</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -83,17 +79,10 @@
 					class="block">Articles</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
 					class="block">About Me</a></li>
-				<li>
-					<a href="#" class="block">SNS</a>
-					<ul>
-						<li><a class="block" target="_blank"
-							href="https://github.com/ruddnr88">GITHUB</a></li>
-						<li><a class="block" target="_blank"
-							href="https://www.youtube.com/channel/UC_2N02mxLdoz6CQL1QQbuzA?view_as=subscriber">YouTube</a></li>
-						<li><a class="block" target="_blank"
-							href="https://kyky1211.tistory.com/">BOLG</a></li>
-					</ul>
-				</li>
+				<li><a href="${pageContext.request.contextPath}/s/home/SNS"
+					class="block">SNS</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/member/login"
+					class="block">Member</a></li>
 			</ul>
 		</nav>
 	</div>

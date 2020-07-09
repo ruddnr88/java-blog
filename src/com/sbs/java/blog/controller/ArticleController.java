@@ -42,6 +42,7 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 
+		
 		int id = articleService.write(cateItemId, title, body);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";

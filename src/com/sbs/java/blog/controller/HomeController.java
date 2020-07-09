@@ -18,9 +18,15 @@ public class HomeController extends Controller {
 			return doActionMain(req, resp);
 		case "aboutMe":
 			return doActionAboutMe(req, resp);
+		case "SNS":
+			return doActionSNS(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionSNS(HttpServletRequest req, HttpServletResponse resp) {
+		return "home/SNS.jsp";
 	}
 
 	private String doActionAboutMe(HttpServletRequest req, HttpServletResponse resp) {
