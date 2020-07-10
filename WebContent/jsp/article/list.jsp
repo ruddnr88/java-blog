@@ -124,7 +124,7 @@
 
 		</ul>
 	</div>
-	<div class="con_butt">
+	<div class="con_butt" style="width:80%;">
 		<div class="list-button butt">
 			<a href="./list">전체목록</a>
 		</div>

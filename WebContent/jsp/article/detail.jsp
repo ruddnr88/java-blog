@@ -58,8 +58,6 @@
 			<tr class="detail">
 				<th>카테고리</th>
 				<td>[<%=article.getCateItemId()%>]<%=cateItemName%></td>
-				
-				
 			</tr>
 			<tr class="detail">
 				<th>번호</th>
@@ -78,6 +76,10 @@
 				<td><%=article.getUpdateDate()%></td>
 			</tr>
 			<tr class="detail">
+				<th>조회수</th>
+				<td><%=article.getHit()%></td>
+			</tr>
+			<tr class="detail">
 				<td colspan="2"><script type="text/x-template" id="origin1"><%=article.getBody()%></script>
 					<div id="viewer1"></div></td>
 
@@ -89,7 +91,7 @@
 
 
 	</table>
-	<div class="con_butt">
+	<div class="con_butt" style="width: 80%;">
 
 		<div class="list-button butt">
 			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
@@ -97,17 +99,25 @@
 
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
-				<a href="#">수정</a>
+				<a href="./modify?id=<%=article.getId()%>">수정</a>
 			</div>
 			<div class="modify-button butt">
-				<a href="#">삭제</a>
+				<a href="./delete?id=<%=article.getId()%>">삭제</a>
 			</div>
 
 		</div>
 
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+	<script>
+		var editor1__initialValue = $('#origin1').html();
+		var editor1 = new toastui.Editor({
+			el : document.querySelector("#viewer1"),
+			viewer : true,
+			initialValue : editor1__initialValue,
+			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
+					youtubePlugin, replPlugin, codepenPlugin ]
+		});
+	</script>
 
 
 </div>

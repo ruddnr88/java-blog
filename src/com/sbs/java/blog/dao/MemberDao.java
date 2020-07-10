@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.util.DBUtil;
+import com.sbs.java.blog.util.SecSql;
 
 public class MemberDao extends Dao {
 
@@ -16,46 +17,47 @@ public class MemberDao extends Dao {
 	}
 
 	public Member getMemberByLoginId(String loginId) {
-		String sql = "";
+		SecSql secSql = new SecSql();
+		
+		secSql.append("SELECT * ");
+		secSql.append("FROM `member` ");
+		secSql.append("WHERE 1 ");
+		secSql.append("AND loginId = ? ", loginId);
 
-		sql += String.format("SELECT * ");
-		sql += String.format("FROM `member` ");
-		sql += String.format("WHERE 1 ");
-		sql += String.format("AND loginId = '%s' ", loginId);
-
-		Map<String, Object> memberRow = DBUtil.selectRow(dbConn, sql);
+		Map<String, Object> memberRow = DBUtil.selectRow(dbConn, secSql);
 
 		if (memberRow.isEmpty()) {
 			return null;
 		}
 
-		return new Member(DBUtil.selectRow(dbConn, sql));
+		return new Member(DBUtil.selectRow(dbConn, secSql));
 	}
 
 	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname) {
-		String sql = "";
+		SecSql secSql = new SecSql();
 
-		sql += String.format("INSERT INTO `member` ");
-		sql += String.format("SET regDate = NOW() ");
-		sql += String.format(", name = '%s' ", name);
-		sql += String.format(", loginId = '%s' ", loginId);
-		sql += String.format(", loginPw = '%s' ", loginPw);
-		sql += String.format(", loginPwConfirm = '%s' ", loginPwConfirm);
-		sql += String.format(", nickname = '%s' ", nickname);
+		secSql.append("INSERT INTO `member`");
+		secSql.append("SET regDate = NOW()");
+		secSql.append(", name = ? ", name);
+		secSql.append(", loginId = ? ", loginId);
+		secSql.append(", loginPw = ? ", loginPw);
+		secSql.append(", loginPwConfirm = ?", loginPwConfirm);
+		secSql.append(", nickname = ?", nickname);
 
-		return DBUtil.insert(dbConn, sql);
+		return DBUtil.insert(dbConn, secSql);
 	}
 
 	public Member getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {
-		String sql = "";
+		SecSql secSql = new SecSql();
+		
+		
+		secSql.append("SELECT * ");
+		secSql.append("FROM `member` ");
+		secSql.append("WHERE 1 ");
+		secSql.append("AND loginId = ? ", loginId);
+		secSql.append("AND loginPw = ? ", loginPw);
 
-		sql += String.format("SELECT * ");
-		sql += String.format("FROM `member` ");
-		sql += String.format("WHERE 1 ");
-		sql += String.format("AND loginId = '%s' ", loginId);
-		sql += String.format("AND loginPw = '%s' ", loginPw);
-
-		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+		Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
 
 		if (row.isEmpty()) {
 			return null;

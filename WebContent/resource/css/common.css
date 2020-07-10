@@ -416,7 +416,8 @@ label[for] {
 
 .top-bar .menu-box-1 {
 	padding: 0 30px;
-	font-family: 'Notable', sans-serif;
+	font-weight: bold;
+	/*font-family: 'Notable', sans-serif;*/
 }
 
 .top-bar .menu-box-1>ul>li>a {

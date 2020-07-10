@@ -21,6 +21,9 @@ public class MemberService extends Service {
 		}
 		return true;
 	}
+	
+
+
 
 	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname) {
 		return memberDao.dojoin(name,loginId,loginPw,loginPwConfirm,nickname);

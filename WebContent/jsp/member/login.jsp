@@ -6,8 +6,7 @@
 <%@ include file="/jsp/part/head.jspf"%>
 
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
-<style>
-</style>
+
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con sign-form-box">
 	<h1>LOGIN</h1>

@@ -195,13 +195,24 @@ function getUrlParams(url) {
 	});
 	return params;
 }
+
 // lib 끝
 
-var editor1__initialValue = $('#origin1').html();
 var editor1 = new toastui.Editor({
-	el : document.querySelector("#viewer1"),
-	viewer : true,
-	initialValue : editor1__initialValue,
+	el : document.querySelector("#editor1"),
+	height : "600px",
+	initialEditType : "markdown",
+	previewStyle : "vertical",
+	initialValue : "# 안녕",
 	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
 			replPlugin, codepenPlugin ]
 });
+
+var editor1__initialValue = $('#origin1').html();
+//var editor1 = new toastui.Editor({
+//	el : document.querySelector("#viewer1"),
+//	viewer : true,
+//	initialValue : editor1__initialValue,
+//	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
+//			replPlugin, codepenPlugin ]
+//});

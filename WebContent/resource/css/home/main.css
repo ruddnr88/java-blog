@@ -185,7 +185,7 @@ select::-ms-expand {
 .con .con_butt {
 	position: relative;
 	margin: 0 auto;
-	width: 80%;
+	
 }
 
 .con .butt {
@@ -280,6 +280,7 @@ select::-ms-expand {
 .write-form-box {
 	margin-top: 30px;
 }
+
 
 
 /*회원가입 화면*/

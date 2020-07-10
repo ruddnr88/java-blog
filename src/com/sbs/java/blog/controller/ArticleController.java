@@ -32,9 +32,47 @@ public class ArticleController extends Controller {
 			return doActionWrite(req, resp);
 		case "doWrite":
 			return doActionDoWrite(req, resp);
+		case "delete":
+			return doActionDelete(req, resp);
+		case "modify":
+			return doActionModify(req, resp);
+		case "doModify":
+			return doActionDoModify(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
+
+		int number = Util.getInt(req, "id");
+
+		String title = req.getParameter("title");
+		String body = req.getParameter("body");
+		int cateItemId = Util.getInt(req, "cateItemId");
+
+		articleService.modify(cateItemId, title, body, number);
+
+		return "html:<script> alert('" + number + "번 게시물이 수정되었습니다.'); history.back(); </script>";
+	}
+
+	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+		return "article/modify.jsp";
+	}
+
+	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+
+		int id = -1;
+
+		try {
+			id = Util.getInt(req, "id");
+		} catch (Exception e) {
+		}
+		if (id != -1) {
+			articleService.delete(id);
+		}
+
+		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionDoWrite(HttpServletRequest req, HttpServletResponse resp) {
@@ -42,7 +80,6 @@ public class ArticleController extends Controller {
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 
-		
 		int id = articleService.write(cateItemId, title, body);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
@@ -74,11 +111,11 @@ public class ArticleController extends Controller {
 		if (cateItemId != 0) {
 			CateItem cateItem = articleService.getCateItem(cateItemId);
 			cateItemName = cateItem.getName();
-
 		}
 
-		req.setAttribute("cateItemName", cateItemName);
+		articleService.increaseHit(id);
 
+		req.setAttribute("cateItemName", cateItemName);
 		Article article = articleService.getForPrintArticle(id, cateItemId);
 
 		req.setAttribute("article", article);

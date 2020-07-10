@@ -44,8 +44,8 @@
 
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con write-form-box">
-	<h1>글 작성하기</h1>
-	<form action="doWrite" method="POST" class="write-form form1"
+	<h1>글 수정하기</h1>
+	<form action="doModify" method="POST" class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
 		<div class="form-row">
 			<div class="label">카테고리</div>
@@ -77,7 +77,7 @@
 		</div>
 		<div class="con_butt" style="margin-top: 10px;">
 			<div class="input">
-				<input type="submit" value="전송" class="login_but input_but" /> <a
+				<input type="submit" value="수정" class="login_but input_but" /> <a
 					class="login_but lb_3" href="list">취소</a>
 			</div>
 		</div>

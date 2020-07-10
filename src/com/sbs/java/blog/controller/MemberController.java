@@ -47,7 +47,7 @@ public class MemberController extends Controller {
 		Member member = memberService.getMemberByLoginIdAndLoginPw(loginId, loginPw);
 
 		if (member == null) {
-			out.print("<script> alert('가입하신 회원이 존재하지 않습니다.'); location.replace('join'); </script>");
+			out.print("<script> alert('가입하신 회원이 존재하지 않습니다.'); location.replace('login'); </script>");
 		} else {
 			return "html:<script> alert('" + loginId + "님 로그인되셨습니다.'); location.replace('.././home/main'); </script>";
 		}
@@ -69,14 +69,22 @@ public class MemberController extends Controller {
 		String loginPwConfirm = req.getParameter("loginPwConfirm");
 		String nickname = req.getParameter("nickname");
 
-//		PrintWriter out = null;
-//
-//		try {
-//			out = resp.getWriter();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
+		PrintWriter out = null;
+
+		try {
+			out = resp.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		if (memberService.isUsedLoginId(loginId)) {
+			out.print("<script> alert('입력하신 아이디는 사용 중입니다.'); history.back(); </script>");
+		}
+		
+		if (memberService.isUsedLoginId(nickname)) {
+			out.print("<script> alert('입력하신 닉네임은 사용 중입니다.'); history.back(); </script>");
+		}
+
 //		while (true) {
 //			if (name.length() == 0) {
 //				out.print("<script> alert('이름을 입력해주세요'); </script>");
@@ -102,6 +110,7 @@ public class MemberController extends Controller {
 //				out.print("<script> alert('입력하신 아이디는 사용 중입니다.'); </script>");
 //				continue;
 //			}
+//
 //			break;
 //		}
 //
