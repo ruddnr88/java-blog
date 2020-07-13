@@ -1,4 +1,4 @@
-package com.sbs.java.blog.app;
+package com.sbs.java.blog.controller;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,10 +9,7 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sbs.java.blog.controller.Controller;
-
 public class TestController extends Controller {
-
 	public TestController(Connection dbConn, String actionMethodName, HttpServletRequest req,
 			HttpServletResponse resp) {
 		super(dbConn, actionMethodName, req, resp);
@@ -28,41 +25,6 @@ public class TestController extends Controller {
 		}
 
 		return "";
-	}
-
-	private String doActionDbSelect() {
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		String title = null;
-		try {
-			stmt = dbConn.prepareStatement(
-					"SELECT title FROM article WHERE title LIKE CONCAT('%', ?, '%') ORDER BY id DESC LIMIT 1");
-			stmt.setString(1, "제목");
-			rs = stmt.executeQuery();
-			if (rs.next()) {
-				title = rs.getString(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return "html:" + title;
 	}
 
 	private String doActionDbInsert() {
@@ -103,6 +65,41 @@ public class TestController extends Controller {
 		}
 
 		return "html:" + id;
+	}
+
+	private String doActionDbSelect() {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String title = null;
+		try {
+			stmt = dbConn.prepareStatement(
+					"SELECT title FROM article WHERE title LIKE CONCAT('%', ?, '%') ORDER BY id DESC LIMIT 1");
+			stmt.setString(1, "제목");
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				title = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return "html:" + title;
 	}
 
 }

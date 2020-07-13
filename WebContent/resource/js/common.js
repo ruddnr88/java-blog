@@ -38,4 +38,6 @@ $(function() {
 	MobileSideBar__init();
 });
 
-
+function getForEditorBody(selector) {
+	return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi, "script");
+}

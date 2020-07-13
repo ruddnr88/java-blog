@@ -1,11 +1,13 @@
-<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="com.sbs.java.blog.dto.CateItem"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
+	List<Article> articles = (List<Article>) request.getAttribute("articles");
+	Article article = (Article) request.getAttribute("article");
 %>
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,9 +47,13 @@
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con write-form-box">
 	<h1>글 수정하기</h1>
-	<form action="doModify" method="POST" class="write-form form1"
+	<form action="doModify" name="update" method="POST"
+		class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
+		<input type="hidden" name="id" value="<%=article.getId()%>">
+		<input type="hidden" name="body">
 		<div class="form-row">
+
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">
@@ -63,29 +69,36 @@
 			</div>
 		</div>
 		<div class="form-row">
+
 			<div class="label">제목</div>
 			<div class="input">
-				<input name="title" type="text" placeholder="제목을 입력해주세요." />
+				<input name="title" type="text" value="<%=article.getTitle()%>" />
 			</div>
+
 		</div>
 		<div class="form-row">
 			<div class="label">내용</div>
 			<div class="input">
-				<input type="hidden" name="body">
-				<div id="editor1"></div>
+				<script type="text/x-template" id="origin1" style="display:none;"><%=article.getBodyForXTemplate()%></script>
+				<div id="editor1" style="text-align:left;"></div>
 			</div>
 		</div>
+
 		<div class="con_butt" style="margin-top: 10px;">
 			<div class="input">
 				<input type="submit" value="수정" class="login_but input_but" /> <a
 					class="login_but lb_3" href="list">취소</a>
 			</div>
 		</div>
-
 	</form>
 </div>
 <script>
+	function check() {
+
+	}
 	function submitWriteForm(form) {
+		var title = document.getElementById('title');
+		var body = document.getElementById('body');
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
@@ -101,6 +114,17 @@
 		form.body.value = source;
 		form.submit();
 	}
+
+	var editor1 = new toastui.Editor({
+		el : document.querySelector("#editor1"),
+		height : "600px",
+		initialEditType : "markdown",
+		initialValue : getForEditorBody('#origin1'),
+		previewStyle : "vertical",
+		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
+				replPlugin, codepenPlugin ]
+	});
+	console.log(editor.getMarkdown());
 </script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>

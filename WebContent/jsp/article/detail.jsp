@@ -99,10 +99,11 @@
 
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
-				<a href="./modify?id=<%=article.getId()%>">수정</a>
+				<a href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
 			</div>
 			<div class="modify-button butt">
-				<a href="./delete?id=<%=article.getId()%>">삭제</a>
+			
+			<a href="delete?id=<%=article.getId()%>">삭제</a>
 			</div>
 
 		</div>

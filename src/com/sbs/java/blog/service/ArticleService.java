@@ -52,8 +52,8 @@ public class ArticleService extends Service {
 		return articleDao.delete(id);
 	}
 
-	public int modify(int cateItemId, String title, String body, int number) {
-		return articleDao.modify(cateItemId, title, body, number);
+	public int modify(int cateItemId, String title, String body, int id) {
+		return articleDao.modify(cateItemId, title, body, id);
 	}
 
 }

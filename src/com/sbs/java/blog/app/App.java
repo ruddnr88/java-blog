@@ -13,8 +13,10 @@ import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
 import com.sbs.java.blog.controller.MemberController;
+import com.sbs.java.blog.controller.TestController;
 import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
+
 
 public class App {
 	private HttpServletRequest req;

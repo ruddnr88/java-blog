@@ -29,6 +29,7 @@ public class SecSql {
 		for (int i = 1; i < args.length; i++) {
 			datas.add(args[i]);
 		}
+		
 		return this;
 	}
 
@@ -62,5 +63,4 @@ public class SecSql {
 	public static SecSql from(String sql) {
 		return new SecSql().append(sql);
 	}
-
 }

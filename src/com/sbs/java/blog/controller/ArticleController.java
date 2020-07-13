@@ -45,32 +45,59 @@ public class ArticleController extends Controller {
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
 
-		int number = Util.getInt(req, "id");
+		int id = Util.getInt(req, "id");
+
+		if (Util.empty(req, "id")) {
+			return "Html:id를 입력해주세요.";
+		}
+		if (Util.isNum(req, "id") == false) {
+			return "Html:id를 정수로 입력해주세요.";
+		}
 
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
 
-		articleService.modify(cateItemId, title, body, number);
+		articleService.modify(cateItemId, title, body, id);
 
-		return "html:<script> alert('" + number + "번 게시물이 수정되었습니다.'); history.back(); </script>";
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+		if (Util.empty(req, "id")) {
+			return "html:id를 입력해주세요.";
+		}
+
+		if (Util.isNum(req, "id") == false) {
+			return "html:id를 정수로 입력해주세요.";
+		}
+
+		int id = Util.getInt(req, "id");
+		
+		int cateItemId = 0;
+
+		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
+			cateItemId = Util.getInt(req, "cateItemId");
+		}
+
+
+		Article article = articleService.getForPrintArticle(id, cateItemId);
+		
+		req.setAttribute("article", article);
 		return "article/modify.jsp";
 	}
 
 	private String doActionDelete(HttpServletRequest req, HttpServletResponse resp) {
+		int id = Util.getInt(req, "id");
 
-		int id = -1;
+		if (Util.empty(req, "id")) {
+			return "Html:id를 입력해주세요.";
+		}
+		if (Util.isNum(req, "id") == false) {
+			return "Html:id를 정수로 입력해주세요.";
+		}
 
-		try {
-			id = Util.getInt(req, "id");
-		} catch (Exception e) {
-		}
-		if (id != -1) {
-			articleService.delete(id);
-		}
+		articleService.delete(id);
 
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
 	}
@@ -91,11 +118,11 @@ public class ArticleController extends Controller {
 
 	private String doActionDetail(HttpServletRequest req, HttpServletResponse resp) {
 		if (Util.empty(req, "id")) {
-			return "Html:id를 입력해주세요.";
+			return "html:id를 입력해주세요.";
 		}
 
 		if (Util.isNum(req, "id") == false) {
-			return "Html:id를 정수로 입력해주세요.";
+			return "html:id를 정수로 입력해주세요.";
 		}
 
 		int id = Util.getInt(req, "id");

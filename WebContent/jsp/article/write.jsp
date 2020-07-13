@@ -101,6 +101,15 @@
 		form.body.value = source;
 		form.submit();
 	}
+	var editor1 = new toastui.Editor({
+		el : document.querySelector("#editor1"),
+		height : "600px",
+		initialEditType : "markdown",
+		previewStyle : "vertical",
+		initialValue : "# 안녕",
+		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
+				replPlugin, codepenPlugin ]
+	});
 </script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
