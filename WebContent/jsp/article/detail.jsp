@@ -80,7 +80,7 @@
 				<td><%=article.getHit()%></td>
 			</tr>
 			<tr class="detail">
-				<td colspan="2"><script type="text/x-template" id="origin1"><%=article.getBody()%></script>
+				<td colspan="2"><script type="text/x-template" id="origin1"><%=article.getBodyForXTemplate()%></script>
 					<div id="viewer1"></div></td>
 
 			</tr>
@@ -99,17 +99,23 @@
 
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
-				<a href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
+				<a
+					href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
 			</div>
 			<div class="modify-button butt">
-			
-			<a href="delete?id=<%=article.getId()%>">삭제</a>
+
+				<a href="delete?id=<%=article.getId()%>">삭제</a>
 			</div>
 
 		</div>
 
 	</div>
 	<script>
+		function getForEditorBody(selector) {
+			return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi,
+					"script");
+		}
+
 		var editor1__initialValue = $('#origin1').html();
 		var editor1 = new toastui.Editor({
 			el : document.querySelector("#viewer1"),
@@ -119,6 +125,8 @@
 					youtubePlugin, replPlugin, codepenPlugin ]
 		});
 	</script>
+	<script
+		src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
 
 </div>

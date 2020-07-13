@@ -197,14 +197,19 @@ function getUrlParams(url) {
 }
 
 // lib 끝
-
-
-
 var editor1__initialValue = $('#origin1').html();
-//var editor1 = new toastui.Editor({
-//	el : document.querySelector("#viewer1"),
-//	viewer : true,
-//	initialValue : editor1__initialValue,
-//	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
-//			replPlugin, codepenPlugin ]
-//});
+
+var editor1 = new toastui.Editor({
+	el : document.querySelector("#editor1"),
+	height : "600px",
+	initialEditType : "markdown",
+	initialValue : getForEditorBody('#origin1'),
+	previewStyle : "vertical",
+	plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
+			replPlugin, codepenPlugin ]
+});
+console.log(editor.getMarkdown());
+
+function getForEditorBody(selector) {
+	return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi, "script");
+}

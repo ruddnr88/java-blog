@@ -72,7 +72,7 @@
 			<div class="label">내용</div>
 			<div class="input">
 				<input type="hidden" name="body">
-				<div id="editor1"></div>
+				<div id="editor1" style="text-align: left;"></div>
 			</div>
 		</div>
 		<div class="con_butt" style="margin-top: 10px;">
@@ -106,7 +106,6 @@
 		height : "600px",
 		initialEditType : "markdown",
 		previewStyle : "vertical",
-		initialValue : "# 안녕",
 		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
 				replPlugin, codepenPlugin ]
 	});

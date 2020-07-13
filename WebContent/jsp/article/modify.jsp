@@ -79,7 +79,7 @@
 		<div class="form-row">
 			<div class="label">내용</div>
 			<div class="input">
-				<script type="text/x-template" id="origin1" style="display:none;"><%=article.getBodyForXTemplate()%></script>
+				<script type="text/x-template" id="origin1" ><%=article.getBodyForXTemplate()%></script>
 				<div id="editor1" style="text-align:left;"></div>
 			</div>
 		</div>
@@ -97,8 +97,7 @@
 
 	}
 	function submitWriteForm(form) {
-		var title = document.getElementById('title');
-		var body = document.getElementById('body');
+	
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
@@ -115,16 +114,7 @@
 		form.submit();
 	}
 
-	var editor1 = new toastui.Editor({
-		el : document.querySelector("#editor1"),
-		height : "600px",
-		initialEditType : "markdown",
-		initialValue : getForEditorBody('#origin1'),
-		previewStyle : "vertical",
-		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
-				replPlugin, codepenPlugin ]
-	});
-	console.log(editor.getMarkdown());
+	
 </script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
