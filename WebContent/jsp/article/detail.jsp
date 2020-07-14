@@ -91,28 +91,55 @@
 
 
 	</table>
-	<div class="con_butt" style="width: 80%;">
-
-		<div class="list-button butt">
-			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
-		</div>
-
-		<div class="de-mo_butt">
-			<div class="delete-button butt">
-				<a
-					href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
+	<form action="doReply" method="POST" class="form1 reply_con"
+		onsubmit="submitReplyForm(this); return false;">
+		<div class="reply_box flex"
+			style="margin-left: 10%; align-items: none;">
+			<div class="label inline-block">댓 글</div>
+			<div class="inline-block replybody">
+				<input name="body" type="text" placeholder="댓글을 작성해주세요." />
 			</div>
-			<div class="modify-button butt">
+			<div class="con_butt" style="margin-top: 10px;">
+				<div class="input">
+					<input type="submit" value="전송" class="reply_bnt" />
+				</div>
+			</div>
+		</div>
+		<div class="con_butt" style="width: 80%;">
 
-				<a href="delete?id=<%=article.getId()%>">삭제</a>
+			<div class="list-button butt">
+				<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
+			</div>
+
+			<div class="de-mo_butt">
+				<div class="delete-button butt">
+					<a
+						href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
+				</div>
+				<div class="modify-button butt">
+
+					<a href="delete?id=<%=article.getId()%>">삭제</a>
+				</div>
+
 			</div>
 
 		</div>
-
-	</div>
+	</form>
 	<script>
+		function submitReplyForm(form) {
+			var source = editor1.getMarkdown().trim();
+			if (source.length == 0) {
+				alert('내용을 입력해주세요.');
+				editor1.focus();
+				return;
+			}
+			form.body.value = source;
+			form.submit();
+		}
 		function getForEditorBody(selector) {
-			return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi, "script");}
+			return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi,
+					"script");
+		}
 
 		var editor1__initialValue = $('#origin1').html();
 		var editor1 = new toastui.Editor({

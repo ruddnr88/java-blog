@@ -33,7 +33,7 @@ public class MemberDao extends Dao {
 		return new Member(DBUtil.selectRow(dbConn, secSql));
 	}
 
-	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname) {
+	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname, String email) {
 		SecSql secSql = new SecSql();
 
 		secSql.append("INSERT INTO `member`");
@@ -43,6 +43,7 @@ public class MemberDao extends Dao {
 		secSql.append(", loginPw = ? ", loginPw);
 		secSql.append(", loginPwConfirm = ?", loginPwConfirm);
 		secSql.append(", nickname = ?", nickname);
+		secSql.append(", email = ?", email);
 
 		return DBUtil.insert(dbConn, secSql);
 	}

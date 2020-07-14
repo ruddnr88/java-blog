@@ -25,8 +25,8 @@ public class MemberService extends Service {
 
 
 
-	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname) {
-		return memberDao.dojoin(name,loginId,loginPw,loginPwConfirm,nickname);
+	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname, String email) {
+		return memberDao.dojoin(name,loginId,loginPw,loginPwConfirm,nickname,email);
 	}
 
 	public Member getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.Util;
 
@@ -38,9 +39,19 @@ public class ArticleController extends Controller {
 			return doActionModify(req, resp);
 		case "doModify":
 			return doActionDoModify(req, resp);
+		case "doReply":
+			return doActionreply(req, resp);
 		}
 
 		return "";
+	}
+
+	private String doActionreply(HttpServletRequest req, HttpServletResponse resp) {
+		String body = req.getParameter("body");
+
+		int id = articleReplyService.replywrite(body);
+
+		return "html:<script> alert('" + id + "번 댓글이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -73,16 +84,15 @@ public class ArticleController extends Controller {
 		}
 
 		int id = Util.getInt(req, "id");
-		
+
 		int cateItemId = 0;
 
 		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
 
-
 		Article article = articleService.getForPrintArticle(id, cateItemId);
-		
+
 		req.setAttribute("article", article);
 		return "article/modify.jsp";
 	}
@@ -146,8 +156,11 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id, cateItemId);
 
 		req.setAttribute("article", article);
+		
 
 		return "article/detail.jsp";
+		
+		
 
 	}
 

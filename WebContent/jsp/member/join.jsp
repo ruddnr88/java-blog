@@ -39,6 +39,12 @@
 			</div>
 		</div>
 		<div class="form-row">
+			<div class="label">E-Mail</div>
+			<div class="input">
+				<input name="email" type="email" placeholder="e-mail을 입력해주세요" />
+			</div>
+		</div>
+		<div class="form-row">
 			<div class="label">닉네임</div>
 			<div class="input">
 				<input name="nickname" type="text" placeholder="닉네임을 입력해주세요." />
@@ -84,6 +90,12 @@
 		if (form.nickname.value.length == 0) {
 			alert('닉네임 입력해주세요.');
 			form.nickname.focus();
+			return;
+		}
+		form.email.value = form.email.value.trim();
+		if (form.email.value.length == 0) {
+			alert('메일을 입력해주세요.');
+			form.email.focus();
 			return;
 		}
 

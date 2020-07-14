@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import="com.sbs.java.blog.dto.Member"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -30,6 +31,9 @@
 <body>
 	<!--  PC버젼 탑바 -->
 	<div class="top-bar visible-on-md-up">
+		<div class="loginedMember">
+			<a href="#"></a>
+		</div>
 		<div class="con height-100p flex flex-jc-sb">
 			<a href="${pageContext.request.contextPath}/s/home/main"
 				class="logo flex flex-ai-c"> <img

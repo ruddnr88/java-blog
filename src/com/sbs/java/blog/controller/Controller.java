@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.java.blog.dto.CateItem;
+import com.sbs.java.blog.service.ArticleReplyService;
 import com.sbs.java.blog.service.ArticleService;
 import com.sbs.java.blog.service.MemberService;
 
@@ -16,6 +17,7 @@ public abstract class Controller {
 	protected HttpServletRequest req;
 	protected HttpServletResponse resp;
 	protected ArticleService articleService;
+	protected ArticleReplyService articleReplyService;
 	protected MemberService memberService;
 
 	public Controller(Connection dbConn, String actionMethodName, HttpServletRequest req, HttpServletResponse resp) {
@@ -25,6 +27,8 @@ public abstract class Controller {
 		this.resp = resp;
 		articleService = new ArticleService(dbConn);
 		memberService = new MemberService(dbConn);
+		articleReplyService = new ArticleReplyService(dbConn);
+		
 	}
 
 	public void beforeAction() {
