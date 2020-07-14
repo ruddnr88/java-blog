@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
@@ -48,10 +49,10 @@ public class ArticleController extends Controller {
 
 	private String doActionreply(HttpServletRequest req, HttpServletResponse resp) {
 		String body = req.getParameter("body");
+		
+		int replyId = articleReplyService.replywrite(body);
 
-		int id = articleReplyService.replywrite(body);
-
-		return "html:<script> alert('" + id + "번 댓글이 생성되었습니다.'); location.replace('list'); </script>";
+		return "html:<script> alert('" + replyId + "번 댓글이 생성되었습니다.'); location.replace('list'); </script>";
 	}
 
 	private String doActionDoModify(HttpServletRequest req, HttpServletResponse resp) {
@@ -75,6 +76,8 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionModify(HttpServletRequest req, HttpServletResponse resp) {
+		
+		 
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
@@ -91,7 +94,20 @@ public class ArticleController extends Controller {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
 
+		String cateItemName = "Total List";
+
+		if (cateItemId != 0) {
+			CateItem cateItem = articleService.getCateItem(cateItemId);
+			cateItemName = cateItem.getName();
+		}
+
+		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
+			cateItemId = Util.getInt(req, "cateItemId");
+		}
+
 		Article article = articleService.getForPrintArticle(id, cateItemId);
+
+		req.setAttribute("cateItemName", cateItemName);
 
 		req.setAttribute("article", article);
 		return "article/modify.jsp";
@@ -156,11 +172,8 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id, cateItemId);
 
 		req.setAttribute("article", article);
-		
 
 		return "article/detail.jsp";
-		
-		
 
 	}
 

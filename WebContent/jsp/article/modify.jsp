@@ -8,6 +8,8 @@
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
 	Article article = (Article) request.getAttribute("article");
+	String cateItemName = (String) request.getAttribute("cateItemName");
+	
 %>
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,13 +52,14 @@
 	<form action="doModify" name="update" method="POST"
 		class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
-		<input type="hidden" name="id" value="<%=article.getId()%>">
-		<input type="hidden" name="body">
+		<input type="hidden" name="id" value="<%=article.getId()%>"> <input
+			type="hidden" name="body">
 		<div class="form-row">
 
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">
+					<option selected><%=cateItemName%></option>
 					<%
 						for (CateItem cateItem : cateItems) {
 					%>
@@ -79,8 +82,8 @@
 		<div class="form-row">
 			<div class="label">내용</div>
 			<div class="input">
-				<script type="text/x-template" id="origin1" ><%=article.getBodyForXTemplate()%></script>
-				<div id="editor1" style="text-align:left;"></div>
+				<script type="text/x-template" id="origin1"><%=article.getBodyForXTemplate()%></script>
+				<div id="editor1" style="text-align: left;"></div>
 			</div>
 		</div>
 
@@ -97,7 +100,7 @@
 
 	}
 	function submitWriteForm(form) {
-	
+
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
@@ -113,8 +116,6 @@
 		form.body.value = source;
 		form.submit();
 	}
-
-	
 </script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>

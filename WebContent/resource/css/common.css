@@ -471,6 +471,7 @@ label[for] {
 	left: 0;
 	width: 100%;
 	height: 50px;
+	z-index: 1;
 }
 
 .mobile-top-bar .logo>img {
