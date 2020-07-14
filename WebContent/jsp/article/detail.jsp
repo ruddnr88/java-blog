@@ -112,15 +112,14 @@
 	</div>
 	<script>
 		function getForEditorBody(selector) {
-			return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi,
-					"script");
-		}
+			return $(selector).html().trim().replace(/<!--REPLACE:SCRIPT-->/gi, "script");}
 
 		var editor1__initialValue = $('#origin1').html();
 		var editor1 = new toastui.Editor({
 			el : document.querySelector("#viewer1"),
 			viewer : true,
 			initialValue : editor1__initialValue,
+			initialValue : getForEditorBody('#origin1'),
 			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
 					youtubePlugin, replPlugin, codepenPlugin ]
 		});
