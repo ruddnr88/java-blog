@@ -120,6 +120,7 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
+		sql.append(", memberId =1");
 
 		return DBUtil.insert(dbConn, sql);
 	}
