@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.DBUtil;
 import com.sbs.java.blog.util.SecSql;
@@ -157,5 +158,40 @@ public class ArticleDao extends Dao {
 		sql.append(" WHERE id = ?", id);
 
 		return DBUtil.update(dbConn, sql);
+	}
+
+	public int replywrite(String body, int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO articleReply");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", articleId = ? ", articleId);
+		sql.append(", memberId = 1 ");
+		sql.append(", body = ? ", body);
+
+		return DBUtil.insert(dbConn, sql);
+	}
+
+	
+	public List<ArticleReply> getArticleRepliesForDetail(int articleId) {
+
+		SecSql sql = SecSql.from("SELECT * ");
+		sql.append("FROM articleReply");
+		sql.append("WHERE articleId = ?", articleId);
+		sql.append("ORDER BY id DESC ");
+
+		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
+		List<ArticleReply> articleReplies = new ArrayList<>();
+
+		for (Map<String, Object> row : rows) {
+			articleReplies.add(new ArticleReply(row));
+		}
+		return articleReplies;
+	}
+
+	public int getForPrintListReplyCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

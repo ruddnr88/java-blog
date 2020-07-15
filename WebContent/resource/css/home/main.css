@@ -114,7 +114,6 @@ select::-ms-expand {
 }
 
 .article .cete-select::-ms-expand {
-	/* for IE 11 */
 	display: none;
 }
 
@@ -181,6 +180,10 @@ select::-ms-expand {
 	text-align: left;
 }
 
+.con .detail_butt {
+	position: relative;
+}
+
 /*버튼*/
 .con .con_butt {
 	position: relative;
@@ -211,12 +214,12 @@ select::-ms-expand {
 
 .con .list-button {
 	position: absolute;
-	left: 0;
+	left: 10%;
 }
 
 .con .de-mo_butt {
 	position: absolute;
-	right: 0;
+	right: 10%;
 }
 
 .page-box>ul>li>a {
@@ -279,28 +282,36 @@ select::-ms-expand {
 	margin-top: 30px;
 }
 /* 댓글 */
+.reply_box {
+	margin-top: 70px;
+	margin-left: 10%;
+	align-items: none;
+}
+
 .replybody {
 	width: 80%;
 	box-sizing: border-box;
 	padding: 10px;
 }
 
-.replybody >input {
+.replybody>input {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 10px;
 }
+
 .reply_bnt {
 	padding: 10px 25px;
 	background-color: #C2E2DD;
 	color: #6EAEA3;
 	border: 1px solid #6EAEA3;
 }
+
 .reply_box .label {
-	margin:auto;
+	margin: auto;
 	font-size: 14px;
 	font-weight: bold;
-	color:#4a867b;
+	color: #4a867b;
 }
 
 /*회원가입 화면*/
@@ -357,5 +368,17 @@ select::-ms-expand {
 	}
 	.form1 .form-row {
 		display: block;
+	}
+	.form1 {
+		width: 100%;
+	}
+	.reply_box {
+		margin-left: 0;
+	}
+	.con .list-button {
+		left: 0;
+	}
+	.con .de-mo_butt {
+		right: 0;
 	}
 }

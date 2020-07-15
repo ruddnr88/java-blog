@@ -18,7 +18,7 @@ public class MemberDao extends Dao {
 
 	public Member getMemberByLoginId(String loginId) {
 		SecSql secSql = new SecSql();
-		
+
 		secSql.append("SELECT * ");
 		secSql.append("FROM `member` ");
 		secSql.append("WHERE 1 ");
@@ -33,39 +33,61 @@ public class MemberDao extends Dao {
 		return new Member(DBUtil.selectRow(dbConn, secSql));
 	}
 
-	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname, String email) {
+	public int dojoin(String loginId, String loginPw, String name, String nickname, String email) {
 		SecSql secSql = new SecSql();
 
 		secSql.append("INSERT INTO `member`");
 		secSql.append("SET regDate = NOW()");
-		secSql.append(", name = ? ", name);
-		secSql.append(", loginId = ? ", loginId);
-		secSql.append(", loginPw = ? ", loginPw);
-		secSql.append(", loginPwConfirm = ?", loginPwConfirm);
-		secSql.append(", nickname = ?", nickname);
-		secSql.append(", email = ?", email);
+		secSql.append(", updateDate = NOW()");
+		secSql.append(", `name` = ?", name);
+		secSql.append(", `loginId` = ?", loginId);
+		secSql.append(", `loginPw` = ?", loginPw);
+		secSql.append(", `nickname` = ?", nickname);
+		secSql.append(", `email` = ?", email);
 
 		return DBUtil.insert(dbConn, secSql);
 	}
 
-	public Member getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {
-		SecSql secSql = new SecSql();
-		
-		
-		secSql.append("SELECT * ");
-		secSql.append("FROM `member` ");
-		secSql.append("WHERE 1 ");
-		secSql.append("AND loginId = ? ", loginId);
-		secSql.append("AND loginPw = ? ", loginPw);
+	public boolean isJoinableLoginId(String loginId) {
+		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+		sql.append("FROM `member`");
+		sql.append("WHERE loginId = ?", loginId);
 
-		Map<String, Object> row = DBUtil.selectRow(dbConn, secSql);
+		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
+		//0이어야 한다 값이 없어야해서 
+	}
 
-		if (row.isEmpty()) {
-			return null;
-		}
+	public int getMemberIdByLoginIdAndLoginPw(String loginId, String loginPw) {
+		SecSql sql = SecSql.from("SELECT id");
+		sql.append("FROM `member`");
+		sql.append("WHERE loginId = ?", loginId);
+		sql.append("AND loginPw = ?", loginPw);
 
-		return new Member(row);
+		return DBUtil.selectRowIntValue(dbConn, sql);
+	}
+	
+	public Member getMemberById(int id) {
+		SecSql sql = SecSql.from("SELECT *");
+		sql.append("FROM `member`");
+		sql.append("WHERE id = ?", id);
 
+		return new Member(DBUtil.selectRow(dbConn, sql));
+	}
+
+	public boolean isJoinableNickname(String nickname) {
+		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+		sql.append("FROM `member`");
+		sql.append("WHERE nickname = ?", nickname);
+
+		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
+	}
+
+	public boolean isJoinableEmail(String email) {
+		SecSql sql = SecSql.from("SELECT COUNT(*) AS cnt");
+		sql.append("FROM `member`");
+		sql.append("WHERE email = ?", email);
+
+		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
 	}
 
 }

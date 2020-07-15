@@ -59,7 +59,6 @@
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">
-					<option selected><%=cateItemName%></option>
 					<%
 						for (CateItem cateItem : cateItems) {
 					%>

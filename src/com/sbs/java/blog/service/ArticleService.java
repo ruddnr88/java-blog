@@ -54,4 +54,12 @@ public class ArticleService extends Service {
 		return articleDao.modify(cateItemId, title, body, id);
 	}
 
+	public int replywrite(String body, int articleId) {
+		return articleDao.replywrite(body, articleId);
+	}
+
+	public int getForPrintListReplyCount() {
+		return articleDao.getForPrintListReplyCount();
+	}
+
 }

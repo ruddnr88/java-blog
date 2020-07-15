@@ -13,25 +13,24 @@ public class MemberService extends Service {
 		memberDao = new MemberDao(dbConn);
 	}
 
-	public boolean isUsedLoginId(String loginId) {
-		Member member = memberDao.getMemberByLoginId(loginId);
-
-		if (member == null) {
-			return false;
-		}
-		return true;
-	}
-	
-
-
-
-	public int dojoin(String name, String loginId, String loginPw, String loginPwConfirm, String nickname, String email) {
-		return memberDao.dojoin(name,loginId,loginPw,loginPwConfirm,nickname,email);
+	public int dojoin(String name, String loginId, String loginPw, String nickname, String email) {
+		return memberDao.dojoin(name, loginId, loginPw, nickname, email);
 	}
 
-	public Member getMemberByLoginIdAndLoginPw(String loginId, String loginPw) {
-		
-		return memberDao.getMemberByLoginIdAndLoginPw(loginId,loginPw);
+	public boolean isJoinableLoginId(String loginId) {
+		return memberDao.isJoinableLoginId(loginId);
+	}
+
+	public boolean isJoinableNickname(String nickname) {
+		return memberDao.isJoinableNickname(nickname);
+	}
+
+	public boolean isJoinableEmail(String email) {
+		return memberDao.isJoinableEmail(email);
+	}
+
+	public int getMemberIdByLoginIdAndLoginPw(String loginId, String loginPw) {
+		return memberDao.getMemberIdByLoginIdAndLoginPw(loginId, loginPw);
 	}
 
 }

@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 
 <!-- 어바웃 미메인컨텐츠 -->
@@ -12,6 +12,7 @@
 	<h1>LOGIN</h1>
 	<form action="doLogin" method="POST" class="sign-form form1"
 		onsubmit="submitLoginForm(this); return false;">
+		<input type="hidden" name="loginPwReal" />
 		<div class="form-row">
 			<div class="label">ID</div>
 			<div class="input">
@@ -49,6 +50,9 @@
 			form.loginPw.focus();
 			return;
 		}
+
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = '';
 
 		form.submit();
 	}

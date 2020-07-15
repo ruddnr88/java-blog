@@ -1,92 +1,93 @@
 package com.sbs.java.blog.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.MemberService;
-import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
 
 	public MemberController(Connection dbConn, String actionMethodName, HttpServletRequest req,
 			HttpServletResponse resp) {
-		super(dbConn, actionMethodName, req, resp);
+		super(dbConn, actionMethodName, req,resp);
+
 	}
 
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doMemberJoin(req, resp);
+			return doMemberJoin();
 		case "doJoin":
-			return doMemberDoJoin(req, resp);
+			return doMemberDoJoin();
 		case "login":
-			return doMemberLogin(req, resp);
+			return doMemberLogin();
 		case "doLogin":
-			return doMemberDoLogin(req, resp);
+			return doMemberDoLogin();
+		case "doLogout":
+			return doMemberLogout();
 		}
 		return "";
 	}
 
-	private String doMemberDoLogin(HttpServletRequest req, HttpServletResponse resp) {
-		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
-
-		PrintWriter out = null;
-
-		try {
-			out = resp.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		Member member = memberService.getMemberByLoginIdAndLoginPw(loginId, loginPw);
-
-		if (member == null) {
-			out.print("<script> alert('가입하신 회원이 존재하지 않습니다.'); location.replace('login'); </script>");
-		} else {
-			return "html:<script> alert('" + loginId + "님 로그인되셨습니다.'); location.replace('.././home/main'); </script>";
-		}
-		return loginId;
+	private String doMemberLogout() {
+		return null;
 	}
 
-	private String doMemberLogin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doMemberDoLogin() {
+		String loginId = req.getParameter("loginId");
+		String loginPw = req.getParameter("loginPwReal");
+
+		int loginedMemberId = memberService.getMemberIdByLoginIdAndLoginPw(loginId, loginPw);
+
+		if (loginedMemberId == -1) {
+			return String.format("html:<script> alert('가입하신 아이디/비번이 일치하지않습니다.'); history.back(); </script>");
+		}
+		//개인저장소(session) 생성
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedMemberId", loginedMemberId);
+
+		return String.format(
+				"html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('../home/main'); </script>");
+
+	}
+
+	private String doMemberLogin() {
 		return "member/login.jsp";
 	}
 
-	private String doMemberJoin(HttpServletRequest req, HttpServletResponse resp) {
+	private String doMemberJoin() {
 		return "member/join.jsp";
 	}
 
-	private String doMemberDoJoin(HttpServletRequest req, HttpServletResponse resp) {
-		String name = req.getParameter("name");
+	private String doMemberDoJoin() {
+
 		String loginId = req.getParameter("loginId");
-		String loginPw = req.getParameter("loginPw");
-		String loginPwConfirm = req.getParameter("loginPwConfirm");
-		String nickname = req.getParameter("nickname");
+		String loginPw = req.getParameter("loginPwReal");
+		String name = req.getParameter("name");
 		String email = req.getParameter("email");
+		String nickname = req.getParameter("nickname");
 
-		PrintWriter out = null;
+		boolean isJoinableLoginId = memberService.isJoinableLoginId(loginId);
 
-		try {
-			out = resp.getWriter();
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (isJoinableLoginId == false) {
+			return String.format("html:<script> alert('%s(은)는 이미 사용중인 아이디 입니다.'); history.back(); </script>", loginId);
+		}
+		boolean isJoinableNickname = memberService.isJoinableNickname(nickname);
+
+		if (isJoinableNickname == false) {
+			return String.format("html:<script> alert('%s(은)는 이미 사용중인 닉네임 입니다.'); history.back(); </script>", nickname);
 		}
 
-		if (memberService.isUsedLoginId(loginId)) {
-			out.print("<script> alert('입력하신 아이디는 사용 중입니다.'); history.back(); </script>");
-		}
-		
-		if (memberService.isUsedLoginId(nickname)) {
-			out.print("<script> alert('입력하신 닉네임은 사용 중입니다.'); history.back(); </script>");
+		boolean isJoinableEmail = memberService.isJoinableEmail(email);
+
+		if (isJoinableEmail == false) {
+			return String.format("html:<script> alert('%s(은)는 이미 사용중인 이메일 입니다.'); history.back(); </script>", email);
 		}
 
-		memberService.dojoin(name, loginId, loginPw, loginPwConfirm, nickname,email);
+		memberService.dojoin(loginId, loginPw, name, email, nickname);
 
 		return "html:<script> alert('" + name + "님 가입을 축하드립니다.'); location.replace('login'); </script>";
 	}

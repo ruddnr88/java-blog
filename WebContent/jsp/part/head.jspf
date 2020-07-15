@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import="com.sbs.java.blog.dto.Member"%>
+<%
+	int loginedMemberId = -1;
+
+	if (session.getAttribute("loginedMemberId") != null) {
+		loginedMemberId = (int)session.getAttribute("loginedMemberId");
+	}
+%>
+<%--null은 int로 들어올수없어 비회원이면 오류가난다. --%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -29,6 +36,8 @@
 
 </head>
 <body>
+	<div class="con"><%=loginedMemberId%>번 회원님 환영합니다 :)
+	</div>
 	<!--  PC버젼 탑바 -->
 	<div class="top-bar visible-on-md-up">
 		<div class="loginedMember">
@@ -55,7 +64,8 @@
 						class="height-100p flex flex-ai-c">SNS</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/s/member/login"
-						class="height-100p flex flex-ai-c">Member</a></li>
+						class="height-100p flex flex-ai-c">Login</a></li>
+
 				</ul>
 			</nav>
 		</div>
@@ -85,8 +95,10 @@
 					class="block">About Me</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/SNS"
 					class="block">SNS</a></li>
+
 				<li><a href="${pageContext.request.contextPath}/s/member/login"
-					class="block">Member</a></li>
+					class="block">Login</a></li>
+
 			</ul>
 		</nav>
 	</div>
