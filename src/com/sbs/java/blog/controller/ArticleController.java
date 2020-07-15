@@ -144,8 +144,10 @@ public class ArticleController extends Controller {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
+		
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 
-		int id = articleService.write(cateItemId, title, body);
+		int id = articleService.write(cateItemId, title, body,loginedMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
@@ -235,5 +237,10 @@ public class ArticleController extends Controller {
 				searchKeywordType, searchKeyword);
 		req.setAttribute("articles", articles);
 		return "article/list.jsp";
+	}
+
+	@Override
+	public String getControllerName() {
+		return "article";
 	}
 }

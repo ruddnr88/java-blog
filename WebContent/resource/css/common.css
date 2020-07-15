@@ -393,7 +393,7 @@ label[for] {
 
 /* 탑바 시작 */
 .top-bar {
-	margin-top: 30px;
+	margin-top: 20px;
 	height: 50px;
 	background: linear-gradient(to right, #fbc2eb 0%, #a6c1ee 51%, #fbc2eb 100%);
 	color: white;

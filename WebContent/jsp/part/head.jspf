@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
 <%
-	int loginedMemberId = -1;
-
-	if (session.getAttribute("loginedMemberId") != null) {
-		loginedMemberId = (int)session.getAttribute("loginedMemberId");
-	}
+	int loginedMemberId = (int)request.getAttribute("loginedMemberId");
+	Member loginedMember = (Member) request.getAttribute("loginedMember");
+	boolean isLogined = (boolean) request.getAttribute("isLogined");
 %>
 <%--null은 int로 들어올수없어 비회원이면 오류가난다. --%>
 <!DOCTYPE html>
@@ -17,6 +16,22 @@
 <link rel="shortcut icon"
 	href="http://kyky1211.dothome.co.kr/img/iccon.ico">
 <title>KY BOARD BLOG:)</title>
+<script>
+	var loginedMemberId = parseInt("${loginedMemberId}");
+	var isLogined = "${isLogined}" == "true";
+	var loginedMember = null;
+</script>
+<%if (isLogined) { %>
+<script>
+	loginedMember = {};
+	loginedMember["id"] = parseInt("${loginedMember.id}");
+	loginedMember["regDate"] = parseInt("${loginedMember.regDate}");
+	loginedMember["loginId"] = parseInt("${loginedMember.loginId}");
+	loginedMember["name"] = parseInt("${loginedMember.name}");
+	loginedMember["nickname"] = parseInt("${loginedMember.nickname}");
+	loginedMember["email"] = parseInt("${loginedMember.email}");
+</script>
+<%} %>
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
@@ -36,8 +51,10 @@
 
 </head>
 <body>
-	<div class="con"><%=loginedMemberId%>번 회원님 환영합니다 :)
-	</div>
+	<%if(loginedMember != null) { %>
+	<div class="con" style="text-align: right;">[<%=loginedMember.getName()%>] 회원님 환영합니다 :)</div>
+	<%} %>
+	
 	<!--  PC버젼 탑바 -->
 	<div class="top-bar visible-on-md-up">
 		<div class="loginedMember">
@@ -62,9 +79,15 @@
 						class="height-100p flex flex-ai-c">About Me</a></li>
 					<li><a href="${pageContext.request.contextPath}/s/home/SNS"
 						class="height-100p flex flex-ai-c">SNS</a></li>
+						<%if (isLogined) { %>
+					<li><a
+						href="${pageContext.request.contextPath}/s/member/doLogout"
+						class="height-100p flex flex-ai-c">Logout</a></li>
+						<%} else { %>
 					<li><a
 						href="${pageContext.request.contextPath}/s/member/login"
 						class="height-100p flex flex-ai-c">Login</a></li>
+						<%} %>
 
 				</ul>
 			</nav>
@@ -95,9 +118,13 @@
 					class="block">About Me</a></li>
 				<li><a href="${pageContext.request.contextPath}/s/home/SNS"
 					class="block">SNS</a></li>
-
+				<%if (isLogined) { %>
+				<li><a href="${pageContext.request.contextPath}/s/member/doLogout"
+					class="block">Logout</a></li>
+				<%} else { %>
 				<li><a href="${pageContext.request.contextPath}/s/member/login"
 					class="block">Login</a></li>
+				<%} %>
 
 			</ul>
 		</nav>

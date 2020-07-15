@@ -33,4 +33,8 @@ public class MemberService extends Service {
 		return memberDao.getMemberIdByLoginIdAndLoginPw(loginId, loginPw);
 	}
 
+	public Member getMemberById(int id) {
+		return memberDao.getMemberById(id);
+	}
+
 }

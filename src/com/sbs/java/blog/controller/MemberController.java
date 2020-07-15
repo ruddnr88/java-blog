@@ -19,24 +19,27 @@ public class MemberController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doMemberJoin();
+			return doActionJoin();
 		case "doJoin":
-			return doMemberDoJoin();
+			return doActionDoJoin();
 		case "login":
-			return doMemberLogin();
+			return doActionLogin();
 		case "doLogin":
-			return doMemberDoLogin();
+			return doActionDoLogin();
 		case "doLogout":
-			return doMemberLogout();
+			return doActionDoLogout();
 		}
 		return "";
 	}
 
-	private String doMemberLogout() {
-		return null;
+	private String doActionDoLogout() {
+		session.removeAttribute("loginedMemberId");
+
+		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>");
+
 	}
 
-	private String doMemberDoLogin() {
+	private String doActionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 
@@ -46,23 +49,21 @@ public class MemberController extends Controller {
 			return String.format("html:<script> alert('가입하신 아이디/비번이 일치하지않습니다.'); history.back(); </script>");
 		}
 		//개인저장소(session) 생성
-		HttpSession session = req.getSession();
 		session.setAttribute("loginedMemberId", loginedMemberId);
 
 		return String.format(
 				"html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('../home/main'); </script>");
-
 	}
 
-	private String doMemberLogin() {
+	private String doActionLogin() {
 		return "member/login.jsp";
 	}
 
-	private String doMemberJoin() {
+	private String doActionJoin() {
 		return "member/join.jsp";
 	}
 
-	private String doMemberDoJoin() {
+	private String doActionDoJoin() {
 
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
@@ -90,5 +91,10 @@ public class MemberController extends Controller {
 		memberService.dojoin(loginId, loginPw, name, email, nickname);
 
 		return "html:<script> alert('" + name + "님 가입을 축하드립니다.'); location.replace('login'); </script>";
+	}
+
+	@Override
+	public String getControllerName() {
+		return "member";
 	}
 }

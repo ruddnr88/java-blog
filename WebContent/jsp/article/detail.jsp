@@ -65,7 +65,7 @@
 			</tr>
 			<tr class="detail">
 				<th>작성자</th>
-				<td><%=article.getExtra().get("writer")%></td>
+				<td><%=article.getMemberId()%></td>
 			</tr>
 			<tr class="detail">
 				<th>등록날짜</th>

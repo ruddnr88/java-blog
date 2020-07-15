@@ -68,7 +68,7 @@ public class ArticleDao extends Dao {
 	public Article getForPrintArticle(int id, int cateItemId) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *, '노경욱' AS extra__writer ");
+		sql.append("SELECT * ");
 		sql.append("FROM article ");
 		sql.append("WHERE 1 ");
 		sql.append("AND id = ? ", id);
@@ -110,7 +110,7 @@ public class ArticleDao extends Dao {
 		return new CateItem(DBUtil.selectRow(dbConn, sql));
 	}
 
-	public int write(int cateItemId, String title, String body) {
+	public int write(int cateItemId, String title, String body,int memberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO article");
@@ -121,7 +121,7 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
-		sql.append(", memberId =1");
+		sql.append(", memberId =?",memberId);
 
 		return DBUtil.insert(dbConn, sql);
 	}
