@@ -18,39 +18,39 @@
 		<div class="form-row">
 			<div class="label">로그인ID</div>
 			<div class="input">
-				<input name="loginId" type="text" placeholder="아이디를 입력해주세요." />
+				<input name="loginId" class="box-form" type="text" placeholder="아이디를 입력해주세요." />
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="label">비밀번호</div>
 			<div class="input">
-				<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
+				<input name="loginPw" class="box-form"type="password" placeholder="비밀번호를 입력해주세요." />
 			</div>
 		</div>
 		<div class="form-row">
-			<div class="label">비밀번호 확인</div>
+			<div class="label" >비밀번호 확인</div>
 			<div class="input">
-				<input name="loginPwConfirm" type="password"
+				<input name="loginPwConfirm"  class="box-form" type="password"
 					placeholder="비밀번호를 다시 입력해주세요." />
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="label">이름</div>
 			<div class="input">
-				<input name="name" type="text" placeholder="이름을 입력해주세요." />
+				<input name="name" type="text" class="box-form" placeholder="이름을 입력해주세요." />
 			</div>
 		</div>
 		
 		<div class="form-row">
 			<div class="label">닉네임</div>
 			<div class="input">
-				<input name="nickname" type="text" placeholder="닉네임을 입력해주세요." />
+				<input name="nickname" type="text" class="box-form" placeholder="닉네임을 입력해주세요." />
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="label">E-Mail</div>
 			<div class="input">
-				<input name="email" type="email" placeholder="e-mail을 입력해주세요" />
+				<input name="email" type="email" class="box-form" placeholder="e-mail을 입력해주세요" />
 			</div>
 		</div>
 		<div class="con_butt sign_butt" style="margin-top: 50px;">

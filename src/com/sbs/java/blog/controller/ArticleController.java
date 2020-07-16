@@ -46,23 +46,21 @@ public class ArticleController extends Controller {
 			return doActionModifyReply();
 		case "dodelReply":
 			return doActionDeleteReply();
-			
+
 		}
 		return "";
 	}
 
-
-
 	private String doActionDeleteReply() {
 		int id = Util.getInt(req, "id");
-				
+
 		int articleId = 0;
 
 		if (!Util.empty(req, "articleId") && Util.isNum(req, "articleId")) {
 			articleId = Util.getInt(req, "articleId");
 			System.out.println(articleId);
 		}
-		
+
 		articleService.deleteReply(id);
 
 		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); history.back(); </script>";
@@ -72,7 +70,7 @@ public class ArticleController extends Controller {
 		int id = Util.getInt(req, "id");
 		String body = req.getParameter("body");
 
-		articleService.modifyReply(body,id);
+		articleService.modifyReply(body, id);
 
 		return "html:<script> alert('댓글이 수정되었습니다.'); history.back(); </script>";
 	}
@@ -86,12 +84,13 @@ public class ArticleController extends Controller {
 			articleId = Util.getInt(req, "articleId");
 			System.out.println(articleId);
 		}
-		
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
-		
-		articleService.replywrite(body, articleId ,loginedMemberId);
 
-		return "html:<script> alert('" + articleId + "번 게시글 댓글이 생성되었습니다.'); location.replace('detail?id=" + articleId + "'); </script>";
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		articleService.replywrite(body, articleId, loginedMemberId);
+
+		return "html:<script> alert('" + articleId + "번 게시글 댓글이 생성되었습니다.'); location.replace('detail?id=" + articleId
+				+ "'); </script>";
 	}
 
 	private String doActionDoModify() {
@@ -154,6 +153,7 @@ public class ArticleController extends Controller {
 		if (Util.isNum(req, "id") == false) {
 			return "Html:id를 정수로 입력해주세요.";
 		}
+
 		articleService.delete(id);
 
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
@@ -163,10 +163,10 @@ public class ArticleController extends Controller {
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
 		int cateItemId = Util.getInt(req, "cateItemId");
-		
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 
-		int id = articleService.write(cateItemId, title, body,loginedMemberId);
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+
+		int id = articleService.write(cateItemId, title, body, loginedMemberId);
 
 		return "html:<script> alert('" + id + "번 게시물이 생성되었습니다.'); location.replace('list'); </script>";
 	}
@@ -205,6 +205,21 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("article", article);
+		
+		//댓글총게시물수
+		
+		int page = 1;
+
+		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {
+			page = Util.getInt(req, "page");
+		}
+		int itemsInAPage = 10;
+		int replyCount = articleService.getReplyCount(id);
+		int totalPage = (int) Math.ceil(replyCount / (double) itemsInAPage);
+
+		req.setAttribute("replyCount", replyCount);
+		req.setAttribute("totalPage", totalPage);
+		req.setAttribute("page", page);
 		
 		//댓글리스트
 		List<ArticleReply> articleReplies = articleService.getArticleRepliesList(id);
@@ -246,7 +261,6 @@ public class ArticleController extends Controller {
 		if (!Util.empty(req, "searchKeyword")) {
 			searchKeyword = Util.getString(req, "searchKeyword");
 		}
-	
 
 		int itemsInAPage = 10;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
@@ -258,7 +272,7 @@ public class ArticleController extends Controller {
 
 		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
 				searchKeywordType, searchKeyword);
-		
+
 		req.setAttribute("articles", articles);
 		return "article/list.jsp";
 	}

@@ -159,11 +159,11 @@ label[for] {
 }
 
 .width-40px {
-	width: 35px;
+	width: 40px;
 }
 
 .width-45px {
-	width: 35px;
+	width: 45px;
 }
 
 .width-50px {
@@ -381,11 +381,11 @@ label[for] {
 
 /*whoamI?*/
 .member-con {
-	margin:0 auto;
+	margin: 0 auto;
 	padding-right: 10px;
-	
 }
-.member-con > span {
+
+.member-con>span {
 	font-weight: bold;
 }
 

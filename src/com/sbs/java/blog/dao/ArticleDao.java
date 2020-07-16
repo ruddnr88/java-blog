@@ -46,7 +46,8 @@ public class ArticleDao extends Dao {
 
 		return articles;
 	}
-
+	
+	//게시물 수(검색기능도 같이)
 	public int getForPrintListArticlesCount(int cateItemId, String searchKeywordType, String searchKeyword) {
 		SecSql sql = new SecSql();
 
@@ -78,8 +79,6 @@ public class ArticleDao extends Dao {
 		sql.append("AND A.id = ?", id);
 		sql.append("WHERE A.displayStatus = 1");
 		
-		sql.append("AND displayStatus = 1 ");
-
 		return new Article(DBUtil.selectRow(dbConn, sql));
 	}
 
@@ -214,6 +213,17 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.update(dbConn, sql);
 		
+	}
+
+	public int getReplyCount(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(*) AS cnt ");
+		sql.append("FROM articleReply");
+		sql.append("WHERE articleId = ? ", id);
+
+		int count = DBUtil.selectRowIntValue(dbConn, sql);
+		return count;
 	}
 
 

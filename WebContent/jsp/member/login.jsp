@@ -15,14 +15,14 @@
 		<input type="hidden" name="loginPwReal" />
 		<div class="form-row">
 			<div class="label">ID</div>
-			<div class="input">
-				<input name="loginId" type="text" placeholder="아이디를 입력해주세요." />
+			<div class="input box-form">
+				<input name="loginId" class="box-form"type="text" placeholder="아이디를 입력해주세요." />
 			</div>
 		</div>
 		<div class="form-row">
 			<div class="label">PW</div>
-			<div class="input">
-				<input name="loginPw" type="password" placeholder="비밀번호를 입력해주세요." />
+			<div class="input box-form">
+				<input name="loginPw" class="box-form" type="password" placeholder="비밀번호를 입력해주세요." />
 			</div>
 		</div>
 

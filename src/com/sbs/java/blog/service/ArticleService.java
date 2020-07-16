@@ -76,6 +76,10 @@ public class ArticleService extends Service {
 		return articleDao.deleteReply(id);
 	}
 
+	public int getReplyCount(int id) {
+		return articleDao.getReplyCount(id);
+	}
+
 	
 
 }

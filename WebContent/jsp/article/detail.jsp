@@ -8,6 +8,8 @@
 	List<ArticleReply> articleReplies = (List<ArticleReply>) request.getAttribute("articleReplies");
 	Article article = (Article) request.getAttribute("article");
 	String cateItemName = (String) request.getAttribute("cateItemName");
+	int totalPage = (int) request.getAttribute("totalPage");
+	int paramPage = (int) request.getAttribute("page");
 %>
 
 <!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
@@ -113,11 +115,12 @@
 		</div>
 
 	</div>
+
 	<form action="doReply" method="POST" class="form1 reply_con"
 		onsubmit="submitReplyForm(this); return false;">
 
 		<div class="reply_box flex">
-			<div class="label inline-block">댓 글</div>
+			<div class="label inline-block name_col">댓 글</div>
 			<div class="inline-block replybody">
 				<input type="hidden" name="articleId" value="${param.id}" /> <input
 					name="body" type="text" placeholder="댓글을 작성해주세요." />
@@ -132,7 +135,7 @@
 	<table class ="re_table">
 		<colgroup>
 			<col width="5%">
-			<col width="10%">
+			<col class="name_col" width="10%">
 			<col width="65%">
 			<col width="20%">
 		</colgroup>
@@ -141,8 +144,8 @@
 			<tr>
 				<th>No.</th>
 				<th>작성자</th>
-				<th>내 용</th>
-				<th>날짜</th>
+				<th style="font-weight: bold; margin:10px;">COMMENTS (<span style="color:red;">${replyCount}</span>)</th>
+				<th class="mo_modi_date">날짜</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -155,9 +158,8 @@
 				<td><%=articleReplie.getId()%></td>
 				<td><%=article.getExtra().get("writer")%></td>
 				<td class="text-align-left">
-				<input type="hidden" name="articleId" value="${param.id}" /> 
 				<%=articleReplie.getBody()%> &nbsp; <a href="dodelReply?id=<%=articleReplie.getId()%>"><i class="fas fa-trash-alt"></i></a></td>
-				<td><%=articleReplie.getRegDate()%></td>
+				<td class="mo_modi_date"><%=articleReplie.getRegDate()%></td>
 			</tr>
 			<%
 				}
