@@ -18,6 +18,7 @@ public class ArticleDao extends Dao {
 		this.dbConn = dbConn;
 	}
 
+	// 리스트
 	public List<Article> getForPrintListArticles(int page, int itemsInAPage, int cateItemId, String searchKeywordType,
 			String searchKeyword) {
 		SecSql sql = new SecSql();
@@ -65,17 +66,18 @@ public class ArticleDao extends Dao {
 		return count;
 	}
 
-	public Article getForPrintArticle(int id, int cateItemId) {
+	public Article getForPrintArticle(int id) {
+
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT * ");
-		sql.append("FROM article ");
-		sql.append("WHERE 1 ");
-		sql.append("AND id = ? ", id);
-		sql.append("AND displayStatus = 1 ");
-		if (cateItemId != 0) {
-			sql.append("AND cateItemId = ? ", cateItemId);
-		}
+		sql.append("SELECT A.*");
+		sql.append(", M.name AS extra__writer");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN member AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("AND A.id = ?", id);
+		sql.append("WHERE A.displayStatus = 1");
+		
 		sql.append("AND displayStatus = 1 ");
 
 		return new Article(DBUtil.selectRow(dbConn, sql));
@@ -110,7 +112,7 @@ public class ArticleDao extends Dao {
 		return new CateItem(DBUtil.selectRow(dbConn, sql));
 	}
 
-	public int write(int cateItemId, String title, String body,int memberId) {
+	public int write(int cateItemId, String title, String body, int memberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO article");
@@ -121,7 +123,7 @@ public class ArticleDao extends Dao {
 		sql.append(", body = ? ", body);
 		sql.append(", displayStatus = '1'");
 		sql.append(", cateItemId = ?", cateItemId);
-		sql.append(", memberId =?",memberId);
+		sql.append(", memberId =?", memberId);
 
 		return DBUtil.insert(dbConn, sql);
 	}
@@ -160,21 +162,20 @@ public class ArticleDao extends Dao {
 		return DBUtil.update(dbConn, sql);
 	}
 
-	public int replywrite(String body, int articleId) {
+	public int replywrite(String body, int articleId, int memberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO articleReply");
 		sql.append("SET regDate = NOW()");
 		sql.append(", updateDate = NOW()");
 		sql.append(", articleId = ? ", articleId);
-		sql.append(", memberId = 1 ");
+		sql.append(", memberId = ? ", memberId);
 		sql.append(", body = ? ", body);
 
 		return DBUtil.insert(dbConn, sql);
 	}
 
-	
-	public List<ArticleReply> getArticleRepliesForDetail(int articleId) {
+	public List<ArticleReply> getArticleRepliesList(int articleId) {
 
 		SecSql sql = SecSql.from("SELECT * ");
 		sql.append("FROM articleReply");
@@ -190,8 +191,31 @@ public class ArticleDao extends Dao {
 		return articleReplies;
 	}
 
+	public void modifyReply(String body,int id) {
+		
+		SecSql sql = SecSql.from("UPDATE articleReply");
+		sql.append("SET body = ?",body);
+		sql.append("WHERE id = ?", id);
+
+		DBUtil.update(dbConn, sql);
+
+	}
+
 	public int getForPrintListReplyCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public int deleteReply(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE FROM articleReply ");
+		sql.append("WHERE id = ? ", id);
+
+		return DBUtil.update(dbConn, sql);
+		
+	}
+
+
+
 }

@@ -71,8 +71,9 @@
 			<col width="5%">
 			<col width="5%">
 			<col width="50%">
-			<col width="20%">
-			<col width="20%">
+			<col width="10%">
+			<col width="15%">
+			<col width="15%">
 
 		</colgroup>
 
@@ -81,6 +82,7 @@
 				<th>CA</th>
 				<th>NO.</th>
 				<th>제 목</th>
+				<th>작성자</th>
 				<th class="mo_modi_date">날짜</th>
 				<th class="mo_modi_date">수정날짜</th>
 			</tr>
@@ -96,6 +98,7 @@
 				<td><%=article.getId()%></td>
 				<td class="text-align-left"><a
 					href="./detail?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>"><%=article.getTitle()%></a></td>
+				<td><%=article.getExtra().get("writer")%></td>
 				<td class="mo_modi_date"><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
 			</tr>

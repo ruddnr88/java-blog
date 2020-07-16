@@ -1,9 +1,11 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
+<%@ page import="com.sbs.java.blog.dto.ArticleReply"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%
+	List<ArticleReply> articleReplies = (List<ArticleReply>) request.getAttribute("articleReplies");
 	Article article = (Article) request.getAttribute("article");
 	String cateItemName = (String) request.getAttribute("cateItemName");
 %>
@@ -65,7 +67,7 @@
 			</tr>
 			<tr class="detail">
 				<th>작성자</th>
-				<td><%=article.getMemberId()%></td>
+				<td><%=article.getExtra().get("writer")%></td>
 			</tr>
 			<tr class="detail">
 				<th>등록날짜</th>
@@ -115,9 +117,10 @@
 		onsubmit="submitReplyForm(this); return false;">
 
 		<div class="reply_box flex">
-			<div class="label inline-block">댓  글</div>
+			<div class="label inline-block">댓 글</div>
 			<div class="inline-block replybody">
-				<input name="body" type="text" placeholder="댓글을 작성해주세요." />
+				<input type="hidden" name="articleId" value="${param.id}" /> <input
+					name="body" type="text" placeholder="댓글을 작성해주세요." />
 			</div>
 			<div style="margin-top: 10px;">
 				<div class="input">
@@ -126,6 +129,43 @@
 			</div>
 		</div>
 	</form>
+	<table class ="re_table">
+		<colgroup>
+			<col width="5%">
+			<col width="10%">
+			<col width="65%">
+			<col width="20%">
+		</colgroup>
+	
+		<thead>
+			<tr>
+				<th>No.</th>
+				<th>작성자</th>
+				<th>내 용</th>
+				<th>날짜</th>
+			</tr>
+		</thead>
+		<tbody>
+
+
+			<%
+				for (ArticleReply articleReplie : articleReplies) {
+			%>
+			<tr class="noti">
+				<td><%=articleReplie.getId()%></td>
+				<td><%=article.getExtra().get("writer")%></td>
+				<td class="text-align-left">
+				<input type="hidden" name="articleId" value="${param.id}" /> 
+				<%=articleReplie.getBody()%> &nbsp; <a href="dodelReply?id=<%=articleReplie.getId()%>"><i class="fas fa-trash-alt"></i></a></td>
+				<td><%=articleReplie.getRegDate()%></td>
+			</tr>
+			<%
+				}
+			%>
+
+
+		</tbody>
+	</table>
 	<script>
 		function submitReplyForm(form) {
 			form.body.value = form.body.value.trim();

@@ -41,31 +41,57 @@ public class ArticleController extends Controller {
 		case "doModify":
 			return doActionDoModify();
 		case "doReply":
-			return doActionreply();
-		case "doReplylist":
-			return doActionreplyList();
+			return doActionReply();
+		case "doModifyReply":
+			return doActionModifyReply();
+		case "dodelReply":
+			return doActionDeleteReply();
+			
 		}
-
 		return "";
 	}
 
-	private String doActionreplyList() {
-		return null;
+
+
+	private String doActionDeleteReply() {
+		int id = Util.getInt(req, "id");
+				
+		int articleId = 0;
+
+		if (!Util.empty(req, "articleId") && Util.isNum(req, "articleId")) {
+			articleId = Util.getInt(req, "articleId");
+			System.out.println(articleId);
+		}
+		
+		articleService.deleteReply(id);
+
+		return "html:<script> alert('" + id + "번 댓글이 삭제되었습니다.'); history.back(); </script>";
 	}
 
-	private String doActionreply() {
+	private String doActionModifyReply() {
+		int id = Util.getInt(req, "id");
+		String body = req.getParameter("body");
+
+		articleService.modifyReply(body,id);
+
+		return "html:<script> alert('댓글이 수정되었습니다.'); history.back(); </script>";
+	}
+
+	private String doActionReply() {
 		String body = req.getParameter("body");
 
 		int articleId = 0;
 
 		if (!Util.empty(req, "articleId") && Util.isNum(req, "articleId")) {
 			articleId = Util.getInt(req, "articleId");
-			System.out.println("?????? articleId");
+			System.out.println(articleId);
 		}
+		
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		articleService.replywrite(body, articleId ,loginedMemberId);
 
-		articleService.replywrite(body, articleId);
-
-		return "html:<script> alert('" + articleId + "번 댓글이 생성되었습니다.'); location.replace('list'); </script>";
+		return "html:<script> alert('" + articleId + "번 게시글 댓글이 생성되었습니다.'); location.replace('detail?id=" + articleId + "'); </script>";
 	}
 
 	private String doActionDoModify() {
@@ -89,19 +115,14 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionModify() {
-
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
-
 		if (Util.isNum(req, "id") == false) {
 			return "html:id를 정수로 입력해주세요.";
 		}
-
 		int id = Util.getInt(req, "id");
-
 		int cateItemId = 0;
-
 		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
@@ -117,7 +138,7 @@ public class ArticleController extends Controller {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
 
-		Article article = articleService.getForPrintArticle(id, cateItemId);
+		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("cateItemName", cateItemName);
 
@@ -127,14 +148,12 @@ public class ArticleController extends Controller {
 
 	private String doActionDelete() {
 		int id = Util.getInt(req, "id");
-
 		if (Util.empty(req, "id")) {
 			return "Html:id를 입력해주세요.";
 		}
 		if (Util.isNum(req, "id") == false) {
 			return "Html:id를 정수로 입력해주세요.";
 		}
-
 		articleService.delete(id);
 
 		return "html:<script> alert('" + id + "번 게시물이 삭제되었습니다.'); location.replace('list'); </script>";
@@ -183,12 +202,15 @@ public class ArticleController extends Controller {
 		articleService.increaseHit(id);
 
 		req.setAttribute("cateItemName", cateItemName);
-		Article article = articleService.getForPrintArticle(id, cateItemId);
+		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("article", article);
+		
+		//댓글리스트
+		List<ArticleReply> articleReplies = articleService.getArticleRepliesList(id);
+		req.setAttribute("articleReplies", articleReplies);
 
 		return "article/detail.jsp";
-
 	}
 
 	private String doActionList() {
@@ -224,6 +246,7 @@ public class ArticleController extends Controller {
 		if (!Util.empty(req, "searchKeyword")) {
 			searchKeyword = Util.getString(req, "searchKeyword");
 		}
+	
 
 		int itemsInAPage = 10;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
@@ -235,6 +258,7 @@ public class ArticleController extends Controller {
 
 		List<Article> articles = articleService.getForPrintListArticles(page, itemsInAPage, cateItemId,
 				searchKeywordType, searchKeyword);
+		
 		req.setAttribute("articles", articles);
 		return "article/list.jsp";
 	}

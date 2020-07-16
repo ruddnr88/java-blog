@@ -73,6 +73,10 @@ h1.list-h1 {
 	padding: 10px;
 }
 
+.article .mo_modi_date {
+	font-size:12px;
+}
+
 /*게시물 리스트*/
 .article .table td>a:hover {
 	color: #609E93;
@@ -312,6 +316,13 @@ select::-ms-expand {
 	font-size: 14px;
 	font-weight: bold;
 	color: #4a867b;
+}
+
+/*댓글리스트*/
+.re_table {
+	width: 80%;
+	margin: 0 auto;
+	border-collapse: collapse;
 }
 
 /*회원가입 화면*/

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.sbs.java.blog.dao.ArticleDao;
 import com.sbs.java.blog.dto.Article;
+import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 
 public class ArticleService extends Service {
@@ -25,8 +26,8 @@ public class ArticleService extends Service {
 		return articleDao.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 	}
 
-	public Article getForPrintArticle(int id, int cateItemId) {
-		return articleDao.getForPrintArticle(id, cateItemId);
+	public Article getForPrintArticle(int id) {
+		return articleDao.getForPrintArticle(id);
 	}
 
 	public List<CateItem> getForPrintCateItems() {
@@ -38,7 +39,7 @@ public class ArticleService extends Service {
 	}
 
 	public int write(int cateItemId, String title, String body,int memberId) {
-		return articleDao.write(cateItemId, title, body,memberId);
+		return articleDao.write(cateItemId, title, body, memberId);
 	}
 
 	public void increaseHit(int id) {
@@ -54,12 +55,27 @@ public class ArticleService extends Service {
 		return articleDao.modify(cateItemId, title, body, id);
 	}
 
-	public int replywrite(String body, int articleId) {
-		return articleDao.replywrite(body, articleId);
+	public int replywrite(String body, int articleId, int memberId) {
+		return articleDao.replywrite(body, articleId, memberId);
 	}
 
 	public int getForPrintListReplyCount() {
 		return articleDao.getForPrintListReplyCount();
 	}
+
+	public List<ArticleReply> getArticleRepliesList(int articleId) {
+		return articleDao.getArticleRepliesList(articleId);
+	}
+
+	public void modifyReply(String body,int id) {
+		articleDao.modifyReply(body,id);
+		
+	}
+
+	public int deleteReply(int id) {
+		return articleDao.deleteReply(id);
+	}
+
+	
 
 }

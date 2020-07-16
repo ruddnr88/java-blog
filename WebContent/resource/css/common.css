@@ -379,6 +379,16 @@ label[for] {
 	max-width: 1356px;
 }
 
+/*whoamI?*/
+.member-con {
+	margin:0 auto;
+	padding-right: 10px;
+	
+}
+.member-con > span {
+	font-weight: bold;
+}
+
 @media ( min-width :800px ) {
 	.visible-on-sm-down {
 		display: none;
