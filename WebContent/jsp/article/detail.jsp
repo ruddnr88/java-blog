@@ -1,6 +1,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.sbs.java.blog.dto.Article"%>
 <%@ page import="com.sbs.java.blog.dto.ArticleReply"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
@@ -101,6 +102,8 @@
 		<div class="list-button butt">
 			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
 		</div>
+		
+		<%if (loginedMemberId == article.getMemberId()) { %>
 
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
@@ -113,6 +116,7 @@
 			</div>
 
 		</div>
+		<%} %>
 
 	</div>
 
@@ -156,9 +160,10 @@
 			%>
 			<tr class="noti">
 				<td><%=articleReplie.getId()%></td>
-				<td><%=article.getExtra().get("writer")%></td>
+				<td><%=articleReplie.getExtra().get("writer")%></td>
+				
 				<td class="text-align-left">
-				<%=articleReplie.getBody()%> &nbsp; <a href="dodelReply?id=<%=articleReplie.getId()%>"><i class="fas fa-trash-alt"></i></a></td>
+				<%=articleReplie.getBody()%> &nbsp;<%if (loginedMemberId == articleReplie.getMemberId()) { %> <a href="dodelReply?id=<%=articleReplie.getId()%>"><i class="fas fa-trash-alt"></i></a><%}%></td>
 				<td class="mo_modi_date"><%=articleReplie.getRegDate()%></td>
 			</tr>
 			<%

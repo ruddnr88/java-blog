@@ -26,7 +26,10 @@ public class ArticleDao extends Dao {
 		int limitFrom = (page - 1) * itemsInAPage;
 
 		sql.append("SELECT *");
-		sql.append("FROM article");
+		sql.append(", M.name AS extra__writer");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
 		sql.append("WHERE displayStatus = 1");
 		if (cateItemId != 0) {
 			sql.append("AND cateItemId = ?", cateItemId);
@@ -34,7 +37,7 @@ public class ArticleDao extends Dao {
 		if (searchKeywordType.equals("title") && searchKeyword.length() > 0) {
 			sql.append("AND title LIKE CONCAT('%', ?, '%')", searchKeyword);
 		}
-		sql.append("ORDER BY id DESC ");
+		sql.append("ORDER BY A.id DESC ");
 		sql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
@@ -177,9 +180,12 @@ public class ArticleDao extends Dao {
 	public List<ArticleReply> getArticleRepliesList(int articleId) {
 
 		SecSql sql = SecSql.from("SELECT * ");
-		sql.append("FROM articleReply");
-		sql.append("WHERE articleId = ?", articleId);
-		sql.append("ORDER BY id DESC ");
+		sql.append(", M.name AS extra__writer");
+		sql.append("FROM articleReply AS AR");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON AR.memberId = M.id");
+		sql.append("WHERE AR.articleId = ?", articleId);
+		sql.append("ORDER BY AR.id DESC ");
 
 		List<Map<String, Object>> rows = DBUtil.selectRows(dbConn, sql);
 		List<ArticleReply> articleReplies = new ArrayList<>();
@@ -198,11 +204,6 @@ public class ArticleDao extends Dao {
 
 		DBUtil.update(dbConn, sql);
 
-	}
-
-	public int getForPrintListReplyCount() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public int deleteReply(int id) {

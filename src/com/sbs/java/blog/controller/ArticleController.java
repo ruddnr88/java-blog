@@ -6,11 +6,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
 import com.sbs.java.blog.dto.Article;
 import com.sbs.java.blog.dto.ArticleReply;
 import com.sbs.java.blog.dto.CateItem;
 import com.sbs.java.blog.util.Util;
+import javax.servlet.http.HttpSession;
 
 public class ArticleController extends Controller {
 	public ArticleController(Connection dbConn, String actionMethodName, HttpServletRequest req,
@@ -94,6 +94,7 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionDoModify() {
+		
 
 		int id = Util.getInt(req, "id");
 
@@ -114,6 +115,9 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionModify() {
+
+	
+
 		if (Util.empty(req, "id")) {
 			return "html:id를 입력해주세요.";
 		}
@@ -205,9 +209,9 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("article", article);
-		
-		//댓글총게시물수
-		
+
+		// 댓글총게시물수
+
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {
@@ -220,8 +224,8 @@ public class ArticleController extends Controller {
 		req.setAttribute("replyCount", replyCount);
 		req.setAttribute("totalPage", totalPage);
 		req.setAttribute("page", page);
-		
-		//댓글리스트
+
+		// 댓글리스트
 		List<ArticleReply> articleReplies = articleService.getArticleRepliesList(id);
 		req.setAttribute("articleReplies", articleReplies);
 
@@ -262,6 +266,7 @@ public class ArticleController extends Controller {
 			searchKeyword = Util.getString(req, "searchKeyword");
 		}
 
+		
 		int itemsInAPage = 10;
 		int totalCount = articleService.getForPrintListArticlesCount(cateItemId, searchKeywordType, searchKeyword);
 		int totalPage = (int) Math.ceil(totalCount / (double) itemsInAPage);

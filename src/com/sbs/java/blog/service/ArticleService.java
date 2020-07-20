@@ -59,9 +59,7 @@ public class ArticleService extends Service {
 		return articleDao.replywrite(body, articleId, memberId);
 	}
 
-	public int getForPrintListReplyCount() {
-		return articleDao.getForPrintListReplyCount();
-	}
+	
 
 	public List<ArticleReply> getArticleRepliesList(int articleId) {
 		return articleDao.getArticleRepliesList(articleId);

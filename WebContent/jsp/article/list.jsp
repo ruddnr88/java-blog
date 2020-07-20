@@ -4,9 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
+<%-- --%>
 <%
 	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
 	List<Article> articles = (List<Article>) request.getAttribute("articles");
+	Article article1 = (Article) request.getAttribute("article");
 	String cateItemName = (String) request.getAttribute("cateItemName");
 	int totalPage = (int) request.getAttribute("totalPage");
 	int paramPage = (int) request.getAttribute("page");
@@ -88,8 +90,6 @@
 			</tr>
 		</thead>
 		<tbody>
-
-
 			<%
 				for (Article article : articles) {
 			%>
@@ -101,16 +101,12 @@
 				<td><%=article.getExtra().get("writer")%></td>
 				<td class="mo_modi_date"><%=article.getRegDate()%></td>
 				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
+				<%
+					}
+				%>
 			</tr>
-			<%
-				}
-			%>
-
-
 		</tbody>
-
 	</table>
-
 
 	<div class="con page-box">
 		<ul class="flex flex-jc-c">
@@ -127,7 +123,7 @@
 
 		</ul>
 	</div>
-	<div class="con_butt" >
+	<div class="con_butt">
 		<div class="list-button butt">
 			<a href="./list">전체목록</a>
 		</div>
