@@ -88,7 +88,7 @@ public class MemberController extends Controller {
 			return String.format("html:<script> alert('%s(은)는 이미 사용중인 이메일 입니다.'); history.back(); </script>", email);
 		}
 
-		memberService.dojoin(loginId, loginPw, name, email, nickname);
+		memberService.dojoin(loginId, loginPw, name, nickname,email);
 
 		return "html:<script> alert('" + name + "님 가입을 축하드립니다.'); location.replace('login'); </script>";
 	}

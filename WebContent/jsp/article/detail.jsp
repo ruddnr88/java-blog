@@ -139,7 +139,7 @@
 	<table class ="re_table">
 		<colgroup>
 			<col width="5%">
-			<col class="name_col" width="10%">
+			<col class="name_col" width="12%">
 			<col width="65%">
 			<col width="20%">
 		</colgroup>
@@ -147,7 +147,7 @@
 		<thead>
 			<tr>
 				<th>No.</th>
-				<th>작성자</th>
+				<th>닉네임</th>
 				<th style="font-weight: bold; margin:10px;">COMMENTS (<span style="color:red;">${replyCount}</span>)</th>
 				<th class="mo_modi_date">날짜</th>
 			</tr>
@@ -163,7 +163,13 @@
 				<td><%=articleReplie.getExtra().get("writer")%></td>
 				
 				<td class="text-align-left">
-				<%=articleReplie.getBody()%> &nbsp;<%if (loginedMemberId == articleReplie.getMemberId()) { %> <a href="dodelReply?id=<%=articleReplie.getId()%>"><i class="fas fa-trash-alt"></i></a><%}%></td>
+				<%=articleReplie.getBody()%> &nbsp;
+				<%if (loginedMemberId == articleReplie.getMemberId()) { %>
+				<a href="dodelReply?id=<%=articleReplie.getId()%>">
+					<i class="fas fa-trash-alt"></i></a>
+					<i class="far fa-edit" onclick="view()"></i></td>	<%}%>
+				
+			
 				<td class="mo_modi_date"><%=articleReplie.getRegDate()%></td>
 			</tr>
 			<%
@@ -174,6 +180,20 @@
 		</tbody>
 	</table>
 	<script>
+	function view() {
+	  if(hiddenTB.style.display=="none") {
+	    hiddenTB.style.display="block";
+	    BT.value = "닫힘";
+	  }
+	  else {
+	    hiddenTB.style.display="none";
+	    BT.value = "열림";
+	  }
+	}
+
+	</script> 		
+	<script>
+	
 		function submitReplyForm(form) {
 			form.body.value = form.body.value.trim();
 			if (form.body.value.length == 0) {

@@ -73,7 +73,7 @@
 			<col width="5%">
 			<col width="5%">
 			<col width="50%">
-			<col width="10%">
+			<col class="name_col" width="10%">
 			<col width="15%">
 			<col width="15%">
 

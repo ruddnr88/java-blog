@@ -180,7 +180,7 @@ public class ArticleDao extends Dao {
 	public List<ArticleReply> getArticleRepliesList(int articleId) {
 
 		SecSql sql = SecSql.from("SELECT * ");
-		sql.append(", M.name AS extra__writer");
+		sql.append(", M.nickname AS extra__writer");
 		sql.append("FROM articleReply AS AR");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON AR.memberId = M.id");

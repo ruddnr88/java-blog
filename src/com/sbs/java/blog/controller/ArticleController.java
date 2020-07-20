@@ -89,7 +89,7 @@ public class ArticleController extends Controller {
 
 		articleService.replywrite(body, articleId, loginedMemberId);
 
-		return "html:<script> alert('" + articleId + "번 게시글 댓글이 생성되었습니다.'); location.replace('detail?id=" + articleId
+		return "html:<script> alert('댓글이 작성되었습니다.'); location.replace('detail?id=" + articleId
 				+ "'); </script>";
 	}
 

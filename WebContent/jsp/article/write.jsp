@@ -78,13 +78,22 @@
 		<div class="con_butt" style="margin-top: 10px;">
 			<div class="input">
 				<input type="submit" value="전송" class="login_but input_but" /> <a
-					class="login_but lb_3" href="list">취소</a>
+					class="login_but lb_3" onClick="cencle()">취소</a>
 			</div>
 		</div>
 
 	</form>
 </div>
 <script>
+
+	function cencle() {
+		if (confirm("취소하시겠습니까?")) {
+			location.href = "list"
+		} else {
+			alert('글을 계속 작성합니다.');
+		}
+
+	}
 	function submitWriteForm(form) {
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
