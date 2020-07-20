@@ -52,7 +52,7 @@
 </head>
 <body>
 	<%if(loginedMember != null) { %>
-	<div class="con member-con" style="text-align:right;"><span>[<%=loginedMember.getName()%>]</span>님 환영합니다 :)</div>
+	<div class="con member-con" style="text-align:right;"><a href="${pageContext.request.contextPath}/s/member/info" style="font-weight: bold;">[<%=loginedMember.getName()%>]</a>님 환영합니다 :)</div>
 	<%} %>
 	
 	<!--  PC버젼 탑바 -->

@@ -28,8 +28,14 @@ public class MemberController extends Controller {
 			return doActionDoLogin();
 		case "doLogout":
 			return doActionDoLogout();
+		case "info":
+			return doActionDoMemberinfo();
 		}
 		return "";
+	}
+
+	private String doActionDoMemberinfo() {
+		return "home/Memberinfo.jsp";
 	}
 
 	private String doActionDoLogout() {
