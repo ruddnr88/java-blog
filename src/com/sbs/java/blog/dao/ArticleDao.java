@@ -163,6 +163,17 @@ public class ArticleDao extends Dao {
 
 		return DBUtil.update(dbConn, sql);
 	}
+	
+	public ArticleReply getForPrintArticleReply(int id) {
+
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT *");
+		sql.append("FROM articleReply");
+		sql.append("WHERE id = ?", id);
+		
+		return new ArticleReply(DBUtil.selectRow(dbConn, sql));
+	}
 
 	public int replywrite(String body, int articleId, int memberId) {
 		SecSql sql = new SecSql();
@@ -199,7 +210,8 @@ public class ArticleDao extends Dao {
 	public void modifyReply(String body,int id) {
 		
 		SecSql sql = SecSql.from("UPDATE articleReply");
-		sql.append("SET body = ?",body);
+		sql.append("SET updateDate = NOW()");
+		sql.append(", body = ?",body);
 		sql.append("WHERE id = ?", id);
 
 		DBUtil.update(dbConn, sql);

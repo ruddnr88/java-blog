@@ -167,33 +167,16 @@
 				<%if (loginedMemberId == articleReplie.getMemberId()) { %>
 				<a href="dodelReply?id=<%=articleReplie.getId()%>">
 					<i class="fas fa-trash-alt"></i></a>
-					<i class="far fa-edit" onclick="view()"></i></td>	<%}%>
-				
-			
+				<a href="modifyReply?id=<%=articleReplie.getId()%>" onclick="window.open(this.href, '_blank', 'width=450px,height=200px,toolbars=no,scrollbars=no'); return false;"><i class="far fa-edit"></i></a>
+				</td>	<%}%>
 				<td class="mo_modi_date"><%=articleReplie.getRegDate()%></td>
 			</tr>
-			<%
-				}
-			%>
-
-
+				<%}%>
 		</tbody>
 	</table>
-	<script>
-	function view() {
-	  if(hiddenTB.style.display=="none") {
-	    hiddenTB.style.display="block";
-	    BT.value = "닫힘";
-	  }
-	  else {
-	    hiddenTB.style.display="none";
-	    BT.value = "열림";
-	  }
-	}
-
-	</script> 		
-	<script>
 	
+	<script>
+		
 		function submitReplyForm(form) {
 			form.body.value = form.body.value.trim();
 			if (form.body.value.length == 0) {
@@ -219,6 +202,8 @@
 					youtubePlugin, replPlugin, codepenPlugin ]
 		});
 	</script>
+
+	
 	<script
 		src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 

@@ -72,10 +72,10 @@
 		<colgroup>
 			<col width="5%">
 			<col width="5%">
-			<col width="50%">
+			<col width="55%">
 			<col class="name_col" width="10%">
 			<col width="15%">
-			<col width="15%">
+			<col width="10%">
 
 		</colgroup>
 
@@ -86,7 +86,7 @@
 				<th>제 목</th>
 				<th>작성자</th>
 				<th class="mo_modi_date">날짜</th>
-				<th class="mo_modi_date">수정날짜</th>
+				<th><i class="fas fa-eye"></i></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -100,7 +100,7 @@
 					href="./detail?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>"><%=article.getTitle()%></a></td>
 				<td><%=article.getExtra().get("writer")%></td>
 				<td class="mo_modi_date"><%=article.getRegDate()%></td>
-				<td class="mo_modi_date"><%=article.getUpdateDate()%></td>
+				<td><%=article.getHit()%></td>
 				<%
 					}
 				%>

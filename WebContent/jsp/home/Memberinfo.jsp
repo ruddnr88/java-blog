@@ -7,15 +7,15 @@
 %>
 
 <!-- 메인컨텐츠 -->
-<div class="con sns-con">
+<div class="con info-con">
 	<h1>회원정보</h1>
-	<ul>
-		<li>가입번호 :<%=loginedMember.getId()%></li>
-		<li>아이디 :<%=loginedMember.getLoginId()%></li>
-		<li>이름 : <%=loginedMember.getName()%></li>
-		<li>닉네임 :<%=loginedMember.getNickname()%></li>
-		<li>가입날짜 :<%=loginedMember.getRegDate()%></li>
-		<li>이메일 :<%=loginedMember.getEmail()%></li>
+	<ul class="member_info">
+		<li>가입번호 : &nbsp <%=loginedMember.getId()%></li>
+		<li>아이디 :&nbsp<%=loginedMember.getLoginId()%></li>
+		<li>이름 : &nbsp<%=loginedMember.getName()%></li>
+		<li>닉네임 :&nbsp<%=loginedMember.getNickname()%></li>
+		<li>가입날짜 :&nbsp<%=loginedMember.getRegDate()%></li>
+		<li>이메일 :&nbsp<%=loginedMember.getEmail()%></li>
 
 	</ul>
 

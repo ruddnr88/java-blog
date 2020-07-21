@@ -55,7 +55,6 @@
 		<input type="hidden" name="id" value="<%=article.getId()%>"> <input
 			type="hidden" name="body">
 		<div class="form-row">
-
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">

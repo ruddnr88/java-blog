@@ -78,6 +78,10 @@ public class ArticleService extends Service {
 		return articleDao.getReplyCount(id);
 	}
 
+	public ArticleReply getForPrintArticleReply(int id) {
+		return articleDao.getForPrintArticleReply(id);
+	}
+
 	
 
 }

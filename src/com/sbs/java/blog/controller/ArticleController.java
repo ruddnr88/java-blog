@@ -42,13 +42,24 @@ public class ArticleController extends Controller {
 			return doActionDoModify();
 		case "doReply":
 			return doActionReply();
-		case "doModifyReply":
+		case "modifyReply":
 			return doActionModifyReply();
+		case "doModifyReply":
+			return doActiondoModifyReply();
 		case "dodelReply":
 			return doActionDeleteReply();
 
 		}
 		return "";
+	}
+
+	private String doActiondoModifyReply() {
+		int id = Util.getInt(req, "id");
+		String body = req.getParameter("body");
+	
+		articleService.modifyReply(body, id);
+
+		return "html:<script> alert('댓글이 수정되었습니다.'); close(); </script>";
 	}
 
 	private String doActionDeleteReply() {
@@ -67,12 +78,14 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionModifyReply() {
+		
 		int id = Util.getInt(req, "id");
-		String body = req.getParameter("body");
+		
+		ArticleReply articleReplie = articleService.getForPrintArticleReply(id);
+		
+		req.setAttribute("articleReplie", articleReplie);
+		return "article/replymodify.jsp";
 
-		articleService.modifyReply(body, id);
-
-		return "html:<script> alert('댓글이 수정되었습니다.'); history.back(); </script>";
 	}
 
 	private String doActionReply() {
@@ -125,6 +138,7 @@ public class ArticleController extends Controller {
 			return "html:id를 정수로 입력해주세요.";
 		}
 		int id = Util.getInt(req, "id");
+		
 		int cateItemId = 0;
 		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
 			cateItemId = Util.getInt(req, "cateItemId");
@@ -144,7 +158,6 @@ public class ArticleController extends Controller {
 		Article article = articleService.getForPrintArticle(id);
 
 		req.setAttribute("cateItemName", cateItemName);
-
 		req.setAttribute("article", article);
 		return "article/modify.jsp";
 	}

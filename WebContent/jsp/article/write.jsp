@@ -85,14 +85,29 @@
 	</form>
 </div>
 <script>
-
 	function cencle() {
 		if (confirm("취소하시겠습니까?")) {
 			location.href = "list"
 		} else {
-			alert('글을 계속 작성합니다.');
+			alert('아님말고');
 		}
+	}
+	var onBeforeUnloadSetted = false;
+	
+	var onBeforeUnload = function(e) {
+		return '떠나시겠습니까?';
+	};
 
+	function applyOnBeforeUnload() {
+		if (onBeforeUnloadSetted)
+			return;
+		$(window).bind('beforeunload', onBeforeUnload);
+		onBeforeUnloadSetted = true;
+	}
+
+	function removeOnBeforeUnload() {
+		$(window).unbind('beforeunload', onBeforeUnload);
+		onBeforeUnloadSetted = false;
 	}
 	function submitWriteForm(form) {
 		form.title.value = form.title.value.trim();
@@ -109,6 +124,7 @@
 		}
 		form.body.value = source;
 		form.submit();
+		removeOnBeforeUnload();
 	}
 	var editor1 = new toastui.Editor({
 		el : document.querySelector("#editor1"),
@@ -118,6 +134,9 @@
 		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
 				replPlugin, codepenPlugin ]
 	});
+	$('form.write-form input, form.write-form textarea').keyup(function() {
+		applyOnBeforeUnload();
+	})
 </script>
 <script
 	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
