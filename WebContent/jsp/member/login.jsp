@@ -29,7 +29,8 @@
 		<div class="con_butt sign_butt" style="margin-top: 50px; width:100%;">
 			<div class="input">
 				<a class="login_but lb_1" href="${pageContext.request.contextPath}/s/member/join">회원가입</a>
-				<input type="submit" value="로그인" class="login_but lb_2"/>
+				<a class="login_but" style="left:25%;" href="${pageContext.request.contextPath}/s/member/findinfo">ID/PW 찾기</a>
+				<input type="submit" style="right:17%;" value="로그인" class="login_but lb_2"/>
 				<a href="${pageContext.request.contextPath}/s/home/main" class="login_but lb_3">취소</a>
 			</div>
 		</div>

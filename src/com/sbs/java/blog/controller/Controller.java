@@ -3,6 +3,8 @@ package com.sbs.java.blog.controller;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -129,5 +131,7 @@ public abstract class Controller {
 		
 		
 		return null;
+	}
+	public void init(ServletConfig config) throws ServletException {
 	}
 }

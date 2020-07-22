@@ -341,7 +341,7 @@ select::-ms-expand {
 /*로그인&가입 버튼*/
 .form1 .input .login_but {
 	position: absolute;
-	padding: 10px 25px;
+	padding: 10px 20px;
 	background-color: #C2E2DD;
 	color: #6EAEA3;
 	border: 1px solid #6EAEA3;
@@ -359,8 +359,27 @@ select::-ms-expand {
 }
 
 .form1 .input .lb_3 {
-	right: 0;
+	right: 0%;
 }
+
+
+/*아이디/비번찾기*/
+.tab_wrap {
+	width:50%;
+	margin:0 auto;
+}
+.tab_menu {
+	text-align: left;
+}
+.tab_menu_btn {
+	padding: 10px 20px;
+	background-color: #C2E2DD;
+	color: #6EAEA3;
+	border: 1px solid #6EAEA3;
+	font-size: 18px;
+	
+}
+
 /*회원정보*/
 .info-con {
 }
@@ -420,5 +439,6 @@ select::-ms-expand {
 	.name_col {
 		width: 20%;
 	}
-	.
+	.form1 .input .lb_3 {
+	right:2%;}
 }

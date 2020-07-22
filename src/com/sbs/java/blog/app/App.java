@@ -21,10 +21,14 @@ import com.sbs.java.blog.util.Util;
 public class App {
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	private String gmailId;
+	private String gmailPw;
 
-	public App(HttpServletRequest req, HttpServletResponse resp) {
+	public App(HttpServletRequest req, HttpServletResponse resp, String gmailId, String gmailPw) {
 		this.req = req;
 		this.resp = resp;
+		this.gmailId = gmailId;
+		this.gmailPw = gmailPw;
 	}
 
 	private void loadDbDriver() throws IOException {
@@ -99,7 +103,7 @@ public class App {
 			controller = new ArticleController(dbConn, actionMethodName, req, resp);
 			break;
 		case "member":
-			controller = new MemberController(dbConn, actionMethodName, req, resp);
+			controller = new MemberController(dbConn, actionMethodName, req, resp,gmailId,gmailPw);
 			break;
 		case "home":
 			controller = new HomeController(dbConn, actionMethodName, req, resp);
