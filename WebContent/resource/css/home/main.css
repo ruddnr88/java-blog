@@ -261,7 +261,7 @@ select::-ms-expand {
 
 .form1 .form-row>.label {
 	width: 100px;
-	font-size:15px;
+	font-size: 15px;
 	font-weight: bold;
 	margin-right: 10px;
 }
@@ -362,35 +362,60 @@ select::-ms-expand {
 	right: 0%;
 }
 
-
 /*아이디/비번찾기*/
 .tab_wrap {
-	width:50%;
-	margin:0 auto;
+	width: 50%;
+	margin: 0 auto;
 }
+
 .tab_menu {
 	text-align: left;
+	border-bottom: 1px solid #6EAEA3;
 }
+
 .tab_menu_btn {
 	padding: 10px 20px;
-	background-color: #C2E2DD;
 	color: #6EAEA3;
-	border: 1px solid #6EAEA3;
-	font-size: 18px;
+	font-size: 16px;
+}
+
+.tab_menu_btn.on {
+	color: white;
+	font-weight: bold;
+	border-bottom: 2px solid #6EAEA3;
+	background-color: #C2E2DD;
+}
+
+.tab_menu_btn:hover {
+	font-weight: bold;
+}
+
+.tab_box {
+	display: none;
+}
+
+.tab_box.on {
+	display: block;
+}
+
+.sign-form1 {
+	margin-top: 30px;
+	width: 100%
+}
+/*회원정보*/
+.info-con {
 	
 }
 
-/*회원정보*/
-.info-con {
-}
 .info-con .member_info {
-	margin:0 auto;
+	margin: 0 auto;
 	width: 50%;
 	text-align: left;
 }
+
 .info-con .member_info  li {
-	padding:10px;
-	font-size:16px;
+	padding: 10px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
@@ -440,5 +465,9 @@ select::-ms-expand {
 		width: 20%;
 	}
 	.form1 .input .lb_3 {
-	right:2%;}
+		right: 2%;
+	}
+	.tab_wrap {
+		width: 100%;
+	}
 }

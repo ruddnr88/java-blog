@@ -90,4 +90,27 @@ public class MemberDao extends Dao {
 		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
 	}
 
+	public int getMemberBynameAndEmail(String name, String email) {
+		return 0;
+		
+	}
+
+	public String getMemberSearchId(String name, String email) {
+		SecSql sql = SecSql.from("SELECT loginId");
+		sql.append("FROM `member`");
+		sql.append("WHERE `name` = ?", name);
+		sql.append("AND email = ?", email);
+
+		return DBUtil.selectRowStringValue(dbConn, sql);
+	}
+
+	public String getMemberSearchPw(String loginId, String email) {
+		SecSql sql = SecSql.from("SELECT loginPw");
+		sql.append("FROM `member`");
+		sql.append("WHERE `loginId` = ?", loginId);
+		sql.append("AND email = ?", email);
+
+		return DBUtil.selectRowStringValue(dbConn, sql);
+	}
+
 }

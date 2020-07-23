@@ -8,8 +8,11 @@ import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.sbs.java.blog.dto.Member;
 import com.sbs.java.blog.service.MailService;
 import com.sbs.java.blog.servlet.DispatcherServlet;
+import com.sbs.java.blog.util.Util;
 
 public class MemberController extends Controller {
 	private String gmailId;
@@ -39,9 +42,9 @@ public class MemberController extends Controller {
 			return doActionDoMemberinfo();
 		case "findinfo":
 			return doActionFindinfo();
-		case "findId":
+		case "doFindId":
 			return doActionFindId();
-		case "findPw":
+		case "doFindPw":
 			return doActionFindPw();
 		}
 
@@ -49,13 +52,43 @@ public class MemberController extends Controller {
 	}
 
 	private String doActionFindId() {
-		// TODO Auto-generated method stub
-		return null;
+		String name = req.getParameter("name");
+		String email = req.getParameter("email");
+		
+
+		String loginIdfind = memberService.getMemberSearchId(name, email);
+		
+		if (loginIdfind != ""){
+			System.out.println("공란이 아니네여");
+			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
+			boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ "+ loginIdfind +" ]입니다.") == 1;
+
+		} else {
+			System.out.println("틀려버렴");
+			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
+			
+		} 
+		return "html:<script> alert('메일이 발송되었습니다.');location.replace('../home/main'); </script>";
 	}
 
 	private String doActionFindPw() {
-		// TODO Auto-generated method stub
-		return null;
+		String loginId = req.getParameter("loginId");
+		String email = req.getParameter("email");
+		
+
+		String loginPwfind = memberService.getMemberSearchPw(loginId, email);
+		
+		if (loginId != ""){
+			System.out.println("공란이 아니네여");
+			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
+			boolean a = mailService.send(email, "안녕하세요.", "비밀번호는 [ "+ loginPwfind +" ]입니다.") == 1;
+
+		} else {
+			System.out.println("틀려버렴");
+			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
+			
+		} 
+		return "html:<script> alert('임시비밀번호가 메일로 발송되었습니다.'); location.replace('../home/main'); </script>";
 	}
 
 	private String doActionFindinfo() {
@@ -68,7 +101,6 @@ public class MemberController extends Controller {
 
 	private String doActionDoLogout() {
 		session.removeAttribute("loginedMemberId");
-
 		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('../home/main'); </script>");
 
 	}
