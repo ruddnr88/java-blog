@@ -1,48 +1,13 @@
-<%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="게시물 작성"></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
-%>
+<%@ include file="/jsp/part/toastUiEditor.jspf"%>
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
-<!-- 하이라이트 라이브러리, 언어 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/css.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/javascript.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/xml.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php-template.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/sql.min.js"></script>
-<!-- 코드 미러 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
-<!-- 토스트 UI 에디터, 자바스크립트 코어 -->
-<script
-	src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 
-<!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
-<script
-	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
-
-<!-- 토스트 UI 에디터, CSS 코어 -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-
-<!-- 어바웃 미메인컨텐츠 -->
+<!-- 글쓰기 메인컨텐츠 -->
 <div class="con write-form-box">
 	<h1>글 작성하기</h1>
 	<form action="doWrite" method="POST" class="write-form form1"
@@ -51,15 +16,12 @@
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">
-					<%
-						for (CateItem cateItem : cateItems) {
-					%>
-					<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>
-					<%
-						}
-					%>
+					<c:forEach items="${cateItems}" var="cateItem">
+						<option value="${cateItem.id}">${cateItem.name}</option>
+					</c:forEach>
 
 				</select>
+				
 			</div>
 		</div>
 		<div class="form-row">
@@ -72,7 +34,7 @@
 			<div class="label">내용</div>
 			<div class="input">
 				<input type="hidden" name="body">
-				<div id="editor1" style="text-align: left;"></div>
+				<div class="toast-editor" style="text-align: left;"></div>
 			</div>
 		</div>
 		<div class="con_butt" style="margin-top: 10px;">
@@ -94,21 +56,7 @@
 	}
 	var onBeforeUnloadSetted = false;
 	
-	var onBeforeUnload = function(e) {
-		return '떠나시겠습니까?';
-	};
 
-	function applyOnBeforeUnload() {
-		if (onBeforeUnloadSetted)
-			return;
-		$(window).bind('beforeunload', onBeforeUnload);
-		onBeforeUnloadSetted = true;
-	}
-
-	function removeOnBeforeUnload() {
-		$(window).unbind('beforeunload', onBeforeUnload);
-		onBeforeUnloadSetted = false;
-	}
 	function submitWriteForm(form) {
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
@@ -126,14 +74,7 @@
 		form.submit();
 		removeOnBeforeUnload();
 	}
-	var editor1 = new toastui.Editor({
-		el : document.querySelector("#editor1"),
-		height : "600px",
-		initialEditType : "markdown",
-		previewStyle : "vertical",
-		plugins : [ toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin,
-				replPlugin, codepenPlugin ]
-	});
+	
 	$('form.write-form input, form.write-form textarea').keyup(function() {
 		applyOnBeforeUnload();
 	})

@@ -1,59 +1,14 @@
-<%@ page import="java.util.List"%>
-<%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page import="com.sbs.java.blog.dto.ArticleReply"%>
-<%@ page import="com.sbs.java.blog.dto.Member"%>
+<%@ page import="com.sbs.java.blog.util.Util"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="게시물 상세내용"></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%
-	List<ArticleReply> articleReplies = (List<ArticleReply>) request.getAttribute("articleReplies");
-	Article article = (Article) request.getAttribute("article");
-	String cateItemName = (String) request.getAttribute("cateItemName");
-	int totalPage = (int) request.getAttribute("totalPage");
-	int paramPage = (int) request.getAttribute("page");
-%>
-
-<!-- 하이라이트 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
-
-<!-- 하이라이트 라이브러리, 언어 -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/css.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/javascript.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/xml.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/php-template.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/sql.min.js"></script>
-
-<!-- 코드 미러 라이브러리 추가, 토스트 UI 에디터에서 사용됨 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
-
-<!-- 토스트 UI 에디터, 자바스크립트 코어 -->
-<script
-	src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.js"></script>
-
-<!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
-<script
-	src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
-
-<!-- 토스트 UI 에디터, CSS 코어 -->
-<link rel="stylesheet"
-	href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+<%@ include file="/jsp/part/toastUiEditor.jspf"%>
 
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con article">
-	<h1 style="color: #6EAEA3;"><%=article.getTitle()%></h1>
-
-
+	<h1 style="color: #6EAEA3;">${article.title}</h1>
 	<table class="table detail-table">
 		<colgroup>
 			<col width="25%">
@@ -62,61 +17,53 @@
 		<tbody>
 			<tr class="detail">
 				<th>카테고리</th>
-				<td>[<%=article.getCateItemId()%>]<%=cateItemName%></td>
+				<td>[${article.cateItemId}]${cateItemName}</td>
 			</tr>
 			<tr class="detail">
 				<th>번호</th>
-				<td><%=article.getId()%></td>
+				<td>${article.id}</td>
 			</tr>
 			<tr class="detail">
 				<th>작성자</th>
-				<td><%=article.getExtra().get("writer")%></td>
+				<td>${article.getExtra().get("writer")}</td>
 			</tr>
 			<tr class="detail">
 				<th>등록날짜</th>
-				<td><%=article.getRegDate()%></td>
+				<td>${article.regDate}</td>
 			</tr>
 			<tr class="detail">
 				<th>수정날짜</th>
-				<td><%=article.getUpdateDate()%></td>
+				<td>${article.updateDate}</td>
 			</tr>
 			<tr class="detail">
 				<th>조회수</th>
-				<td><%=article.getHit()%></td>
+				<td>${article.hit}</td>
 			</tr>
 			<tr class="detail">
-				<td colspan="2"><script type="text/x-template" id="origin1"><%=article.getBodyForXTemplate()%></script>
-					<div id="viewer1"></div></td>
-
+				<td colspan="2"><script type="text/x-template">${article.bodyForXTemplate}</script>
+					<div class="toast-editor toast-editor-viewer"></div></td>
 			</tr>
-
-			<!-- 두번째 줄 끝 -->
-
 		</tbody>
-
-
 	</table>
-
 	<div class="detail_butt ">
 
 		<div class="list-button butt">
-			<a href="./list?cateItemId=<%=article.getCateItemId()%>">목록</a>
+			<a href="./list?cateItemId=${article.cateItemId}">목록</a>
 		</div>
 		
-		<%if (loginedMemberId == article.getMemberId()) { %>
-
+		<c:if test="${loginedMemberId == article.memberId}">
 		<div class="de-mo_butt">
 			<div class="delete-button butt">
 				<a
-					href="modify?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>">수정</a>
+					href="modify?id=${article.id}&cateItemId=${article.cateItemId}">수정</a>
 			</div>
 			<div class="modify-button butt">
 
-				<a href="delete?id=<%=article.getId()%>">삭제</a>
+				<a href="delete?id=${article.id}">삭제</a>
 			</div>
 
 		</div>
-		<%} %>
+		</c:if>
 
 	</div>
 
@@ -155,23 +102,22 @@
 		<tbody>
 
 
-			<%
-				for (ArticleReply articleReplie : articleReplies) {
-			%>
+			<c:forEach items="${articleReplies}" var="articleReply">
 			<tr class="noti">
-				<td><%=articleReplie.getId()%></td>
-				<td><%=articleReplie.getExtra().get("writer")%></td>
+				<td>${articleReply.id}</td>
+				<td>${articleReply.getExtra().get("writer")}</td>
 				
 				<td class="text-align-left">
-				<%=articleReplie.getBody()%> &nbsp;
-				<%if (loginedMemberId == articleReplie.getMemberId()) { %>
-				<a href="dodelReply?id=<%=articleReplie.getId()%>">
-					<i class="fas fa-trash-alt"></i></a>
-				<a href="modifyReply?id=<%=articleReplie.getId()%>" onclick="window.open(this.href, '_blank', 'width=450px,height=200px,toolbars=no,scrollbars=no'); return false;"><i class="far fa-edit"></i></a>
-				</td>	<%}%>
-				<td class="mo_modi_date"><%=articleReplie.getRegDate()%></td>
+				${articleReply.body} &nbsp;
+				<c:if test="${loginedMemberId == articleReply.memberId}">
+					<a href="dodelReply?id=${articleReply.id}">
+						<i class="fas fa-trash-alt"></i></a>
+					<a href="modifyReply?id=${articleReply.id}" onclick="window.open(this.href, '_blank', 'width=450px,height=200px,toolbars=no,scrollbars=no'); return false;"><i class="far fa-edit"></i></a>
+				</c:if>
+				</td>	
+				<td class="mo_modi_date">${articleReply.regDate}</td>
 			</tr>
-				<%}%>
+			</c:forEach>
 		</tbody>
 	</table>
 	
@@ -192,20 +138,8 @@
 					"script");
 		}
 
-		var editor1__initialValue = $('#origin1').html();
-		var editor1 = new toastui.Editor({
-			el : document.querySelector("#viewer1"),
-			viewer : true,
-			initialValue : editor1__initialValue,
-			initialValue : getForEditorBody('#origin1'),
-			plugins : [ toastui.Editor.plugin.codeSyntaxHighlight,
-					youtubePlugin, replPlugin, codepenPlugin ]
-		});
 	</script>
 
-	
-	<script
-		src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 
 
 </div>

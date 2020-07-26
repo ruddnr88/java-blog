@@ -1,18 +1,9 @@
-<%@ page import="java.util.List"%>
-<%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="${cateItemName}"></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
-<%-- --%>
-<%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
-	Article article1 = (Article) request.getAttribute("article");
-	String cateItemName = (String) request.getAttribute("cateItemName");
-	int totalPage = (int) request.getAttribute("totalPage");
-	int paramPage = (int) request.getAttribute("page");
-%>
+
 <!-- 리스트 미메인컨텐츠 -->
 
 <div class="con article">
@@ -20,35 +11,22 @@
 		<select class="cete-select"
 			onchange="if(this.value) location.href=(this.value);">
 			<option selected>카테고리 선택</option>
-			<%
-				for (CateItem cateItem : cateItems) {
-			%>
-			<option value="./list?cateItemId=<%=cateItem.getId()%>" class="block">[<%=cateItem.getId()%>]<%=cateItem.getName()%></option>
-			<%
-				}
-			%>
+				<c:forEach items ="${cateItems}" var="cateItem">
+					<option value="./list?cateItemId=${cateItem.id}" class="block">
+						[${cateItem.id}] ${cateItem.name}
+					</option>
+				</c:forEach>	
 		</select>
 	</div>
 
 	<ul class="cate-menu flex">
-		<%
-			for (CateItem cateItem : cateItems) {
-		%>
-
-		<li class="flex flex-as-c"><a
-			href="./list?cateItemId=<%=cateItem.getId()%>" class="block">[<%=cateItem.getId()%>]<%=cateItem.getName()%></a></li>
-
-		<%
-			}
-		%>
+		<c:forEach items="${cateItems}" var="cateItem">
+			<li class="flex flex-as-c"><a
+					href="./list?cateItemId=${cateItem.id}" class="block">[${cateItem.id}] ${cateItem.name}</a></li>
+		</c:forEach>
 	</ul>
 
-
-
-
-
-	<h1 class="list-h1" style="margin-top: 10px;">
-		<%=cateItemName%></h1>
+	<h1 class="list-h1" style="margin-top: 10px;">${cateItemName}</h1>
 	<div class="search-count">
 		<div class="text-align-left countValue">총 게시물 수 : ${totalCount}</div>
 		<div class="search-bar">
@@ -90,35 +68,27 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%
-				for (Article article : articles) {
-			%>
+			<c:forEach items="${articles}" var="article">
 			<tr class="noti">
-				<td><%=article.getCateItemId()%></td>
-				<td><%=article.getId()%></td>
-				<td class="text-align-left"><a
-					href="./detail?id=<%=article.getId()%>&cateItemId=<%=article.getCateItemId()%>"><%=article.getTitle()%></a></td>
-				<td><%=article.getExtra().get("writer")%></td>
-				<td class="mo_modi_date"><%=article.getRegDate()%></td>
-				<td><%=article.getHit()%></td>
-				<%
-					}
-				%>
+				<td>${article.cateItemId}</td>
+				<td>${article.id}</td>
+				<td class="text-align-left">
+				<a href="./detail?id=${article.id}&cateItemId=${article.cateItemId}">${article.title}</a></td>
+				<td>${article.getExtra().get("writer")}</td>
+				<td class="mo_modi_date">${article.regDate}</td>
+				<td>${article.hit}</td>
 			</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 
 	<div class="con page-box">
 		<ul class="flex flex-jc-c">
 			<li style="color: #609E93">◀</li>
-			<%
-				for (int i = 1; i <= totalPage; i++) {
-			%>
-			<li class="<%=i == paramPage ? "current" : ""%>"><a
-				href="?cateItemId=${param.cateItemId}&page=<%=i%>" class="block"><%=i%></a></li>
-			<%
-				}
-			%>
+			<c:forEach var="i" begin="1" end="${totalPage}" step="1">
+			<li class="${i == cPage ? 'current' : ''}"><a
+				href="?cateItemId=${param.cateItemId}&page=${i}" style="font-weight: bold" >${i}</a></li>
+			</c:forEach>
 			<li style="color: #609E93">▶</li>
 
 		</ul>
