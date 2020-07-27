@@ -1,17 +1,10 @@
-<%@ page import="java.util.List"%>
-<%@ page import="com.sbs.java.blog.dto.Article"%>
-<%@ page import="com.sbs.java.blog.dto.CateItem"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="pageTitle" value="게시물 수정"></c:set>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
-<%
-	List<CateItem> cateItems = (List<CateItem>) request.getAttribute("cateItems");
-	List<Article> articles = (List<Article>) request.getAttribute("articles");
-	Article article = (Article) request.getAttribute("article");
-	String cateItemName = (String) request.getAttribute("cateItemName");
-	
-%>
+
 <%="<style>.form1 .form-row:not(:first-child) { margin-top : 10px; }</style>"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -21,20 +14,15 @@
 	<form action="doModify" name="update" method="POST"
 		class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
-		<input type="hidden" name="id" value="<%=article.getId()%>"> <input
-			type="hidden" name="body">
+		<input type="hidden" name="id" value="${article.id}">
+		 <input	type="hidden" name="body">
 		<div class="form-row">
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
 				<select name="cateItemId">
-					<%
-						for (CateItem cateItem : cateItems) {
-					%>
-					<option value="<%=cateItem.getId()%>"><%=cateItem.getName()%></option>
-					<%
-						}
-					%>
-
+					<c:forEach items="${cateItems}" var="cateItem">
+						<option ${article.cateItemId == cateItem.id ? 'selected' : ''} value="${cateItem.id}">${cateItem.name}</option>
+					</c:forEach>
 				</select>
 			</div>
 		</div>
@@ -42,14 +30,14 @@
 
 			<div class="label">제목</div>
 			<div class="input">
-				<input name="title" type="text" value="<%=article.getTitle()%>" />
+				<input name="title" type="text" value="${article.title}" />
 			</div>
 
 		</div>
 		<div class="form-row">
 			<div class="label">내용</div>
 			<div class="input">
-				<script type="text/x-template"><%=article.getBodyForXTemplate()%></script>
+				<script type="text/x-template">${article.bodyForXTemplate}</script>
 				<div class="toast-editor" style="text-align: left;"></div>
 			</div>
 		</div>
@@ -63,23 +51,29 @@
 	</form>
 </div>
 <script>
-	function check() {
-
-	}
+	var submitModifyFormDone = false;
 	function submitWriteForm(form) {
+		if (submitModifyFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
+		
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
 			form.title.focus();
 			return;
 		}
-		var source = editor1.getMarkdown().trim();
-		if (source.length == 0) {
+		var editor = $(form).find('.toast-editor').data('data-toast-editor');
+		var body = editor.getMarkdown();
+		body = body.trim();
+		if (body.length == 0) {
 			alert('내용을 입력해주세요.');
-			editor1.focus();
-			return;
+			editor.focus();
+			return false;
 		}
-		form.body.value = source;
+		form.body.value = body;
+
 		form.submit();
 	}
 </script>

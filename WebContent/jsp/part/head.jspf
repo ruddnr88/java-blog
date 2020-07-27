@@ -116,7 +116,7 @@
 				<li><a href="${pageContext.request.contextPath}/s/home/SNS"
 					class="block">SNS</a></li>
 				<c:if test ="${isLogined}"> 
-					<li><a href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl==${urlEncodedAfterLogoutRedirectUrl}"
+					<li><a href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}"
 						class="block">Logout</a></li>
 				</c:if>
 				<c:if test ="${isLogined == false}"> 

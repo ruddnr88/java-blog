@@ -59,7 +59,7 @@ public class ArticleController extends Controller {
 	
 		articleService.modifyReply(body, id);
 
-		return "html:<script> alert('댓글이 수정되었습니다.'); close(); </script>";
+		return "html:<script> alert('댓글이 수정되었습니다.'); close();opener.location.reload(); </script>";
 	}
 
 	private String doActionDeleteReply() {
@@ -103,7 +103,7 @@ public class ArticleController extends Controller {
 		articleService.replywrite(body, articleId, loginedMemberId);
 
 		return "html:<script> alert('댓글이 작성되었습니다.'); location.replace('detail?id=" + articleId
-				+ "'); </script>";
+				+ "');opener.location.reload(); </script>";
 	}
 
 	private String doActionDoModify() {
@@ -124,11 +124,10 @@ public class ArticleController extends Controller {
 
 		articleService.modify(cateItemId, title, body, id);
 
-		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id=" + id + "'); </script>";
+		return "html:<script> alert('" + id + "번 게시물이 수정되었습니다.'); location.replace('detail?id=" + id + "&cateItemId" + cateItemId +"'); </script>";
 	}
 
 	private String doActionModify() {
-
 	
 
 		if (Util.empty(req, "id")) {
@@ -246,6 +245,8 @@ public class ArticleController extends Controller {
 	}
 
 	private String doActionList() {
+		long startTime = System.nanoTime();
+		
 		int page = 1;
 
 		if (!Util.empty(req, "page") && Util.isNum(req, "page")) {
@@ -292,6 +293,14 @@ public class ArticleController extends Controller {
 				searchKeywordType, searchKeyword);
 
 		req.setAttribute("articles", articles);
+		
+		
+
+long endTime = System.nanoTime();
+long estimatedTime = endTime - startTime;
+// nano seconds to seconds
+double seconds = estimatedTime / 1000000000.0;
+System.out.println("seconds: " + seconds);
 		return "article/list.jsp";
 	}
 

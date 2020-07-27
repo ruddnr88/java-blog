@@ -12,6 +12,7 @@
 	<h1>글 작성하기</h1>
 	<form action="doWrite" method="POST" class="write-form form1"
 		onsubmit="submitWriteForm(this); return false;">
+		<input type="hidden" name="body">
 		<div class="form-row">
 			<div class="label">카테고리</div>
 			<div class="input" style="text-align: left;">
@@ -33,7 +34,7 @@
 		<div class="form-row">
 			<div class="label">내용</div>
 			<div class="input">
-				<input type="hidden" name="body">
+				<script type="text/x-template"></script>
 				<div class="toast-editor" style="text-align: left;"></div>
 			</div>
 		</div>
@@ -47,6 +48,8 @@
 	</form>
 </div>
 <script>
+	var submitWriteFormDone = false;
+
 	function cencle() {
 		if (confirm("취소하시겠습니까?")) {
 			location.href = "list"
@@ -54,31 +57,29 @@
 			alert('아님말고');
 		}
 	}
-	var onBeforeUnloadSetted = false;
-	
-
 	function submitWriteForm(form) {
+		if (submitWriteFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
 		form.title.value = form.title.value.trim();
 		if (form.title.value.length == 0) {
 			alert('제목을 입력해주세요.');
 			form.title.focus();
 			return;
 		}
-		var source = editor1.getMarkdown().trim();
-		if (source.length == 0) {
+		var editor = $(form).find('.toast-editor').data('data-toast-editor');
+		var body = editor.getMarkdown();
+		body = body.trim();
+		if (body.length == 0) {
 			alert('내용을 입력해주세요.');
-			editor1.focus();
-			return;
+			editor.focus();
+			return false;
 		}
-		form.body.value = source;
+		form.body.value = body;
+		
 		form.submit();
-		removeOnBeforeUnload();
+		submitWriteFormDone = true;
 	}
-	
-	$('form.write-form input, form.write-form textarea').keyup(function() {
-		applyOnBeforeUnload();
-	})
 </script>
-<script
-	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
 <%@ include file="/jsp/part/foot.jspf"%>

@@ -5,7 +5,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/jsp/part/head.jspf"%>
 <%@ include file="/jsp/part/toastUiEditor.jspf"%>
-
+<style>
+ .prev , .next {
+	 cursor: pointer;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    font-weight: bold;
+    font-size: 15px;
+    }
+</style>
 <!-- 어바웃 미메인컨텐츠 -->
 <div class="con article">
 	<h1 style="color: #6EAEA3;">${article.title}</h1>
@@ -41,7 +50,8 @@
 			</tr>
 			<tr class="detail">
 				<td colspan="2"><script type="text/x-template">${article.bodyForXTemplate}</script>
-					<div class="toast-editor toast-editor-viewer"></div></td>
+					<div class="toast-editor toast-editor-viewer"></div>
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -122,7 +132,6 @@
 	</table>
 	
 	<script>
-		
 		function submitReplyForm(form) {
 			form.body.value = form.body.value.trim();
 			if (form.body.value.length == 0) {
