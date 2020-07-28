@@ -101,7 +101,7 @@ public class Util {
 			msg.setFrom(new InternetAddress(from, fromName));
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
 			msg.setSubject(title, "UTF-8");
-			msg.setText(body, "UTF-8");
+			msg.setContent(body, "text/html; charset=UTF-8");
 
 			Transport.send(msg);
 
@@ -115,7 +115,7 @@ public class Util {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
 			return -3;
 		}
-		
+
 		return 1;
 	}
 

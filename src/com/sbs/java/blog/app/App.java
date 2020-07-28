@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.java.blog.config.Config;
 import com.sbs.java.blog.controller.ArticleController;
 import com.sbs.java.blog.controller.Controller;
 import com.sbs.java.blog.controller.HomeController;
@@ -16,7 +17,6 @@ import com.sbs.java.blog.controller.MemberController;
 import com.sbs.java.blog.controller.TestController;
 import com.sbs.java.blog.exception.SQLErrorException;
 import com.sbs.java.blog.util.Util;
-
 
 public class App {
 	private HttpServletRequest req;
@@ -50,6 +50,16 @@ public class App {
 	}
 
 	public void start() throws ServletException, IOException {
+		// Config 구성
+
+		if (req.getServletContext().getInitParameter("gmailId") != null) {
+			Config.gmailId = (String) req.getServletContext().getInitParameter("gmailId");
+		}
+
+		if (req.getServletContext().getInitParameter("gmailPw") != null) {
+			Config.gmailPw = (String) req.getServletContext().getInitParameter("gmailPw");
+		}
+
 		// DB 드라이버 로딩
 		loadDbDriver();
 
@@ -103,7 +113,7 @@ public class App {
 			controller = new ArticleController(dbConn, actionMethodName, req, resp);
 			break;
 		case "member":
-			controller = new MemberController(dbConn, actionMethodName, req, resp,gmailId,gmailPw);
+			controller = new MemberController(dbConn, actionMethodName, req, resp, gmailId, gmailPw);
 			break;
 		case "home":
 			controller = new HomeController(dbConn, actionMethodName, req, resp);

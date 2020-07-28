@@ -12,6 +12,7 @@
 	<h1>LOGIN</h1>
 	<form action="doLogin" method="POST" class="sign-form form1"
 		onsubmit="submitLoginForm(this); return false;">
+		<input type="hidden" name="redirectUrl"	value="${param.afterLoginRedirectUrl}" >
 		<input type="hidden" name="loginPwReal" />
 		<div class="form-row">
 			<div class="label">ID</div>

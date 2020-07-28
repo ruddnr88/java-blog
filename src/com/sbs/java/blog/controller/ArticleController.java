@@ -207,7 +207,6 @@ public class ArticleController extends Controller {
 		if (!Util.empty(req, "cateItemId") && Util.isNum(req, "cateItemId")) {
 			cateItemId = Util.getInt(req, "cateItemId");
 		}
-
 		String cateItemName = "Total List";
 
 		if (cateItemId != 0) {
@@ -219,7 +218,7 @@ public class ArticleController extends Controller {
 
 		req.setAttribute("cateItemName", cateItemName);
 		Article article = articleService.getForPrintArticle(id);
-
+		
 		req.setAttribute("article", article);
 
 		// 댓글총게시물수

@@ -46,9 +46,20 @@ public class MemberController extends Controller {
 			return doActionFindId();
 		case "doFindPw":
 			return doActionFindPw();
+		case "dodelete":
+			return doActionMemberDelete();
 		}
 
 		return "";
+	}
+
+	private String doActionMemberDelete() {
+		int id = Util.getInt(req, "id");
+		session.removeAttribute("loginedMemberId");
+		memberService.memberdelete(id);
+
+		return "html:<script> alert('회원탈퇴되었습니다.'); location.replace('../home/main'); </script>";
+
 	}
 
 	private String doActionFindId() {
@@ -59,12 +70,10 @@ public class MemberController extends Controller {
 		String loginIdfind = memberService.getMemberSearchId(name, email);
 		
 		if (loginIdfind != ""){
-			System.out.println("공란이 아니네여");
 			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
 			boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ "+ loginIdfind +" ]입니다.") == 1;
 
 		} else {
-			System.out.println("틀려버렴");
 			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
 			
 		} 
@@ -79,12 +88,10 @@ public class MemberController extends Controller {
 		String loginPwfind = memberService.getMemberSearchPw(loginId, email);
 		
 		if (loginId != ""){
-			System.out.println("공란이 아니네여");
 			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
 			boolean a = mailService.send(email, "안녕하세요.", "비밀번호는 [ "+ loginPwfind +" ]입니다.") == 1;
 
 		} else {
-			System.out.println("틀려버렴");
 			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
 			
 		} 
@@ -118,9 +125,10 @@ public class MemberController extends Controller {
 		}
 		// 개인저장소(session) 생성
 		session.setAttribute("loginedMemberId", loginedMemberId);
+		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
 
 		return String.format(
-				"html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('../home/main'); </script>");
+				"html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
 	}
 
 	private String doActionLogin() {
@@ -157,15 +165,6 @@ public class MemberController extends Controller {
 		}
 
 		memberService.dojoin(loginId, loginPw, name, nickname, email);
-
-		MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
-		boolean sendMailDone = mailService.send(email, "안녕하세요." + name + "님", "반갑습니다.!!") == 1;
-
-		try {
-			resp.getWriter().append(String.format("발송성공 : %b", sendMailDone));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		return "html:<script> alert('" + name + "님 가입을 축하드립니다.'); location.replace('login'); </script>";
 	}

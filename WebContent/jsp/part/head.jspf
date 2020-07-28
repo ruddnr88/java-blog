@@ -82,7 +82,7 @@
 					</c:if>
 					<c:if test ="${isLogined == false}"> 
 					<li><a
-						href="${pageContext.request.contextPath}/s/member/login"
+						href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}"
 						class="height-100p flex flex-ai-c">Login</a></li>
 					</c:if>
 
@@ -120,7 +120,7 @@
 						class="block">Logout</a></li>
 				</c:if>
 				<c:if test ="${isLogined == false}"> 
-					<li><a href="${pageContext.request.contextPath}/s/member/login"
+					<li><a href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUri=${encodedAfterLoginRedirectUri}"
 						class="block">Login</a></li>
 				</c:if>
 			</ul>

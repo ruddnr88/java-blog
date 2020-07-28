@@ -14,6 +14,8 @@
 		<li>이메일 :&nbsp${loginedMember.email}</li>
 
 	</ul>
+	
+	<div class="butt"><a href="dodelete?id=${loginedMember.id}">회원탈퇴</a></div>
 
 </div>
 

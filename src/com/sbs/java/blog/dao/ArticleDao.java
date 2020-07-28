@@ -26,9 +26,9 @@ public class ArticleDao extends Dao {
 		int limitFrom = (page - 1) * itemsInAPage;
 
 		sql.append("SELECT *");
-		sql.append(", M.name AS extra__writer");
+		sql.append(", IFNULL(M.name, '탈퇴한회원') AS extra__writer");
 		sql.append("FROM article AS A");
-		sql.append("INNER JOIN `member` AS M");
+		sql.append("LEFT JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
 		sql.append("WHERE displayStatus = 1");
 		if (cateItemId != 0) {
@@ -71,16 +71,16 @@ public class ArticleDao extends Dao {
 	}
 
 	public Article getForPrintArticle(int id) {
-
+		
 		SecSql sql = new SecSql();
 
 		sql.append("SELECT A.*");
-		sql.append(", M.name AS extra__writer");
+		sql.append(", IFNULL(M.name, '탈퇴한회원') AS extra__writer");
 		sql.append("FROM article AS A");
-		sql.append("INNER JOIN member AS M");
+		sql.append("LEFT JOIN member AS M");
 		sql.append("ON A.memberId = M.id");
-		sql.append("AND A.id = ?", id);
 		sql.append("WHERE A.displayStatus = 1");
+		sql.append("AND A.id = ?", id);
 		
 		return new Article(DBUtil.selectRow(dbConn, sql));
 	}
