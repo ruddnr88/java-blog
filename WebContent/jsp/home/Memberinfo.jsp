@@ -14,11 +14,9 @@
 		<li>이메일 :&nbsp${loginedMember.email}</li>
 
 	</ul>
-	
-	<div class="butt"><a href="dodelete?id=${loginedMember.id}">회원탈퇴</a></div>
+	<div onclick="if ( confirm('정말 탈퇴하시겠습니까?') == false ) return false;"class="butt"><a href="dodelete?id=${loginedMember.id}">회원탈퇴</a></div>
+	<div class ="butt"><a href="Mailing" onclick="window.open(this.href, '_blank', 'width=450px,height=500px,toolbars=no,scrollbars=no'); return false;">문의하기</a></div>
 
 </div>
-
-
 
 <%@ include file="/jsp/part/foot.jspf"%>

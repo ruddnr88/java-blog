@@ -114,10 +114,11 @@ public class MemberDao extends Dao {
 	}
 
 	public int memberdelete(int id) {
-		SecSql sql = new SecSql();
 
-		sql.append("DELETE FROM `member` ");
-		sql.append("WHERE id = ? ", id);
+		SecSql sql = SecSql.from("UPDATE `member`");
+		sql.append("SET delDate = NOW()");
+		sql.append(", delStatus = 0");
+		sql.append("WHERE id = ?", id);
 
 		return DBUtil.update(dbConn, sql);
 	}

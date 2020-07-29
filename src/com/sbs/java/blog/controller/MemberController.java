@@ -48,9 +48,29 @@ public class MemberController extends Controller {
 			return doActionFindPw();
 		case "dodelete":
 			return doActionMemberDelete();
+		case "Mailing":
+			return doActionMemberMailing();
+		case "doMailing":
+			return doActionMemberdoMailing();
 		}
 
 		return "";
+	}
+
+	private String doActionMemberdoMailing() {
+		String email = req.getParameter("email");
+		String title = req.getParameter("title");
+		String body = req.getParameter("body");
+
+		MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
+		boolean a = mailService.send(email, title, body) == 1;
+		System.out.printf(email, title, body);
+
+		return "html:<script> alert('메일이 발송되었습니다.'); close();opener.location.reload(); </script>";
+	}
+
+	private String doActionMemberMailing() {
+		return "member/domailing.jsp";
 	}
 
 	private String doActionMemberDelete() {
@@ -65,36 +85,34 @@ public class MemberController extends Controller {
 	private String doActionFindId() {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
-		
 
 		String loginIdfind = memberService.getMemberSearchId(name, email);
-		
-		if (loginIdfind != ""){
+
+		if (loginIdfind != "") {
 			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
-			boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ "+ loginIdfind +" ]입니다.") == 1;
+			boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ " + loginIdfind + " ]입니다.") == 1;
 
 		} else {
 			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
-			
-		} 
+
+		}
 		return "html:<script> alert('메일이 발송되었습니다.');location.replace('../home/main'); </script>";
 	}
 
 	private String doActionFindPw() {
 		String loginId = req.getParameter("loginId");
 		String email = req.getParameter("email");
-		
 
 		String loginPwfind = memberService.getMemberSearchPw(loginId, email);
-		
-		if (loginId != ""){
+
+		if (loginId != "") {
 			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
-			boolean a = mailService.send(email, "안녕하세요.", "비밀번호는 [ "+ loginPwfind +" ]입니다.") == 1;
+			boolean a = mailService.send(email, "안녕하세요.", "비밀번호는 [ " + loginPwfind + " ]입니다.") == 1;
 
 		} else {
 			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
-			
-		} 
+
+		}
 		return "html:<script> alert('임시비밀번호가 메일로 발송되었습니다.'); location.replace('../home/main'); </script>";
 	}
 
@@ -108,7 +126,7 @@ public class MemberController extends Controller {
 
 	private String doActionDoLogout() {
 		session.removeAttribute("loginedMemberId");
-		
+
 		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
 		return String.format("html:<script> alert('로그아웃 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
 
@@ -127,8 +145,8 @@ public class MemberController extends Controller {
 		session.setAttribute("loginedMemberId", loginedMemberId);
 		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
 
-		return String.format(
-				"html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('" + redirectUrl + "'); </script>");
+		return String.format("html:<script> alert('" + loginId + "님 로그인 되었습니다.'); location.replace('" + redirectUrl
+				+ "'); </script>");
 	}
 
 	private String doActionLogin() {
