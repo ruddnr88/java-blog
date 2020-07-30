@@ -3,15 +3,12 @@ package com.sbs.java.blog.dto;
 import java.util.Map;
 
 public class ArticleReply extends Dto {
-
-	private String updateDate;
 	private int articleId;
 	private int memberId;
 	private String body;
 
 	public ArticleReply(Map<String, Object> row) {
 		super(row);
-		this.updateDate = (String) row.get("updateDate");
 		this.articleId = (int) row.get("articleId");
 		this.memberId = (int) row.get("memberId");
 		this.body = (String) row.get("body");
@@ -19,16 +16,9 @@ public class ArticleReply extends Dto {
 
 	@Override
 	public String toString() {
-		return "ArticleReply [updateDate=" + updateDate + ", articleId=" + articleId + ", memberId=" + memberId
-				+ ", body=" + body + "]";
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
+		return "ArticleReply [articleId=" + articleId + ", memberId=" + memberId + ", body=" + body + ", getId()="
+				+ getId() + ", getUpdateDate()=" + getUpdateDate() + ", getRegDate()=" + getRegDate() + ", getExtra()="
+				+ getExtra() + "]";
 	}
 
 	public int getArticleId() {

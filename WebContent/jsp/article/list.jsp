@@ -74,7 +74,7 @@
 				<td>${article.id}</td>
 				<td class="text-align-left">
 				<a href="./detail?id=${article.id}&cateItemId=${article.cateItemId}">${article.title}</a></td>
-				<td>${article.getExtra().get("writer")}</td>
+				<td>${article.extra.writer}</td>
 				<td class="mo_modi_date">${article.regDate}</td>
 				<td>${article.hit}</td>
 			</tr>

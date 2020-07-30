@@ -473,6 +473,16 @@ select::-ms-expand {
 	font-size: 18px;
 	margin-left: 10px;
 }
+/*회원가입 */
+
+.form1 .message-msg {
+	color:red;
+}
+.loginDup {
+	text-align:left; 
+	font-weight:bold; 
+	margin-top:10px;
+}
 /*로그인창 폼*/
 .form1 .box-form {
 	border: 0 none;

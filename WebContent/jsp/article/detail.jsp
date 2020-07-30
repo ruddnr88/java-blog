@@ -34,7 +34,7 @@
 			</tr>
 			<tr class="detail">
 				<th>작성자</th>
-				<td>${article.getExtra().get("writer")}</td>
+				<td>${article.extra.writer}</td>
 			</tr>
 			<tr class="detail">
 				<th>등록날짜</th>
@@ -115,17 +115,17 @@
 			<c:forEach items="${articleReplies}" var="articleReply">
 			<tr class="noti">
 				<td>${articleReply.id}</td>
-				<td>${articleReply.getExtra().get("writer")}</td>
+				<td>${articleReply.extra.writer}</td>
 				
 				<td class="text-align-left">
 				${articleReply.body} &nbsp;
 				<c:if test="${loginedMemberId == articleReply.memberId}">
-					<a href="dodelReply?id=${articleReply.id}">
+					<a href="dodelReply?id=${articleReply.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">
 						<i class="fas fa-trash-alt"></i></a>
 					<a href="modifyReply?id=${articleReply.id}" onclick="window.open(this.href, '_blank', 'width=450px,height=200px,toolbars=no,scrollbars=no'); return false;"><i class="far fa-edit"></i></a>
 				</c:if>
 				</td>	
-				<td class="mo_modi_date">${articleReply.regDate}</td>
+				<td class="mo_modi_date">${articleReply.updateDate}</td>
 			</tr>
 			</c:forEach>
 		</tbody>

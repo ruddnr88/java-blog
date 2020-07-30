@@ -3,7 +3,6 @@ package com.sbs.java.blog.dto;
 import java.util.Map;
 
 public class Article extends Dto {
-	private String updateDate;
 	private String title;
 	private String body;
 	private int cateItemId;
@@ -12,26 +11,18 @@ public class Article extends Dto {
 
 	public Article(Map<String, Object> row) {
 		super(row);
-		this.updateDate = (String) row.get("updateDate");
 		this.cateItemId = (int) row.get("cateItemId");
 		this.hit = (int) row.get("hit");
 		this.title = (String) row.get("title");
 		this.body = (String) row.get("body");
 		this.memberId = (int) row.get("memberId");
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Article [updateDate=" + updateDate + ", cateItemId=" + cateItemId + ", title=" + title + ", body="
-				+ body + ", hit=" + hit + ",memberId=" + memberId + " dto=" + super.toString() + "]";
-	}
-
-	public String getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
+		return "Article [title=" + title + ", body=" + body + ", cateItemId=" + cateItemId + ", hit=" + hit
+				+ ", memberId=" + memberId + ", getId()=" + getId() + ", getUpdateDate()=" + getUpdateDate()
+				+ ", getRegDate()=" + getRegDate() + ", getExtra()=" + getExtra() + "]";
 	}
 
 	public int getCateItemId() {

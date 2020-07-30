@@ -18,25 +18,25 @@ public class HomeController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "main":
-			return doActionMain();
+			return ActionMain();
 		case "aboutMe":
-			return doActionAboutMe();
+			return ActionAboutMe();
 		case "SNS":
-			return doActionSNS();
+			return ActionSNS();
 		}
 
 		return "";
 	}
 
-	private String doActionSNS() {
+	private String ActionSNS() {
 		return "home/SNS.jsp";
 	}
 
-	private String doActionAboutMe() {
+	private String ActionAboutMe() {
 		return "home/aboutMe.jsp";
 	}
 
-	private String doActionMain() {
+	private String ActionMain() {
 	
 		return "home/main.jsp";
 	}

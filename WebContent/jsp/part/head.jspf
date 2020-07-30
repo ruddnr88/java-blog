@@ -48,7 +48,7 @@
 </head>
 <body>
 	<c:if test="${isLogined}">
-	<div class="con member-con" style="text-align:right;"><a href="${pageContext.request.contextPath}/s/member/info" style="font-weight: bold;">[${loginedMember.name}]</a>님 환영합니다 :)</div>
+	<div class="con member-con" style="text-align:right;"><a href="${pageContext.request.contextPath}/s/member/passwordForPrivate" style="font-weight: bold;">[${loginedMember.name}]</a>님 환영합니다 :)</div>
 	</c:if>
 	
 	<!--  PC버젼 탑바 -->

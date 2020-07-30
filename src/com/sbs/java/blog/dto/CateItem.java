@@ -11,11 +11,6 @@ public class CateItem extends Dto {
 		this.name = (String) row.get("name");
 	}
 
-	@Override
-	public String toString() {
-		return "Article [name=" + name + ", dto=" + super.toString() + "]";
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -24,4 +19,11 @@ public class CateItem extends Dto {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "CateItem [name=" + name + ", getId()=" + getId() + ", getUpdateDate()=" + getUpdateDate()
+				+ ", getRegDate()=" + getRegDate() + ", getExtra()=" + getExtra() + "]";
+	}
+
+	
 }

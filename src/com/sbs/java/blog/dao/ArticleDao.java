@@ -30,12 +30,12 @@ public class ArticleDao extends Dao {
 		sql.append("FROM article AS A");
 		sql.append("LEFT JOIN `member` AS M");
 		sql.append("ON A.memberId = M.id");
-		sql.append("WHERE displayStatus = 1");
+		sql.append("WHERE A.displayStatus = 1");
 		if (cateItemId != 0) {
-			sql.append("AND cateItemId = ?", cateItemId);
+			sql.append("AND A.cateItemId = ?", cateItemId);
 		}
 		if (searchKeywordType.equals("title") && searchKeyword.length() > 0) {
-			sql.append("AND title LIKE CONCAT('%', ?, '%')", searchKeyword);
+			sql.append("AND A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
 		}
 		sql.append("ORDER BY A.id DESC ");
 		sql.append("LIMIT ?, ? ", limitFrom, itemsInAPage);

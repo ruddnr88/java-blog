@@ -29,35 +29,70 @@ public class MemberController extends Controller {
 	public String doAction() {
 		switch (actionMethodName) {
 		case "join":
-			return doActionJoin();
+			return ActionJoin();
 		case "doJoin":
-			return doActionDoJoin();
+			return ActionDoJoin();
 		case "login":
-			return doActionLogin();
+			return ActionLogin();
 		case "doLogin":
-			return doActionDoLogin();
+			return ActionDoLogin();
 		case "doLogout":
-			return doActionDoLogout();
+			return ActionDoLogout();
 		case "info":
-			return doActionDoMemberinfo();
+			return ActionDoMemberinfo();
 		case "findinfo":
-			return doActionFindinfo();
+			return ActionFindinfo();
 		case "doFindId":
-			return doActionFindId();
+			return ActionFindId();
 		case "doFindPw":
-			return doActionFindPw();
+			return ActionFindPw();
 		case "dodelete":
-			return doActionMemberDelete();
+			return ActionMemberDelete();
 		case "Mailing":
-			return doActionMemberMailing();
+			return ActionMemberMailing();
 		case "doMailing":
-			return doActionMemberdoMailing();
+			return ActionMemberdoMailing();
+		case "getLoginIdDup":
+			return ActionGetLoginIdDup();
+		case "passwordForPrivate":
+			return actionPasswordForPrivate();
+		case "dopasswordForPrivate":
+			return actionDoPasswordForPrivate();
+		
 		}
 
 		return "";
 	}
 
-	private String doActionMemberdoMailing() {
+	private String actionDoPasswordForPrivate() {
+		String loginPw = req.getParameter("loginPwReal");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		if(loginedMember.getLoginPw().equals(loginPw)) {
+			return String.format("html:<script> location.replace('findinfo');</script>");
+		}
+		
+		return String.format("html:<script> alert('비밀번호를 다시 입력해주세요.');history.back() </script>");
+	}
+
+	private String actionPasswordForPrivate() {
+		return "member/passwordForPrivate.jsp";
+	}
+
+	private String ActionGetLoginIdDup() {
+		String loginId = req.getParameter("loginId");
+
+		boolean isJoinableLoginId = memberService.isJoinableLoginId(loginId);
+
+		if (isJoinableLoginId) {
+			return "json:{\"msg\":\"사용할 수 있는 아이디 입니다.\" ,\"resultCode\": \"S-1\",\"loginId\":\"" + loginId + "\"}";
+		} else {
+			return "json:{\"msg\":\"이미 사용중인 아이디 입니다.\",\"resultCode\": \"F-1\",\"loginId\":\"" + loginId + "\"}";
+		}
+
+	}
+
+	private String ActionMemberdoMailing() {
 		String email = req.getParameter("email");
 		String title = req.getParameter("title");
 		String body = req.getParameter("body");
@@ -69,11 +104,11 @@ public class MemberController extends Controller {
 		return "html:<script> alert('메일이 발송되었습니다.'); close();opener.location.reload(); </script>";
 	}
 
-	private String doActionMemberMailing() {
+	private String ActionMemberMailing() {
 		return "member/domailing.jsp";
 	}
 
-	private String doActionMemberDelete() {
+	private String ActionMemberDelete() {
 		int id = Util.getInt(req, "id");
 		session.removeAttribute("loginedMemberId");
 		memberService.memberdelete(id);
@@ -82,7 +117,7 @@ public class MemberController extends Controller {
 
 	}
 
-	private String doActionFindId() {
+	private String ActionFindId() {
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 
@@ -99,7 +134,7 @@ public class MemberController extends Controller {
 		return "html:<script> alert('메일이 발송되었습니다.');location.replace('../home/main'); </script>";
 	}
 
-	private String doActionFindPw() {
+	private String ActionFindPw() {
 		String loginId = req.getParameter("loginId");
 		String email = req.getParameter("email");
 
@@ -116,15 +151,15 @@ public class MemberController extends Controller {
 		return "html:<script> alert('임시비밀번호가 메일로 발송되었습니다.'); location.replace('../home/main'); </script>";
 	}
 
-	private String doActionFindinfo() {
+	private String ActionFindinfo() {
 		return "member/findinfo.jsp";
 	}
 
-	private String doActionDoMemberinfo() {
+	private String ActionDoMemberinfo() {
 		return "home/Memberinfo.jsp";
 	}
 
-	private String doActionDoLogout() {
+	private String ActionDoLogout() {
 		session.removeAttribute("loginedMemberId");
 
 		String redirectUrl = Util.getString(req, "redirectUrl", "../home/main");
@@ -132,7 +167,7 @@ public class MemberController extends Controller {
 
 	}
 
-	private String doActionDoLogin() {
+	private String ActionDoLogin() {
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
 
@@ -149,15 +184,15 @@ public class MemberController extends Controller {
 				+ "'); </script>");
 	}
 
-	private String doActionLogin() {
+	private String ActionLogin() {
 		return "member/login.jsp";
 	}
 
-	private String doActionJoin() {
+	private String ActionJoin() {
 		return "member/join.jsp";
 	}
 
-	private String doActionDoJoin() {
+	private String ActionDoJoin() {
 
 		String loginId = req.getParameter("loginId");
 		String loginPw = req.getParameter("loginPwReal");
