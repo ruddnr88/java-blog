@@ -2,6 +2,7 @@ package com.sbs.java.blog.controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.UUID;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletConfig;
@@ -55,27 +56,65 @@ public class MemberController extends Controller {
 		case "getLoginIdDup":
 			return ActionGetLoginIdDup();
 		case "passwordForPrivate":
-			return actionPasswordForPrivate();
+			return ActionPasswordForPrivate();
 		case "dopasswordForPrivate":
-			return actionDoPasswordForPrivate();
-		
+			return ActionDoPasswordForPrivate();
+		case "modifyPrivate":
+			return ActionModifyPrivate();
+		case "doModifyForPrivate":
+			return ActionDoModifyPrivate();
+
 		}
 
 		return "";
 	}
 
-	private String actionDoPasswordForPrivate() {
+	private String ActionDoModifyPrivate() {
+		int loginedMemberId = (int) req.getAttribute("loginedMemberId");
+		String authCode = req.getParameter("authCode");
+		
+		if( memberService.isValidModifyPrivateAuthCode(loginedMemberId,authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+		};
+		
 		String loginPw = req.getParameter("loginPwReal");
-		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		if(loginedMember.getLoginPw().equals(loginPw)) {
-			return String.format("html:<script> location.replace('findinfo');</script>");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		loginedMember.setLoginPw(loginPw); //크게 의미는 없지만, 의미론적인 면에서 해야하는일
+		
+		memberService.modify(loginedMemberId,loginPw);
+		
+		return String.format("html:<script> alert('개인정보가 수정되었습니다. 다시 로그인 해주세요.'); location.replace('../member/doLogout'); </script>");
+	}
+
+	private String ActionModifyPrivate() {
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+
+		String authCode = req.getParameter("authCode");
+		if( memberService.isValidModifyPrivateAuthCode(loginedMemberId,authCode) == false) {
+			return String.format(
+					"html:<script> alert('비밀번호를 다시 체크해주세요.'); location.replace('../member/passwordForPrivate'); </script>");
+			
+		};
+		return "member/modifyPrivate.jsp";
+	}
+
+	private String ActionDoPasswordForPrivate() {
+		String loginPw = req.getParameter("loginPwReal");
+		Member loginedMember = (Member) req.getAttribute("loginedMember");
+		int loginedMemberId = loginedMember.getId();
+
+		if (loginedMember.getLoginPw().equals(loginPw)) {
+			String authCode = memberService.genModiyfyPrivateAuthCode(loginedMemberId);
+			
+			return String.format("html:<script> location.replace('modifyPrivate?authCode="+ authCode +"');</script>");
 		}
-		
+
 		return String.format("html:<script> alert('비밀번호를 다시 입력해주세요.');history.back() </script>");
 	}
 
-	private String actionPasswordForPrivate() {
+	private String ActionPasswordForPrivate() {
 		return "member/passwordForPrivate.jsp";
 	}
 
@@ -105,7 +144,7 @@ public class MemberController extends Controller {
 	}
 
 	private String ActionMemberMailing() {
-		return "member/domailing.jsp";
+		return "./member/domailing.jsp";
 	}
 
 	private String ActionMemberDelete() {

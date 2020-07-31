@@ -23,10 +23,13 @@ public class HomeController extends Controller {
 			return ActionAboutMe();
 		case "SNS":
 			return ActionSNS();
+		
 		}
 
 		return "";
 	}
+
+
 
 	private String ActionSNS() {
 		return "home/SNS.jsp";

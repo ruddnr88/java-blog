@@ -42,7 +42,8 @@ public abstract class Controller {
 		attrService = new AttrService(dbConn);
 				
 		mailService = new MailService(Config.gmailId, Config.gmailPw, Config.mailFrom, Config.mailFromName);
-		memberService = new MemberService(dbConn,mailService);
+		memberService = new MemberService(dbConn,mailService, attrService);
+		attrService = new AttrService(dbConn);
 
 	}
 	public abstract String getControllerName();
