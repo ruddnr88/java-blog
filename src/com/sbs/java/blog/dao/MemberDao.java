@@ -71,7 +71,13 @@ public class MemberDao extends Dao {
 		sql.append("FROM `member`");
 		sql.append("WHERE id = ?", id);
 
-		return new Member(DBUtil.selectRow(dbConn, sql));
+		Map<String, Object> row = DBUtil.selectRow(dbConn, sql);
+
+		if (row.isEmpty()) {
+			return null;
+		}
+
+		return new Member(row);
 	}
 
 	public boolean isJoinableNickname(String nickname) {
@@ -90,27 +96,35 @@ public class MemberDao extends Dao {
 		return DBUtil.selectRowIntValue(dbConn, sql) == 0;
 	}
 
-	public int getMemberBynameAndEmail(String name, String email) {
-		return 0;
-		
-	}
-
-	public String getMemberSearchId(String name, String email) {
-		SecSql sql = SecSql.from("SELECT loginId");
+	public Member getMemberByNameAndEmail(String name, String email) {
+		SecSql sql = SecSql.from("SELECT *");
 		sql.append("FROM `member`");
 		sql.append("WHERE `name` = ?", name);
 		sql.append("AND email = ?", email);
 
-		return DBUtil.selectRowStringValue(dbConn, sql);
+		Map<String,Object> row = DBUtil.selectRow(dbConn, sql);
+		
+		if(row.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(row);
+		
 	}
 
-	public String getMemberSearchPw(String loginId, String email) {
-		SecSql sql = SecSql.from("SELECT loginPw");
+	public Member getMemberByloginId(String loginId) {
+		SecSql sql = SecSql.from("SELECT *");
 		sql.append("FROM `member`");
 		sql.append("WHERE `loginId` = ?", loginId);
-		sql.append("AND email = ?", email);
-
-		return DBUtil.selectRowStringValue(dbConn, sql);
+		
+		Map<String,Object> row = DBUtil.selectRow(dbConn, sql);
+		
+		if(row.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(row);
+		
 	}
 
 	public int memberdelete(int id) {
@@ -132,5 +146,6 @@ public class MemberDao extends Dao {
 
 		DBUtil.update(dbConn, sql);
 	}
+
 
 }

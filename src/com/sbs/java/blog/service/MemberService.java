@@ -45,16 +45,12 @@ public class MemberService extends Service {
 		return memberDao.getMemberById(id);
 	}
 
-	public int getMemberBynameAndEmail(String name, String email) {
-		return memberDao.getMemberBynameAndEmail(name, email);
+	public Member getMemberByNameAndEmail(String name, String email) {
+		return memberDao.getMemberByNameAndEmail(name, email);
 	}
 
-	public String getMemberSearchId(String name, String email) {
-		return memberDao.getMemberSearchId(name, email);
-	}
-
-	public String getMemberSearchPw(String loginId, String email) {
-		return memberDao.getMemberSearchPw(loginId, email);
+	public Member getMemberByloginId(String loginId) {
+		return memberDao.getMemberByloginId(loginId);
 	}
 
 	public int memberdelete(int id) {

@@ -157,37 +157,42 @@ public class MemberController extends Controller {
 	}
 
 	private String ActionFindId() {
-		String name = req.getParameter("name");
-		String email = req.getParameter("email");
+		String name = Util.getString(req,"name");
+		String email = Util.getString(req,"email");
 
-		String loginIdfind = memberService.getMemberSearchId(name, email);
+		Member member = memberService.getMemberByNameAndEmail(name, email);
 
-		if (loginIdfind != "") {
-			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
-			boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ " + loginIdfind + " ]입니다.") == 1;
-
-		} else {
-			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
+		if (member == null) {
+			req.setAttribute("jsAlertMsg", "일치하는 회원이 없습니다.");
+			req.setAttribute("jsHistoryBack", true);
+			return "common/data.jsp";
 
 		}
-		return "html:<script> alert('메일이 발송되었습니다.');location.replace('../home/main'); </script>";
-	}
+		req.setAttribute("jsAlertMsg", "일치하는 회원을 찾았습니다.\\n아이디 : " + member.getLoginId());
+		req.setAttribute("jsHistoryBack", true);
+		
+//		MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
+//		boolean a = mailService.send(email, "안녕하세요. " + name + " 님", "가입하신 아이디는[ " + member.getLoginId() + " ]입니다.") == 1;
+		return "common/data.jsp";
+		
 
+	}
+// ----------------------------------------작업중(비밀번호찾기)-----------------------------
 	private String ActionFindPw() {
 		String loginId = req.getParameter("loginId");
 		String email = req.getParameter("email");
 
-		String loginPwfind = memberService.getMemberSearchPw(loginId, email);
+		Member member = memberService.getMemberByloginId(loginId);
 
-		if (loginId != "") {
-			MailService mailService = new MailService(gmailId, gmailPw, gmailId, "관리자");
-			boolean a = mailService.send(email, "안녕하세요.", "비밀번호는 [ " + loginPwfind + " ]입니다.") == 1;
-
-		} else {
-			return String.format("html:<script> alert('가입하신 정보가 일치하지않습니다.'); history.back(); </script>");
+		if (member == null || member.getLoginPw().equals(email) == false) {
+			req.setAttribute("jsAlertMsg", "일치하는 회원이 없습니다.");
+			req.setAttribute("jsHistoryBack", true);
+			return "common/data.jsp";
 
 		}
-		return "html:<script> alert('임시비밀번호가 메일로 발송되었습니다.'); location.replace('../home/main'); </script>";
+		
+	
+		return "common/data.jsp";
 	}
 
 	private String ActionFindinfo() {

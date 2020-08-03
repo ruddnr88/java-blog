@@ -24,7 +24,7 @@
 					<div class="form-row">
 						<div class="label">이름</div>
 						<div class="input box-form">
-							<input name="name" class="box-form" type="text"
+							<input name="name" autofocus class="box-form" type="text"
 								placeholder="이름을 입력해주세요." />
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 					<div class="con_butt sign_butt"
 						style="margin-top: 50px; width: 100%;">
 						<div class="input">
-							<input type="submit" value="메일전송" class="login_but lb_2" /> <a
+							<input type="submit" value="확인" class="login_but lb_2" /> <a
 								href="${pageContext.request.contextPath}/s/home/main"
 								class="login_but lb_3">취소</a>
 						</div>
@@ -93,7 +93,7 @@
 	function submitFindidForm(form) {
 		form.name.value = form.name.value.trim();
 		if (form.name.value.length == 0) {
-			alert('아이디를 입력해주세요.');
+			alert('이름을 입력해주세요.');
 			form.name.focus();
 			return;
 		}
