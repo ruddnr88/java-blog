@@ -23,12 +23,20 @@ public class App {
 	private HttpServletResponse resp;
 	private String gmailId;
 	private String gmailPw;
+	private boolean isDevelServer = true;
+	//개발자 설정
 
 	public App(HttpServletRequest req, HttpServletResponse resp, String gmailId, String gmailPw) {
 		this.req = req;
 		this.resp = resp;
 		this.gmailId = gmailId;
 		this.gmailPw = gmailPw;
+
+		String profilesActive = System.getProperty("spring.profiles.active");
+
+		if (profilesActive != null && profilesActive.equals("production")) {
+			isDevelServer = false;
+		}
 	}
 
 	private void loadDbDriver() throws IOException {
@@ -46,7 +54,10 @@ public class App {
 	}
 
 	private String getDbUrl() {
-		return "jdbc:mysql://blog.rud.kr:3306/st_blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		if (isDevelServer) {
+			return "jdbc:mysql://localhost:3306/st_n26_blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
+		}
+		return "jdbc:mysql://blog.n26.st.iu.gy:3306/st_n26_blog?serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull";
 	}
 
 	public void start() throws ServletException, IOException {
@@ -144,10 +155,16 @@ public class App {
 	}
 
 	private String getDbId() {
-		return "st_blog";
+		if (isDevelServer) {
+			return "sbsst";	
+		}
+		return "st_n26_blog";
 	}
 
 	private String getDbPassword() {
+		if(isDevelServer) {
+			return "sbs123414";	
+		}
 		return "sbs123414";
 	}
 
