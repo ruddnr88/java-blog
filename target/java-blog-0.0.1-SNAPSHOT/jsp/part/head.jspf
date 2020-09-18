@@ -1,0 +1,128 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.sbs.java.blog.dto.Member"%>
+<%--null은 int로 들어올수없어 비회원이면 오류가난다. --%>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon"
+	href="http://kyky1211.dothome.co.kr/img/iccon.ico">
+<title>KY BOARD BLOG:)</title>
+<script>
+	var loginedMemberId = parseInt("${loginedMemberId}");
+	var isLogined = "${isLogined}" == "true";
+	var loginedMember = null;
+</script>
+<c:if test ="${isLogined}"> 
+	<script>
+		loginedMember = {};
+		loginedMember["id"] = parseInt("${loginedMember.id}");
+		loginedMember["regDate"] = parseInt("${loginedMember.regDate}");
+		loginedMember["loginId"] = parseInt("${loginedMember.loginId}");
+		loginedMember["name"] = parseInt("${loginedMember.name}");
+		loginedMember["nickname"] = parseInt("${loginedMember.nickname}");
+		loginedMember["email"] = parseInt("${loginedMember.email}");
+	</script>
+
+</c:if>
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/common.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resource/css/home/main.css">
+<!-- 제이쿼리 불러오기 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="${pageContext.request.contextPath}/resource/js/common.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resource/js/home/main.js"></script>
+
+</head>
+<body>
+	<c:if test="${isLogined}">
+	<div class="con member-con" style="text-align:right;"><a href="${pageContext.request.contextPath}/s/member/passwordForPrivate" style="font-weight: bold;">[${loginedMember.name}]</a>님 환영합니다 :)</div>
+	</c:if>
+	
+	<!--  PC버젼 탑바 -->
+	<div class="top-bar visible-on-md-up">
+		<div class="loginedMember">
+			<a href="#"></a>
+		</div>
+		<div class="con height-100p flex flex-jc-sb">
+			<a href="${pageContext.request.contextPath}/s/home/main"
+				class="logo flex flex-ai-c"> <img
+				src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
+			</a>
+
+			<nav class="menu-box-1">
+				<ul class="flex height-100p">
+
+					<li><a href="${pageContext.request.contextPath}/s/home/main"
+						class="height-100p flex flex-ai-c">Home</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/article/list"
+						class="height-100p flex flex-ai-c">Articles</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/s/home/aboutMe"
+						class="height-100p flex flex-ai-c">About Me</a></li>
+					<li><a href="${pageContext.request.contextPath}/s/home/SNS"
+						class="height-100p flex flex-ai-c">SNS</a></li>
+					<c:if test ="${isLogined}"> 
+					<li><a
+						href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}"
+						class="height-100p flex flex-ai-c">Logout</a></li>
+					</c:if>
+					<c:if test ="${isLogined == false}"> 
+					<li><a
+						href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUrl=${urlEncodedAfterLoginRedirectUrl}"
+						class="height-100p flex flex-ai-c">Login</a></li>
+					</c:if>
+
+				</ul>
+			</nav>
+		</div>
+	</div>
+	<!--모바일버젼 탑바-->
+	<div class="mobile-top-bar visible-on-sm-down flex">
+		<a href="#" class="btn-toggle-mobile-side-bar">
+			<div></div>
+			<div></div>
+			<div></div>
+		</a> <a href="${pageContext.request.contextPath}/s/home/main"
+			class="logo flex flex-ai-c absolute-center absolute-middle"> <img
+			src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
+		</a>
+	</div>
+	<div class="mobile-side-bar flex flex-ai-c visible-on-sm-down">
+
+		<nav class="menu-box-1 flex-grow-1">
+			<ul>
+				<li class="icon"><img
+					src="http://kyky1211.dothome.co.kr/img/icon.png" alt=""></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/main"
+					class="block">Home</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/article/list"
+					class="block">Articles</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/aboutMe"
+					class="block">About Me</a></li>
+				<li><a href="${pageContext.request.contextPath}/s/home/SNS"
+					class="block">SNS</a></li>
+				<c:if test ="${isLogined}"> 
+					<li><a href="${pageContext.request.contextPath}/s/member/doLogout?redirectUrl=${urlEncodedAfterLogoutRedirectUrl}"
+						class="block">Logout</a></li>
+				</c:if>
+				<c:if test ="${isLogined == false}"> 
+					<li><a href="${pageContext.request.contextPath}/s/member/login?afterLoginRedirectUri=${encodedAfterLoginRedirectUri}"
+						class="block">Login</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	</div>
