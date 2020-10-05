@@ -4,7 +4,7 @@
 
 <!-- 메인컨텐츠 -->
 <div class="con main-con">
-	<img src="http://kyky1211.dothome.co.kr/img/main.png" alt="Image">
+	<img src="https://user-images.githubusercontent.com/63378808/95030745-bd206f00-06ec-11eb-9e45-0892d6b9e706.png" alt="Image">
 
 </div>
 

@@ -59,7 +59,7 @@
 		<div class="con height-100p flex flex-jc-sb">
 			<a href="${pageContext.request.contextPath}/s/home/main"
 				class="logo flex flex-ai-c"> <img
-				src="http://kyky1211.dothome.co.kr/img/icon.png" alt="">
+				src="https://user-images.githubusercontent.com/63378808/95030689-4f744300-06ec-11eb-99db-3edff38a8a35.png" alt="logo">
 			</a>
 
 			<nav class="menu-box-1">
